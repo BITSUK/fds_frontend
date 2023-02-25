@@ -1,0 +1,90 @@
+.header-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.header-columns {
+    display: flex;
+    flex-direction: row;
+}
+
+.header-row1-col1 {  
+    width: 15%;
+}
+.header-row1-col2 {
+    width: 60%;
+}
+.header-row1-col3 {
+    width: 25%;
+}
+
+#home-ico {
+    background: transparent;
+}
+#home-ico:hover {
+    transform: scale(1.2);
+    cursor: pointer;
+}
+ 
+#HTR-L, #HTR-M, #HTR-R {
+    background-color: #3DA6D2;
+    color: white;
+}
+
+.header-column1 {  
+    width: 20%;
+}
+.header-column2 {
+    width: 45%;
+}
+.header-column3 {
+    width: 35%;
+}
+
+#Welcome {
+    background: none;
+    float: left;
+}
+  
+#Login, #Logout{
+    background: none;
+    float: right;
+    padding-right: 5px;
+}
+
+#Login a, #Logout a {
+    color: white;
+}
+  
+ 
+#HMR-R {
+    text-align: right;
+}
+ 
+.breadcrumb {
+    width: 100%;
+    background-color: white;
+    margin: 0px;
+    padding: 0px;    
+}
+
+@media screen and (max-width: 1200px) {
+    #HTR-R, #HMR-R {
+      display: none;    
+    }  
+
+    .header-row1-col2{
+        width: 85%;
+    }
+
+  }
+
+@media screen and (max-width: 800px) {
+    .breadcrumb {
+      font-size: 9px;
+    }  
+
+    #HMR-L {
+        display:none;
+    }
+}

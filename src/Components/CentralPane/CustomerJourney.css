@@ -1,0 +1,13 @@
+.customer-journey {
+	border-style: solid;
+    border-color: #3DA6D2;
+}
+
+.customer-journey img{
+    width: 100%;
+    height: 140px;
+}
+
+.customer-journey img:hover {
+    cursor: pointer;
+  }

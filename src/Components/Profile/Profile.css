@@ -1,0 +1,15 @@
+.reg-form-container {
+    width: 60%;
+    margin-left: 10%;
+    margin-top: 0;
+}
+
+.reg-form-components {
+    margin-top: 10px;
+    padding-left: 20px;   
+}
+
+.fld-password {
+    width: 40%;
+    margin-top: 5px;
+}

@@ -1,0 +1,60 @@
+
+  .vertical-menu a:hover {
+    background-color: #402f80;
+  }
+  .vertical-menu a {
+    background-color: #2D92CB;
+    color: white;
+    display: block;
+    padding: 4px;
+    text-decoration: none;
+    text-align: center;
+    border: 0px solid #2D92CB;
+    margin: 2px;
+    font-size: 16px;
+    
+  }
+
+  .vertical-menu-expand a {
+    background-color: #2D92CB;
+    color: white;
+    display: block;
+    padding: 4px;
+    text-decoration: none;
+    text-align: center;
+    border: 0px solid #2D92CB;
+    margin: 2px;
+    font-size: 16px;  
+  }
+
+  .vertical-menu-expand a {
+    display: none;
+  }
+
+  .vertical-menu-expand a:hover {
+    background-color: #F2744D;
+  }
+
+  @media screen and (max-width: 1200px) {
+    .vertical-menu a {
+      font-size: 13px;
+    }
+  }
+
+  @media screen and (max-width: 800px) {
+    .vertical-menu a {
+      font-size: 10px;
+    }  
+  }
+
+  
+  @media screen and (max-width: 500px) {
+    .vertical-menu a {
+      display: none;
+    }
+
+    .vertical-menu-expand a {
+      display: block;
+      font-size: 10px;
+    }
+  }

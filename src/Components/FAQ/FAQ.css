@@ -1,0 +1,41 @@
+/* Container for the FAQ section */
+.faq-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 50px;
+  }
+  
+  /* Style for the title */
+  .faq-title {
+    text-align: left;
+    font-size: 36px;
+    margin-bottom: 50px;
+    color: #333;
+    font-weight: 700;
+  }
+  
+  /* Style for the question and answer list */
+  .faq-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  /* Style for each question and answer item */
+  .faq-item {
+    margin-bottom: 20px;
+  }
+  
+  /* Style for the question */
+  .faq-question {
+    font-size: 24px;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  
+  /* Style for the answer */
+  .faq-answer {
+    font-size: 18px;
+    line-height: 1.5;
+    color: #555;
+  }
+  

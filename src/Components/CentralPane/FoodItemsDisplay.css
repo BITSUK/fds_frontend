@@ -1,0 +1,15 @@
+.food-items {
+	border-style: solid;
+    border-color: #3DA6D2;
+}
+
+.food-item {
+    float: left;
+    width: 33.33%;
+    padding: 5px;    
+  }
+  
+.food-item:hover {
+      transform: scale(1.1);
+      /* cursor: pointer; */
+}

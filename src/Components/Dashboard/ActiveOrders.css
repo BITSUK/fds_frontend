@@ -1,0 +1,25 @@
+.order-title {
+    padding-left: 5px;
+
+}
+
+.order {
+    padding-left: 20px;
+
+}
+
+.Pending {
+    color: blue;   
+}
+
+.Confirmed {
+    color: green;   
+}
+
+.Delivered {
+    color: green;   
+}
+
+.Cancelled {
+    color: rgb(255, 0, 0);   
+}

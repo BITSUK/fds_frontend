@@ -1,0 +1,30 @@
+.journey-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px;
+  }
+  
+  .journey-title {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  
+  .journey-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .journey-step {
+    margin-bottom: 20px;
+  }
+  
+  .journey-step-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .journey-step-description {
+    font-size: 18px;
+    line-height: 1.5;
+  }
+  

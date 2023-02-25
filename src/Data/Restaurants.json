@@ -1,0 +1,311 @@
+[     
+    {
+        "rest_id": "D1",
+        "rest_name": "Shree Sai Bhojanle",
+        "rest_location_code": "NDLS",
+        "rest_location": "Delhi",
+        "rating": 4,
+        "image_link": "https://rb.gy/doe9fe/images/1.png",
+        "user_id": "UID002",
+        "menu_item": [
+            {
+                "menu_id": "D11",
+                "menu_name": "South Indian Thali",
+                "menu_price": 150,
+                "menu_review": 4,
+                "menu_type": "Veg",
+                "menu_category": "Starter"
+            },
+            {
+                "menu_id": "D12",
+                "menu_name": "Veg Thali",
+                "menu_price": 180,
+                "menu_review": 3,
+                "menu_type": "Veg",
+                "menu_category": "Main Course"
+            },
+			{
+                "menu_id": "D13",
+                "menu_name": "Veg Thali - Delux",
+                "menu_price": 240,
+                "menu_review": 3,
+                "menu_type": "Veg",
+                "menu_category": "Main Course"
+            },
+			{
+                "menu_id": "D14",
+                "menu_name": "Rajma Rice",
+                "menu_price": 160,
+                "menu_review": 3,
+                "menu_type": "Veg",
+                "menu_category": "Main Course"
+            },			
+			{
+                "menu_id": "D15",
+                "menu_name": "Kadi Rice",
+                "menu_price": 170,
+                "menu_review": 3,
+                "menu_type": "Veg",
+                "menu_category": "Main Course"
+            },
+			{
+                "menu_id": "D16",
+                "menu_name": "Chole Bhature",
+                "menu_price": 120,
+                "menu_review": 3,
+                "menu_type": "Veg",
+                "menu_category": "Main Course"
+            },
+			{
+                "menu_id": "D17",
+                "menu_name": "Papdi Chat",
+                "menu_price": 50,
+                "menu_review": 3,
+                "menu_type": "Veg",
+                "menu_category": "Starter"
+            },
+			{
+                "menu_id": "D18",
+                "menu_name": "Bhel Puri",
+                "menu_price": 50,
+                "menu_review": 3,
+                "menu_type": "Veg",
+                "menu_category": "Starter"
+            },
+			{
+                "menu_id": "D19",
+                "menu_name": "Idli Sambhar",
+                "menu_price": 80,
+                "menu_review": 3,
+                "menu_type": "Veg",
+                "menu_category": "Starter"
+            },
+            {
+                "menu_id": "D110",
+                "menu_name": "Biryani",
+                "menu_price": 300,
+                "menu_review": 3,
+                "menu_type": "Non-Veg",
+                "menu_category": "Starter"
+            }
+        ]
+    },
+	{
+        "rest_id": "D2",
+        "rest_name": "Oberoi",
+        "rest_location_code": "NDLS",
+        "rest_location": "Delhi",
+        "rating": 3,
+        "image_link": "./images/1.png",
+        "user_id": "UID000",
+        "menu_item": [
+            {
+                "menu_id": "D22",
+                "menu_name": "Wadapav",
+                "menu_price": 20,
+                "menu_review": 3,
+                "menu_type": "Veg",
+                "menu_category": "Starter"
+            },
+            {
+                "menu_id": "D22",
+                "menu_name": "Paneer",
+                "menu_price": 20,
+                "menu_review": 4,
+                "menu_type": "Veg",
+                "menu_category": "Main Course"
+            }
+        ]
+    },
+	{
+        "rest_id": "D3",
+        "rest_name": "Pizza Hut",
+        "rest_location_code": "NDLS",
+        "rest_location": "Delhi",
+        "rating": 2,
+        "image_link": "./images/1.png",
+        "user_id": "UID000",
+        "menu_item": [
+            {
+                "menu_id": "D31",
+                "menu_name": "Choco Lava",
+                "menu_price": 20,
+                "menu_review": 3,
+                "menu_type": "Veg",
+                "menu_category": "Starter"
+            },
+            {
+                "menu_id": "D32",
+                "menu_name": "Spring Roll",
+                "menu_price": 60,
+                "menu_review": 5,
+                "menu_type": "Veg",
+                "menu_category": "Main Course"
+            }
+        ]
+    },        
+    {
+        "rest_id": "K1",
+        "rest_name": "Sai Palace",
+        "rest_location_code": "KOTA",
+        "rest_location": "Kota",
+        "rating": 3,
+        "image_link": "./images/1.png",
+        "user_id": "UID000",
+        "menu_item": [
+            {
+                "menu_id": "K11",
+                "menu_name": "Wadapav",
+                "menu_price": 20,
+                "menu_review": 2,
+                "menu_type": "Veg",
+                "menu_category": "Starter"
+            },
+            {
+                "menu_id": "K12",
+                "menu_name": "Paneer",
+                "menu_price": 20,
+                "menu_review": 5,
+                "menu_type": "Veg",
+                "menu_category": "Main Course"
+            }
+        ]
+    },
+    {
+        "rest_id": "R1",
+        "rest_name": "Domino",
+        "rest_location_code": "RTM",
+        "rest_location": "Ratlam",
+        "rating": 4,
+        "image_link": "./images/1.png",
+        "user_id": "UID000",
+        "menu_item": [
+            {
+                "menu_id": "R11",
+                "menu_name": "Veg Pizza",
+                "menu_price": 20,
+                "menu_review": 3,
+                "menu_type": "Veg",
+                "menu_category": "Starter"
+            },
+            {
+                "menu_id": "R12",
+                "menu_name": "Corn Pizza",
+                "menu_price": 50,
+                "menu_review": 4,
+                "menu_type": "Veg",
+                "menu_category": "Main Course"
+            }
+        ]
+    },
+	{
+        "rest_id": "R2",
+        "rest_name": "Sai Bhojanle",
+        "rest_location_code": "RTM",
+        "rest_location": "Ratlam",
+        "rating": 4,
+        "image_link": "https://rb.gy/doe9fe/images/1.png",
+        "user_id": "UID000",
+        "menu_item": [
+            {
+                "menu_id": "R21",
+                "menu_name": "South Indian Thali",
+                "menu_price": 150,
+                "menu_review": 4,
+                "menu_type": "Veg",
+                "menu_category": "Starter"
+            },
+            {
+                "menu_id": "R22",
+                "menu_name": "Veg Thali",
+                "menu_price": 180,
+                "menu_review": 3,
+                "menu_type": "Veg",
+                "menu_category": "Main Course"
+            },
+			{
+                "menu_id": "R23",
+                "menu_name": "Non-Veg Thali",
+                "menu_price": 240,
+                "menu_review": 3,
+                "menu_type": "Non-Veg",
+                "menu_category": "Main Course"
+            },
+			{
+                "menu_id": "R24",
+                "menu_name": "Rajma Rice",
+                "menu_price": 160,
+                "menu_review": 3,
+                "menu_type": "Veg",
+                "menu_category": "Main Course"
+            },			
+			{
+                "menu_id": "R25",
+                "menu_name": "Kadi Rice",
+                "menu_price": 170,
+                "menu_review": 3,
+                "menu_type": "Veg",
+                "menu_category": "Main Course"
+            },
+			{
+                "menu_id": "R26",
+                "menu_name": "Chole Bhature",
+                "menu_price": 120,
+                "menu_review": 3,
+                "menu_type": "Veg",
+                "menu_category": "Main Course"
+            },
+			{
+                "menu_id": "R27",
+                "menu_name": "Papdi Chat",
+                "menu_price": 50,
+                "menu_review": 3,
+                "menu_type": "Veg",
+                "menu_category": "Starter"
+            },
+			{
+                "menu_id": "R28",
+                "menu_name": "Bhel Puri",
+                "menu_price": 50,
+                "menu_review": 3,
+                "menu_type": "Veg",
+                "menu_category": "Starter"
+            },
+			{
+                "menu_id": "R29",
+                "menu_name": "Idli Sambhar",
+                "menu_price": 80,
+                "menu_review": 3,
+                "menu_type": "Veg",
+                "menu_category": "Starter"
+            }
+        ]
+    },
+	{
+        "rest_id": "M1",
+        "rest_name": "Oberoi",
+        "rest_location_code": "MMCT",
+        "rest_location": "Mumbai",
+        "rating": 3,
+        "image_link": "./images/1.png",
+        "user_id": "UID000",
+        "menu_item": [
+            {
+                "menu_id": "M11",
+                "menu_name": "wadapav",
+                "menu_price": 20,
+                "menu_review": 4,
+                "menu_type": "Veg",
+                "menu_category": "Starter"
+            },
+            {
+                "menu_id": "M12",
+                "menu_name": "panner",
+                "menu_price": 20,
+                "menu_review": 1,
+                "menu_type": "Veg",
+                "menu_category": "Main Course"
+            }
+        ]
+    }
+]

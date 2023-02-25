@@ -1,0 +1,31 @@
+.a-default {
+    color: black;
+    font-weight: bold;
+    padding: 5px;
+}
+
+.a-warning {
+    color: blue;
+    font-weight: bold;
+    padding: 5px;
+}
+
+.a-error {
+    color: red;
+    font-weight: bold;
+    padding: 5px;
+}
+
+.a-success {
+    color: green;
+    font-weight: bold;
+    padding: 5px;
+}
+
+.no-margin {
+    margin: 0;
+}
+
+.no-padding {
+    padding: 0;
+}

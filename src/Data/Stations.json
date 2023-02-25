@@ -1,0 +1,79 @@
+[
+    {  
+        "id": "1", 
+        "station_code" : "NDLS", 
+        "station_name" : "Delhi",
+        "trains" : [ 
+            {  "train_no": "12904", "train_name" : "Golden Temple",         "arrival_time" : "03:45", "departure_time" : "04:00", "halt": "15m"},
+            {  "train_no": "12432", "train_name" : "Rajdhani",              "arrival_time" : "-",     "departure_time" : "06:16", "halt": "-"},
+            {  "train_no": "12910", "train_name" : "Garibrath",             "arrival_time" : "-",     "departure_time" : "16:30", "halt": "-"},
+            {  "train_no": "12926", "train_name" : "Paschim SF Express",    "arrival_time" : "16:20", "departure_time" : "16:35", "halt": "15m"},
+            {  "train_no": "22210", "train_name" : "Duronto Express",       "arrival_time" : "-",     "departure_time" : "22:10", "halt": "-"}
+        ]          
+    },
+    {  
+        "id": "2", 
+        "station_code" : "MTJ",  
+        "station_name" : "Mathura",
+        "trains" : [ 
+            {  "train_no": "12926", "train_name" : "Paschim SF Express" },
+            {  "train_no": "12910", "train_name" : "Garibrath"    },
+            {  "train_no": "12904", "train_name" : "Golden Temple"    }
+        ]      
+    },
+    {  
+        "id": "3", 
+        "station_code" : "KOTA", 
+        "station_name" : "Kota",
+        "trains" : [ 
+            {  "train_no": "22210", "train_name" : "Duronto Express",       "arrival_time" : "03:45", "departure_time" : "03:55", "halt": "10m"},
+            {  "train_no": "12904", "train_name" : "Golden Temple",         "arrival_time" : "10:10", "departure_time" : "10:20", "halt": "10m"},
+            {  "train_no": "12432", "train_name" : "Rajdhani"    ,          "arrival_time" : "10:40", "departure_time" : "10:50", "halt": "10m"},
+            {  "train_no": "12910", "train_name" : "Garibrath"   ,          "arrival_time" : "21:15", "departure_time" : "21:20", "halt": "5m"},
+            {  "train_no": "12926", "train_name" : "Paschim SF Express" ,   "arrival_time" : "23:30", "departure_time" : "23:40", "halt": "10m"}
+        ]           
+    },
+    {  
+        "id": "4", 
+        "station_code" : "RTM",  
+        "station_name" : "Ratlam",
+        "trains" : [ 
+            {  "train_no": "12926", "train_name" : "Paschim SF Express" },
+            {  "train_no": "22210", "train_name" : "Duronto Express"},
+            {  "train_no": "12910", "train_name" : "Garibrath"    },
+            {  "train_no": "12904", "train_name" : "Golden Temple"}
+        ]         
+    },
+    {  
+        "id": "5", 
+        "station_code" : "BRC",  
+        "station_name" : "Vadodara",
+        "trains" : [ 
+            {  "train_no": "12926", "train_name" : "Paschim SF Express" },
+            {  "train_no": "22210", "train_name" : "Duronto Express"    },
+            {  "train_no": "12910", "train_name" : "Garibrath"    },
+            {  "train_no": "12432", "train_name" : "Rajdhani"}
+        ]       
+    },
+    {  
+        "id": "6", 
+        "station_code" : "ST",   
+        "station_name" : "Surat",
+        "trains" : [ 
+            {  "train_no": "12926", "train_name" : "Paschim SF Express"},
+            {  "train_no": "12910", "train_name" : "Garibrath"}
+        ]          
+    },
+    {  
+        "id": "7", 
+        "station_code" : "MMCT", 
+        "station_name" : "Mumbai",
+        "trains" : [ 
+            {  "train_no": "12926", "train_name" : "Paschim SF Express"},
+            {  "train_no": "22210", "train_name" : "Duronto Express"   },
+            {  "train_no": "12910", "train_name" : "Garibrath"    },
+            {  "train_no": "12432", "train_name" : "Rajdhani"    },
+            {  "train_no": "12904", "train_name" : "Golden Temple" }
+        ]         
+    }
+]

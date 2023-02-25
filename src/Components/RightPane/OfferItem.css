@@ -1,0 +1,14 @@
+.OfferItem {
+    float: left;
+    padding: 2px;
+  }
+
+.OfferItem img{
+	width:100%;
+	padding-bottom: 2px;
+}
+
+.OfferItem:hover {
+  transform: scale(1.2);
+  cursor: pointer;
+}

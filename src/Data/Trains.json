@@ -1,0 +1,65 @@
+[
+    { 
+        "id": "1", 
+        "train_no"   : "12926",
+        "train_name" : "Paschim SF Express",
+        "train_stations" : [ 
+            {  "station_code" : "NDLS", "station": "Delhi"    ,"arrival_day" : "Day 1", "arrival_time" : "16:20", "departure_day" : "Day 1", "departure_time" : "16:35", "halt": "15m"},
+            {  "station_code" : "MTJ" , "station": "Mathura"  ,"arrival_day" : "Day 1", "arrival_time" : "19:10", "departure_day" : "Day 1", "departure_time" : "19:15", "halt": "5m"},
+            {  "station_code" : "KOTA", "station": "Kota"     ,"arrival_day" : "Day 1", "arrival_time" : "23:30", "departure_day" : "Day 1", "departure_time" : "23:40", "halt": "10m"},
+            {  "station_code" : "RTM" , "station": "Ratlam"   ,"arrival_day" : "Day 2", "arrival_time" : "04:25", "departure_day" : "Day 2", "departure_time" : "04:35", "halt": "10m"},            
+            {  "station_code" : "BRC" , "station": "Vadodara" ,"arrival_day" : "Day 2", "arrival_time" : "08:15", "departure_day" : "Day 2", "departure_time" : "08:25", "halt": "10m"},            
+            {  "station_code" : "ST"  , "station": "Surat"    ,"arrival_day" : "Day 2", "arrival_time" : "10:24", "departure_day" : "Day 2", "departure_time" : "10:29", "halt": "5m"},
+            {  "station_code" : "MMCT", "station": "Mumbai"   ,"arrival_day" : "Day 2", "arrival_time" : "14:55", "departure_day" : "",      "departure_time" : "-",      "halt": "-"}  
+        ]
+    },
+    { 
+        "id": "2", 
+        "train_no"   : "22210",
+        "train_name" : "Duronto Express",
+        "train_stations" : [ 
+            {  "station_code" : "NDLS", "station": "Delhi"    },
+            {  "station_code" : "KOTA", "station": "Kota"     },
+            {  "station_code" : "RTM" , "station": "Ratlam"   },
+            {  "station_code" : "BRC" , "station": "Vadodara" },
+            {  "station_code" : "MMCT", "station": "Mumbai"   }   
+        ]
+    },
+    {   
+        "id": "3", 
+        "train_no"   : "12910",
+        "train_name" : "Garibrath",
+        "train_stations" : [ 
+            {  "station_code" : "NDLS", "station": "Delhi"    },
+            {  "station_code" : "MTJ" , "station": "Mathura"  },
+            {  "station_code" : "KOTA", "station": "Kota"     },
+            {  "station_code" : "RTM" , "station": "Ratlam"   },
+            {  "station_code" : "BRC" , "station": "Vadodara" },
+            {  "station_code" : "ST"  , "station": "Surat"    },
+            {  "station_code" : "MMCT", "station": "Mumbai"   }   
+        ]
+    },
+    {   
+        "id": "4", 
+        "train_no"   : "12432",
+        "train_name" : "Rajdhani",
+        "train_stations" : [ 
+            {  "station_code" : "NDLS", "station": "Delhi"    },
+            {  "station_code" : "KOTA", "station": "Kota"     },
+            {  "station_code" : "BRC" , "station": "Vadodara" },
+            {  "station_code" : "MMCT", "station": "Mumbai"   }   
+        ]
+    },
+    {   
+        "id": "5", 
+        "train_no"   : "12904",
+        "train_name" : "Golden Temple",
+        "train_stations" : [ 
+            {  "station_code" : "NDLS", "station": "Delhi"    },
+            {  "station_code" : "MTJ" , "station": "Mathura"  },
+            {  "station_code" : "KOTA", "station": "Kota"     },
+            {  "station_code" : "RTM" , "station": "Ratlam"   },
+            {  "station_code" : "MMCT", "station": "Mumbai"   } 
+        ]
+    }
+]

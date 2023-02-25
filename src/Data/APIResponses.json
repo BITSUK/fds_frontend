@@ -1,0 +1,190 @@
+{
+    "users": [
+      { "id": "001", "userId" : "UID001", "userName"   : "Amit",      "userRoles"   : ["customer"],                  "userStatus" : "active" },
+      { "id": "002", "userId" : "UID002", "userName"   : "Deepak",    "userRoles"   : ["restaurant"],                "userStatus" : "active" },
+      { "id": "003", "userId" : "UID003", "userName"   : "Priya",     "userRoles"   : ["customer","restaurant"],     "userStatus" : "active" },
+      { "id": "004", "userId" : "UID004", "userName"   : "Rana",      "userRoles"   : ["admin"],                     "userStatus" : "active" },
+      { "id": "005", "userId" : "hello@gmail.com", "userName"   : "Hello",      "userRoles"   : ["customer"],                     "userStatus" : "active" }
+    ],    
+    "trains": [
+      { "id": "12926",
+        "train_name" : "Paschim SF Express",
+        "train_origin" : "Amritsar",
+        "train_destination" : "Mumbai",
+        "train_stations" : [
+            { "id" : "0", 
+              "station_code" : "ASR",
+              "station_name" : "Amritsar",
+              "arrival_day:" : "",
+              "arrival_time:" : "",
+              "departure_day:" : "Day 1",
+              "departure_time:" : "7:35",
+              "halt": ""
+             },
+             { "id" : "1",
+              "station_code" : "NDLS",
+              "station_name" : "New Delhi",
+              "arrival_day:" : "Day 1",
+              "arrival_time:" : "16:20",
+              "departure_day:" : "Day 1",
+              "departure_time:" : "16:35",
+              "halt": "15m"
+             },
+             { "id" : "2",
+              "station_code" : "KOTA",
+              "station_name" : "Kota Jn",
+              "arrival_day:" : "Day 1",
+              "arrival_time:" : "23:30",
+              "departure_day:" : "Day 1",
+              "departure_time:" : "23:40",
+              "halt": "10m"
+             },
+             { "id" : "3",
+              "station_code" : "ST",
+              "station_name" : "Surat",
+              "arrival_day:" : "Day 2",
+              "arrival_time:" : "10:24",
+              "departure_day:" : "Day 2",
+              "departure_time:" : "10:29",
+              "halt": "5m"
+             },
+             { "id" : "L",
+              "station_code" : "MMCT",
+              "station_name" : "Mumbai Central",
+              "arrival_day:" : "Day 2",
+              "arrival_time:" : "14:55",
+              "departure_day:" : "",
+              "departure_time:" : "",
+              "halt": ""
+             }
+        ]
+      },
+      { "id": "22210",
+        "train_name" : "Duronto Express",
+        "train_origin" : "New Delhi",
+        "train_destination" : "Mumbai",
+        "train_stations" : [
+            { "id" : "0", 
+              "station_code" : "NDLS",
+              "station_name" : "New Delhi",
+              "arrival_day:" : "",
+              "arrival_time:" : "",
+              "departure_day:" : "Day 1",
+              "departure_time:" : "22:10",
+              "halt": ""
+             },
+             { "id" : "1",
+              "station_code" : "KOTA",
+              "station_name" : "Kota Jn",
+              "arrival_day:" : "Day 2",
+              "arrival_time:" : "03:45",
+              "departure_day:" : "Day 2",
+              "departure_time:" : "03:55",
+              "halt": "10m"
+             },
+             { "id" : "2",
+              "station_code" : "RTM",
+              "station_name" : "Ratlam Jn",
+              "arrival_day:" : "Day 2",
+              "arrival_time:" : "07:00",
+              "departure_day:" : "Day 2",
+              "departure_time:" : "07:05",
+              "halt": "5m"
+             },
+             { "id" : "3",
+              "station_code" : "BRC",
+              "station_name" : "Vadodara Jn",
+              "arrival_day:" : "Day 2",
+              "arrival_time:" : "10:33",
+              "departure_day:" : "Day 2",
+              "departure_time:" : "10:43",
+              "halt": "10m"
+             },
+             { "id" : "L",
+              "station_code" : "MMCT",
+              "station_name" : "Mumbai Central",
+              "arrival_day:" : "Day 2",
+              "arrival_time:" : "15:50",
+              "departure_day:" : "",
+              "departure_time:" : "",
+              "halt": ""
+             }
+        ]
+      },
+      { "id": "12910",
+        "train_name" : "Garibrath",
+        "train_origin" : "New Delhi",
+        "train_destination" : "Mumbai",
+        "train_stations" : [
+            { "id" : "0", 
+              "station_code" : "NDLS",
+              "station_name" : "New Delhi",
+              "arrival_day:" : "",
+              "arrival_time:" : "",
+              "departure_day:" : "Day 1",
+              "departure_time:" : "16:30",
+              "halt": ""
+             },
+             { "id" : "1",
+              "station_code" : "MTJ",
+              "station_name" : "Mathura Jn",
+              "arrival_day:" : "Day 1",
+              "arrival_time:" : "18:03",
+              "departure_day:" : "Day 1",
+              "departure_time:" : "18:05",
+              "halt": "2m"
+             },
+             { "id" : "3",
+              "station_code" : "RTM",
+              "station_name" : "Ratlam Jn",
+              "arrival_day:" : "Day 2",
+              "arrival_time:" : "00:15",
+              "departure_day:" : "Day 2",
+              "departure_time:" : "00:18",
+              "halt": "3m"
+             },
+             { "id" : "4",
+              "station_code" : "BRC",
+              "station_name" : "Vadodara Jn",
+              "arrival_day:" : "Day 2",
+              "arrival_time:" : "03:55",
+              "departure_day:" : "Day 2",
+              "departure_time:" : "04:05",
+              "halt": "10m"
+             },
+             { "id" : "5",
+              "station_code" : "ST",
+              "station_name" : "Surat",
+              "arrival_day:" : "Day 2",
+              "arrival_time:" : "05:37",
+              "departure_day:" : "Day 2",
+              "departure_time:" : "05:42",
+              "halt": "5m"
+             },
+             { "id" : "6",
+              "station_code" : "BVI",
+              "station_name" : "Borivali",
+              "arrival_day:" : "Day 2",
+              "arrival_time:" : "08:27",
+              "departure_day:" : "Day 2",
+              "departure_time:" : "08:29",
+              "halt": "2m"
+             },
+             { "id" : "L",
+              "station_code" : "MMCT",
+              "station_name" : "Mumbai Central",
+              "arrival_day:" : "Day 2",
+              "arrival_time:" : "09:15",
+              "departure_day:" : "",
+              "departure_time:" : "",
+              "halt": ""
+             }
+        ]
+      }
+
+
+      
+      
+    ]
+  }
+  

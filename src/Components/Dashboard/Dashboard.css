@@ -1,0 +1,14 @@
+.no-margin {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.white-color-text {
+    color :white;
+}
+
+.horizontal-line {
+    margin-top: 1px;
+    margin-bottom: 1px;
+  }
+  
