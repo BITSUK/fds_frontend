@@ -28,7 +28,7 @@ export default function Login(props) {
         // Obtain the userid and password entered by user on screen
         var inputUserId = document.getElementById("loginFormUserId").value;        
         var inputPassword = document.getElementById("loginFormPassword").value;
-        var inputRole = document.getElementById("radioCustomer").checked == true ? "1" : "2";
+        var inputRole = document.getElementById("radioCustomer").checked === true ? "1" : "2";
         
         //Validate the user id and password
         if (inputUserId === "" || inputPassword === "") {
@@ -36,7 +36,7 @@ export default function Login(props) {
             a.alertType = "error";
             setAlert(a);
 
-        } else if ((inputUserId.length == 6) &&  (inputPassword.length >=8) && (inputUserId.substr(0,3) == 'UID')) {
+        } else if ((inputUserId.length === 6) &&  (inputPassword.length >= 8) && (inputUserId.substr(0,3) === 'UID')) {
             
             // var loginURL = "http://localhost:3004/users/001";
 
@@ -52,6 +52,8 @@ export default function Login(props) {
                     console.log('API Response: ');
                     console.log(data);                
 
+                    var role = (data[0].user_role === "1") ? "customer" : "restaurant";
+                        
                     if (data[0].user_id === inputUserId) {
                         setUserContext({
                             uid: data[0].user_id,
@@ -59,7 +61,7 @@ export default function Login(props) {
                             mobile: data[0].user_mobile,
                             email: data[0].user_email,
                             address: "",
-                            role: data[0].user_role,
+                            role: role,
                             isLoggedIn: true,
                             train: "",
                             trainName : "",

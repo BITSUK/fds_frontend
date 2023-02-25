@@ -50,47 +50,46 @@ export default function Registration() {
         }
 
         //Ensure either Customer or restuartant or both are selected
-        if ((document.getElementById("chkCustomer").checked == false) && (document.getElementById("chkRestaurant").checked == false)) {
+        if ((document.getElementById("chkCustomer").checked === false) && (document.getElementById("chkRestaurant").checked === false)) {
             setAlert({ alertMessage: "Select role - Customer or Restaurant or both.", alertType: "error" });
             document.getElementById("chkCustomer").focus();
             return;
         }
 
-        //validate mobile number
-        fld = document.getElementById("regFormMobile").value;
-        if (fld.length != 10){
-            setAlert({ alertMessage: "Mobile number should be 10 characters and without country code", alertType: "error" });
-            document.getElementById("regFormMobile").focus();
-            return;     
-        }
-
-        if ((fld.length != 10) || (fld.match("[A-Z]") != null) || (fld.match("[%@#$]") != null) || (fld.match("[a-z]") != null)) {
-            setAlert({ alertMessage: "Invalid mobile number", alertType: "error" });
-            document.getElementById("regFormMobile").focus();
-            return;    
-        } 
-        
-
         //validate email id
         fld = document.getElementById("regFormEmail").value;
-        if ((fld > "") && (fld.match("[@]") == null)) {
+        if ((fld > "") && (fld.match("[@]") === null)) {
             setAlert({ alertMessage: "Invalid email id", alertType: "error" });
             document.getElementById("regFormEmail").focus();
             return;
         }
 
+        //validate mobile number
+        fld = document.getElementById("regFormMobile").value;
+        if (fld.length !== 10){
+            setAlert({ alertMessage: "Mobile number should be 10 characters and without country code", alertType: "error" });
+            document.getElementById("regFormMobile").focus();
+            return;     
+        }
+
+        if ((fld.length !== 10) || (fld.match("[A-Z]") !== null) || (fld.match("[%@#$]") !== null) || (fld.match("[a-z]") !== null)) {
+            setAlert({ alertMessage: "Invalid mobile number", alertType: "error" });
+            document.getElementById("regFormMobile").focus();
+            return;    
+        } 
+
         //Validate user id
         fld = document.getElementById("regFormUserid").value;
-        if ((fld === "") || (fld.length <=    4)) {            
-            setAlert({ alertMessage: "User id should be more than 4 characters", alertType: "error" });
+        if (fld === "") {            
+            setAlert({ alertMessage: "User id is mandatory", alertType: "error" });
             document.getElementById("regFormUserid").focus();
             return;    
         } 
 
         //Validate user id
         fld = document.getElementById("regFormUserid").value;
-        if ((fld === "") || (fld.length <=    4)) {            
-            setAlert({ alertMessage: "User id should be more than 4 characters", alertType: "error" });
+        if (fld.length > 6) {            
+            setAlert({ alertMessage: "User id should not be more than 6 characters", alertType: "error" });
             document.getElementById("regFormUserid").focus();
             return;    
         } 
@@ -118,7 +117,7 @@ export default function Registration() {
         } 
 
         //Validate Restuarant field
-        if (document.getElementById("chkRestaurant").checked == true) {
+        if (document.getElementById("chkRestaurant").checked === true) {
 
             //User address is mandatory if restaurant role is selected
             fld = document.getElementById("regFormUserAddress").value;
@@ -145,7 +144,7 @@ export default function Registration() {
             }
 
             //Ensure type of restuarant is selected
-            if ((document.getElementById("chkVegRest").checked == false) && (document.getElementById("chkNonVegRest").checked == false)) {
+            if ((document.getElementById("chkVegRest").checked === false) && (document.getElementById("chkNonVegRest").checked === false)) {
                 setAlert({ alertMessage: "Select restaurant type - Veg Non-Veg.", alertType: "error" });
                 document.getElementById("chkVegRest").focus();
                 return;
@@ -154,13 +153,40 @@ export default function Registration() {
         }
 
         //Check if terms accepted
-        if (document.getElementById("chkTerms").checked == false) {
+        if (document.getElementById("chkTerms").checked === false) {
             setAlert({ alertMessage: "Please accept terms and conditions", alertType: "error" });
             document.getElementById("chkTerms").focus();
             return;
         } 
 
-        setAlert({ alertMessage: "Successfully registered.", alertType: "success" });
+
+        // Backend server call
+        var baseURL = "http://127.0.0.1:8000/fds/";
+        var specificURL = "rest/api/users/registration/";
+        var queryString = "";
+
+        var url = baseURL + specificURL + queryString;        
+                  
+        fetch(url)
+            .then(response => response.json())      // convert response to json
+            .then(function(data) {                  // process response
+                console.log('API Response: ');
+                console.log(data);                
+
+                //Logic here
+                    
+                a.alertMessage = "";
+                a.alertType = "default";
+                setAlert(a);                    
+                
+                // alert("Successfully registered.");
+                setAlert({ alertMessage: "Successfully registered.", alertType: "success" });
+                // navigate('/dashboard');
+            })
+            .catch(error => {
+                console.log ("Error calling /registration endpoint: " + error);
+            });
+        // fetch ends
         
     }
 
@@ -169,37 +195,38 @@ export default function Registration() {
     return (
     <div>
         <Alert />
-        <div className="reg-form-container">            
+        <div className="reg-form-container" >            
             <br />
             <br />
+            <div className="reg-form-components" style={{display: 'none'}}>
+				<input type="checkbox" id="chkCustomer" name="role-type" value="Customer" defaultChecked /> &nbsp;
+                <label htmlFor="chkCustomer">Customer</label>	&nbsp;
+				{/* <input type="checkbox" id="chkRestaurant" name="role-type" value="Restaurant" onClick={showHideRest}/> &nbsp;
+                <label htmlFor="chkRestaurant">Restaurant</label>			 */}
+			</div>
             <div className="reg-form-components">
-                <label htmlFor="regFormUserName" className="form-label" style={{color: 'blue'}}>User Name*</label>
+                <label htmlFor="regFormUserName" className="form-label" style={{color: 'blue'}}>Name*</label>
                 <input type="text" className="form-control" id="regFormUserName" placeholder="Name"/>
             </div>
-            <div className="reg-form-components">
-				<input type="checkbox" id="chkCustomer" name="role-type" value="Customer" defaultChecked/> &nbsp;
-                <label htmlFor="chkCustomer">Customer</label>	&nbsp;
-				<input type="checkbox" id="chkRestaurant" name="role-type" value="Restaurant" onClick={showHideRest}/> &nbsp;
-                <label htmlFor="chkRestaurant">Restaurant</label>			
-			</div>
             
             <div className="reg-form-components">
-                <label htmlFor="regFormMobile" className="form-label">Mobile*</label>
-                <input type="text" className="form-control" id="regFormMobile" placeholder="mobile number"/>
-            </div>
+                <label htmlFor="regFormUserid" className="form-label">Userid*</label>
+                <input type="text" className="form-control" id="regFormUserid" placeholder="userid"/>
+            </div>            
             <div className="reg-form-components">
                 <label htmlFor="regFormEmail" className="form-label">Email</label>
                 <input type="text" className="form-control" id="regFormEmail" placeholder="xyz@gmail.com"/>
-            </div>  
+            </div> 
             <div className="reg-form-components">
+                <label htmlFor="regFormMobile" className="form-label">Mobile*</label>
+                <input type="text" className="form-control" id="regFormMobile" placeholder="mobile number"/>
+            </div> 
+            {/* <div className="reg-form-components">
                 <label htmlFor="regFormAddress" className="form-label">Address</label>
                 <input type="text" className="form-control" id="regFormUserAddress" placeholder="Address"/>
-            </div>
+            </div> */}
 
-            <div className="reg-form-components">
-                <label htmlFor="regFormUserid" className="form-label">Userid*</label>
-                <input type="text" className="form-control" id="regFormUserid" placeholder="userid/mobile/email"/>
-            </div>
+            
             <div className="reg-form-components">
                 <label htmlFor="regFormPassword1" className="form-label">Password</label>
                 <div>
@@ -207,7 +234,14 @@ export default function Registration() {
                     <input type="password" className="form-control fld-password" id="regFormPassword2" placeholder="repeat"/>
                 </div>
             </div> 
-                      
+            <br/>
+            <hr className="horizontal-line"/>
+            <div className="reg-form-components">
+				{/* <input type="checkbox" id="chkCustomer" name="role-type" value="Customer" defaultChecked/> &nbsp;
+                <label htmlFor="chkCustomer">Customer</label>	&nbsp; */}
+				<input type="checkbox" id="chkRestaurant" name="role-type" value="Restaurant" onClick={showHideRest}/> &nbsp;
+                <label htmlFor="chkRestaurant" >Are you registering as a restaurant owner?</label>			
+			</div>          
 
             <div Id="restaurant-details" style={{display: "none"}}>
                 <div className="reg-form-components">
@@ -216,18 +250,18 @@ export default function Registration() {
                 </div>
 
                 <div className="reg-form-components">
-                    <label htmlFor="regFormName" className="form-label">Restaurant Address</label>
-                    <input type="text" className="form-control" id="regFormRestAddress" placeholder="Name"/>
-                </div>
-
-                <div className="reg-form-components">
                     <input type="checkbox" id="chkVegRest" name="restaurant-type" value="Veg" defaultChecked/> &nbsp;
                     <label htmlFor="chkVegRest">Veg</label>	&nbsp;
                     <input type="checkbox" id="chkNonVegRest" name="restaurant-type" value="Non-Veg"/> &nbsp;
                     <label htmlFor="chkNonVegRest">Non-Veg</label>	&nbsp;		
-			    </div>                
+			    </div> 
+                
+                <div className="reg-form-components">
+                    <label htmlFor="regFormName" className="form-label">Restaurant Address</label>
+                    <input type="text" className="form-control" id="regFormRestAddress" placeholder="Name"/>
+                </div>               
 
-                <div className="reg-form-components"> 
+                {/* <div className="reg-form-components"> 
                     <label>Operational Days: </label><br/>
                     <input type="checkbox" id="chkMon" name="restaurant-type" value="Mon" defaultChecked/> &nbsp;
                     <label htmlFor="chkMon">Mon</label>&nbsp;
@@ -243,10 +277,10 @@ export default function Registration() {
                     <label htmlFor="chkSat">Sat</label>&nbsp;
                     <input type="checkbox" id="chkSun" name="restaurant-type" value="Sun" defaultChecked/> &nbsp;
                     <label htmlFor="chkSun">Sun</label>&nbsp;
-			    </div>
-
+			    </div> */}
+                <br/>
             </div>
-
+            <hr className="horizontal-line"/>
             <div className="reg-form-components"> 
                     <input type="checkbox" id="chkTerms" name="terms-and-conditions" value="TC"/> &nbsp;
                     <label htmlFor="chkTerms">I accept all terms and conditions.*</label>&nbsp;
