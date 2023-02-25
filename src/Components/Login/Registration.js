@@ -1,6 +1,6 @@
 import React from 'react'
 import './Registration.css';
-import {Link} from "react-router-dom";
+import {Link, useNavigate } from "react-router-dom";
 import { AlertContext } from '../../Contexts/AlertContext.js';
 import {useContext} from "react";
 import Alert from "../Alert/Alert.js";
@@ -13,6 +13,8 @@ export default function Registration() {
         alertType: alertMessage.alertType,
         alertMessage: alertMessage.alertMessage
     }     
+
+    const navigate = useNavigate();
 
     //Show and hide restuartant section 
     const showHideRest = (event) => {
@@ -88,8 +90,8 @@ export default function Registration() {
 
         //Validate user id
         fld = document.getElementById("regFormUserid").value;
-        if (fld.length > 6) {            
-            setAlert({ alertMessage: "User id should not be more than 6 characters", alertType: "error" });
+        if (fld.length < 4) {            
+            setAlert({ alertMessage: "User id should not be less than 4 characters", alertType: "error" });
             document.getElementById("regFormUserid").focus();
             return;    
         } 
@@ -120,12 +122,12 @@ export default function Registration() {
         if (document.getElementById("chkRestaurant").checked === true) {
 
             //User address is mandatory if restaurant role is selected
-            fld = document.getElementById("regFormUserAddress").value;
-            if (fld === ""){
-                setAlert({ alertMessage: "User address is mandatory", alertType: "error" });
-                document.getElementById("regFormUserAddress").focus();
-                return;  
-            }
+            // fld = document.getElementById("regFormUserAddress").value;
+            // if (fld === ""){
+            //     setAlert({ alertMessage: "User address is mandatory", alertType: "error" });
+            //     document.getElementById("regFormUserAddress").focus();
+            //     return;  
+            // }
 
             //Restaurant name
             fld = document.getElementById("regFormRestName").value;
@@ -140,6 +142,15 @@ export default function Registration() {
             if (fld === ""){
                 setAlert({ alertMessage: "Restuarant address is mandatory", alertType: "error" });
                 document.getElementById("regFormRestAddress").focus();
+                return;  
+            }
+
+
+            //restaurant address
+            fld = document.getElementById("regFormRestLocation").value;
+            if (fld === ""){
+                setAlert({ alertMessage: "Restuarant location is mandatory", alertType: "error" });
+                document.getElementById("regFormRestLocation").focus();
                 return;  
             }
 
@@ -159,6 +170,59 @@ export default function Registration() {
             return;
         } 
 
+        // Obtain the screen details for creating User and Restaurant records
+        var u_id = document.getElementById("regFormUserid").value;
+        var u_name = document.getElementById("regFormUserName").value;
+        var u_email = document.getElementById("regFormEmail").value;
+        var u_mobile = document.getElementById("regFormMobile").value;
+        var u_password = document.getElementById("regFormPassword1").value;
+        var u_role = (document.getElementById("chkRestaurant").checked === true) ? "2" : "1";
+
+        var r_id = u_id;
+        var r_owner = u_id;
+        var r_cname = u_name;
+        var r_cmobile = u_mobile;
+        var r_rating = "";
+        var r_status = "1";
+        var r_name = "";
+        var r_address = "";
+        var r_location = "";
+        var r_type = "";
+
+        if (document.getElementById("chkRestaurant").checked === true) {
+            r_name = document.getElementById("regFormRestName").value;
+            r_address = document.getElementById("regFormRestAddress").value;
+            r_location = document.getElementById("regFormRestLocation").value;
+            r_type = (document.getElementById("chkNonVegRest").checked === true) ? "1" : "0"
+        }
+        
+        var payload = {
+            user_id: u_id,
+            user_name: u_name,
+            user_email: u_email,
+            user_mobile: u_mobile,
+            user_password: u_password,
+            user_role: u_role,
+            rest_id: r_id,
+            rest_name: r_name,
+            rest_address: r_address,
+            rest_location_code: r_location,
+            rest_owner: r_owner,
+            contact_person : r_cname,
+            contact_no : r_cmobile,
+            rest_type: r_type,
+            rest_status: "1",
+            rest_rating: r_status
+        }
+
+        var requestOptions = {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(payload),
+        }
 
         // Backend server call
         var baseURL = "http://127.0.0.1:8000/fds/";
@@ -167,24 +231,32 @@ export default function Registration() {
 
         var url = baseURL + specificURL + queryString;        
                   
-        fetch(url)
-            .then(response => response.json())      // convert response to json
+        fetch(url, requestOptions)
+            .then(response => {
+                    if(response.ok)  {
+                        alert("Successfully registered.");
+                        // setAlert({ alertMessage: "Successfully registered.", alertType: "success" });
+                        return response.json();     // convert response to json
+                    } 
+                    // else some error has happened
+                    return response.json().then(response => {
+                        throw new Error(response.error)
+                    })
+                }
+            )
             .then(function(data) {                  // process response
-                console.log('API Response: ');
-                console.log(data);                
+                //console.log('API Response: ');
+                //console.log(data);                
 
-                //Logic here
-                    
                 a.alertMessage = "";
                 a.alertType = "default";
-                setAlert(a);                    
+                //setAlert(a);                    
                 
-                // alert("Successfully registered.");
-                setAlert({ alertMessage: "Successfully registered.", alertType: "success" });
-                // navigate('/dashboard');
+                navigate('/login');
             })
             .catch(error => {
-                console.log ("Error calling /registration endpoint: " + error);
+                console.log("Error Registering:" + error);
+                alert ("Registration had issue, please try again");
             });
         // fetch ends
         
@@ -230,8 +302,8 @@ export default function Registration() {
             <div className="reg-form-components">
                 <label htmlFor="regFormPassword1" className="form-label">Password</label>
                 <div>
-                    <input type="text" className="form-control fld-password" id="regFormPassword1" placeholder="password" onClick={handlePasswordFocus}/>
-                    <input type="password" className="form-control fld-password" id="regFormPassword2" placeholder="repeat"/>
+                    <input type="password" className="form-control fld-password" id="regFormPassword1" placeholder="password" onClick={handlePasswordFocus}/>
+                    <input type="text" className="form-control fld-password" id="regFormPassword2" placeholder="repeat"/>
                 </div>
             </div> 
             <br/>
@@ -259,7 +331,12 @@ export default function Registration() {
                 <div className="reg-form-components">
                     <label htmlFor="regFormName" className="form-label">Restaurant Address</label>
                     <input type="text" className="form-control" id="regFormRestAddress" placeholder="Name"/>
-                </div>               
+                </div>   
+
+                <div className="reg-form-components">
+                    <label htmlFor="regFormName" className="form-label">Location Code (station code)</label>
+                    <input type="text" className="form-control" id="regFormRestLocation" placeholder="NDLS"/>
+                </div>              
 
                 {/* <div className="reg-form-components"> 
                     <label>Operational Days: </label><br/>

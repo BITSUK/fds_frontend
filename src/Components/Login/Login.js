@@ -6,8 +6,6 @@ import { UserContext } from '../../Contexts/UserContext.js';
 import { AlertContext } from '../../Contexts/AlertContext.js';
 import { CartContext, emptyCart} from '../../Contexts/CartContext.js';
 import Alert from "../Alert/Alert.js";
-// import axios from 'axios';
-
 
 export default function Login(props) {
     
@@ -36,16 +34,15 @@ export default function Login(props) {
             a.alertType = "error";
             setAlert(a);
 
-        } else if ((inputUserId.length === 6) &&  (inputPassword.length >= 8) && (inputUserId.substr(0,3) === 'UID')) {
+        // } else if ((inputUserId.length === 6) &&  (inputPassword.length >= 8) && (inputUserId.substr(0,3) === 'UID')) {
+        } else if ((inputUserId.length > 4) &&  (inputPassword.length >= 8)) {    
             
-            // var loginURL = "http://localhost:3004/users/001";
-
+            //Call Backend Login API
             var loginURL = "http://127.0.0.1:8000/fds/rest/api/users/login/" 
             var queryString = "?" + "user_id=" + inputUserId + "&user_password=" + inputPassword + "&user_role=" + inputRole
                       
             loginURL += queryString
 
-            // axios.get(loginURL)
             fetch(loginURL)
                 .then(response => response.json())      // convert response to json
                 .then(function(data) {                  // process response
@@ -90,6 +87,7 @@ export default function Login(props) {
                 })
                 .catch(error => {
                     console.log ("Error calling /login endpoint: " + error);
+                    alert("Login failed check credentials and try again.");
                 });
             // fetch logic ends
 

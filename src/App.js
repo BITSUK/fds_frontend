@@ -97,8 +97,8 @@ export default function App() {
                     <Route exact path="/home" element={<RightPane />}/>
                     <Route exact path="/dashboard" element={<Blank message=""/>}/>
 					
-					          <Route exact path="/login" element={<Blank message="Enter user id and password to login. Password min 8 chars and UIDxxx (where xxx = 001, 002, 003 or 004)."/>}/>
-                    <Route exact path="/register" element={<Blank message="Enter user details to register. You can register a user to both the roles - Customer and Restuarant."/>}/>
+					          <Route exact path="/login" element={<Blank message="Enter user id and password to login. Password min 8 chars."/>}/>
+                    <Route exact path="/register" element={<Blank message="Enter user details to register. If user owns restaurant and he can register that too."/>}/>
 					          <Route exact path="/forgot-password" element={<Blank message="Reset password using OTP authentication. Password should be atleast 8 character."/>}/>
                     
 					          <Route exact path="/order-food" element={<Blank message=""/>}/>
