@@ -6,7 +6,7 @@ import { UserContext } from '../../Contexts/UserContext.js';
 import { AlertContext } from '../../Contexts/AlertContext.js';
 import { CartContext, emptyCart} from '../../Contexts/CartContext.js';
 import Alert from "../Alert/Alert.js";
-// import axios from 'axios';
+
 
 
 export default function Login(props) {
@@ -28,7 +28,7 @@ export default function Login(props) {
         // Obtain the userid and password entered by user on screen
         var inputUserId = document.getElementById("loginFormUserId").value;        
         var inputPassword = document.getElementById("loginFormPassword").value;
-        var inputRole = document.getElementById("radioCustomer").checked == true ? "1" : "2";
+        var inputRole = document.getElementById("radioCustomer").checked == true ? "customer" : "restaurant";
         
         //Validate the user id and password
         if (inputUserId === "" || inputPassword === "") {
@@ -37,59 +37,53 @@ export default function Login(props) {
             setAlert(a);
 
         } else if ((inputUserId.length == 6) &&  (inputPassword.length >=8) && (inputUserId.substr(0,3) == 'UID')) {
+            var uidN =  inputUserId.substr(3,3);
+            let loginURL = "http://localhost:3004/users/" + uidN;
             
-            // var loginURL = "http://localhost:3004/users/001";
+            // API call to jason-server 
+            fetch(loginURL)                         // returns Promise object
+            .then(response => response.json())      // convert response to json
+            .then(function(data) {                  // process response
+                console.log('API Response: ');
+                console.log(data);                
 
-            var loginURL = "http://127.0.0.1:8000/fds/rest/api/users/login/" 
-            var queryString = "?" + "user_id=" + inputUserId + "&user_password=" + inputPassword + "&user_role=" + inputRole
-                      
-            loginURL += queryString
+                if ((data.id === uidN) && ((data.userRoles[0] == inputRole) || (data.userRoles[1] == inputRole))) {
+                    setUserContext({
+                        uid: data.userId,
+                        name: data.userName,
+                        mobile: "9965532235",
+                        email: "xyz@gmail.com",
+                        address: "Delhi",
+                        role: inputRole,
+                        isLoggedIn: true,
+                        train: "",
+                        trainName : "",
+                        station: "",
+                        stationName: "",
+                        jdate: "",
+                        restaurant : "",
+                        restaurantName: ""
 
-            // axios.get(loginURL)
-            fetch(loginURL)
-                .then(response => response.json())      // convert response to json
-                .then(function(data) {                  // process response
-                    console.log('API Response: ');
-                    console.log(data);                
+                    })
+                    
+                    a.alertMessage = "";
+                    a.alertType = "default";
+                    setAlert(a);                    
+                    
+                    alert("Login Successful");
 
-                    if (data[0].user_id === inputUserId) {
-                        setUserContext({
-                            uid: data[0].user_id,
-                            name: data[0].user_name,
-                            mobile: data[0].user_mobile,
-                            email: data[0].user_email,
-                            address: "",
-                            role: data[0].user_role,
-                            isLoggedIn: true,
-                            train: "",
-                            trainName : "",
-                            station: "",
-                            stationName: "",
-                            jdate: "",
-                            restaurant : "",
-                            restaurantName: ""
-
-                        })
-                        
-                        a.alertMessage = "";
-                        a.alertType = "default";
-                        setAlert(a);                    
-                        
-                        alert("Login Successful");
-
-                        // (cart.totalPrice === "0") ? navigate('/dashboard') : navigate('/order-conf-page'); 
-                        navigate('/dashboard');
-                    } else {
-                        a.alertMessage = "Userid or password not valid, please try again.";
-                        a.alertType = "error";
-                        setAlert(a); 
-                    }
-                
-                })
-                .catch(error => {
-                    console.log ("Error calling /login endpoint: " + error);
-                });
-            // fetch logic ends
+                    // (cart.totalPrice === "0") ? navigate('/dashboard') : navigate('/order-conf-page'); 
+                    navigate('/dashboard');
+                } else {
+                    a.alertMessage = "Userid or password not valid, please try again.";
+                    a.alertType = "error";
+                    setAlert(a); 
+                }
+               
+            })
+            .catch(error => {
+                 console.log ("Error calling /login endpoint: " + error);
+            });
 
         } else {
             a.alertMessage = "Userid or password not valid, try again.";
