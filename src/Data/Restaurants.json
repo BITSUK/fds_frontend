@@ -1,6 +1,6 @@
 [     
     {
-        "rest_id": "D1",
+        "rest_id": "RID001",
         "rest_name": "Shree Sai Bhojanle",
         "rest_location_code": "NDLS",
         "rest_location": "Delhi",
@@ -91,7 +91,7 @@
         ]
     },
 	{
-        "rest_id": "D2",
+        "rest_id": "RID002",
         "rest_name": "Oberoi",
         "rest_location_code": "NDLS",
         "rest_location": "Delhi",
@@ -118,7 +118,7 @@
         ]
     },
 	{
-        "rest_id": "D3",
+        "rest_id": "RID003",
         "rest_name": "Pizza Hut",
         "rest_location_code": "NDLS",
         "rest_location": "Delhi",
@@ -145,7 +145,7 @@
         ]
     },        
     {
-        "rest_id": "K1",
+        "rest_id": "RID004",
         "rest_name": "Sai Palace",
         "rest_location_code": "KOTA",
         "rest_location": "Kota",
@@ -172,7 +172,7 @@
         ]
     },
     {
-        "rest_id": "R1",
+        "rest_id": "RID005",
         "rest_name": "Domino",
         "rest_location_code": "RTM",
         "rest_location": "Ratlam",
@@ -199,7 +199,7 @@
         ]
     },
 	{
-        "rest_id": "R2",
+        "rest_id": "RID006",
         "rest_name": "Sai Bhojanle",
         "rest_location_code": "RTM",
         "rest_location": "Ratlam",
@@ -282,7 +282,7 @@
         ]
     },
 	{
-        "rest_id": "M1",
+        "rest_id": "RID007",
         "rest_name": "Oberoi",
         "rest_location_code": "MMCT",
         "rest_location": "Mumbai",

@@ -67,6 +67,12 @@ export default function RestDetails() {
             <br />
 
             <div className="reg-form-components">
+                <label htmlFor="regFormName" className="form-label">Location code (station)</label>
+                <input type="text" className="form-control" id="regFormRestLocation" placeholder="NDLS" value="NDLS"/>
+            </div>
+            <br />
+
+            <div className="reg-form-components">
                 <label>Restaurant Type: </label> <br/>
                 <input type="checkbox" id="chkVegRest" name="restaurant-type" value="Veg" defaultChecked/> &nbsp;
                 <label htmlFor="chkVegRest">Veg</label>	&nbsp;
@@ -75,7 +81,7 @@ export default function RestDetails() {
             </div>  
             <br />
 
-            <div className="reg-form-components"> 
+            {/* <div className="reg-form-components"> 
                 <label>Operational Days: </label><br/>
                 <input type="checkbox" id="chkMon" name="restaurant-type" value="Mon" defaultChecked/> &nbsp;
                 <label htmlFor="chkMon">Mon</label>&nbsp;
@@ -91,7 +97,7 @@ export default function RestDetails() {
                 <label htmlFor="chkSat">Sat</label>&nbsp;
                 <input type="checkbox" id="chkSun" name="restaurant-type" value="Sun" defaultChecked/> &nbsp;
                 <label htmlFor="chkSun">Sun</label>&nbsp;
-            </div>
+            </div> */}
 
             <br />
             <div className="reg-form-components">

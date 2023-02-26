@@ -14,26 +14,76 @@ export default function OrderFoodRest() {
     const [userContext, setUserContext] = useContext(UserContext);
     const inpParms = useParams();
     const [query, setQuery] = useState("");
+    const [stationsdata, setStationsdata] = useState([{"station_code": "", "station_name": "" }]);
+    const [trainsdata, setTrainsdata] = useState([{"train_no": "","train_name": ""}]);
+    const [restaurantsdata, setRestaurantsdata] = useState([{
+        "rest_id": "",
+        "rest_name": "",
+        "rest_address": "",
+        "rest_location_code": "",
+        "rest_owner": "",
+        "contact_person": "",
+        "contact_no": "",
+        "rest_type": "",
+        "rest_status": "",
+        "rest_rating": 0
+    }]);
+
+        //fetch stations
+        useEffect(() => {
+            const fetchData = async () => {
+            const response = await fetch('http://127.0.0.1:8000/fds/rest/api/stations/');
+            const data = await response.json();
+            // console.log(data.results);
+            setStationsdata(data.results);
+            };
+
+            fetchData();
+        }, []);
+
+        //fetch trains
+        useEffect(() => {
+            const fetchData = async () => {
+            const response = await fetch('http://127.0.0.1:8000/fds/rest/api/trains/');
+            const data = await response.json();
+            // console.log(data.results);
+            setTrainsdata(data.results);
+            };
+
+            fetchData();
+        }, []);
+
+        //fetch trains
+        useEffect(() => {
+            const fetchData = async () => {
+            const response = await fetch('http://127.0.0.1:8000/fds/rest/api/restaurants/');
+            const data = await response.json();
+            // console.log(data.results);
+            setRestaurantsdata(data.results);
+            };
+
+            fetchData();
+        }, []);
 
     //Filter Restaurants JSON
-    const filteredRestaurants = Restaurants.filter(e => 
+    const filteredRestaurants = restaurantsdata.filter(e => 
         (e.rest_location_code.toLowerCase().includes(inpParms["station_code"].toLowerCase())));
 
     const currentItems = filteredRestaurants.filter(e => 
         (e.rest_name.toLowerCase().includes(query.toLowerCase())));
 
     //Search in Stations JSON
-    const stationTrainXREF = Stations.filter(e => (e.station_code.includes(inpParms["station_code"])));
+    const stationLIST = stationsdata.filter(e => (e.station_code.includes(inpParms["station_code"])));
 
     //Search in Trains JSON
-    const trainStationXREF = Trains.filter(e => (e.train_no.includes(inpParms["train_no"])));
+    const trainLIST = trainsdata.filter(e => (e.train_no.includes(inpParms["train_no"])));
 
     //Update station and train in userContext
     var updatedUserContext = userContext;
     updatedUserContext.station = inpParms["station_code"]
-    updatedUserContext.stationName = stationTrainXREF[0].station_name;
+    updatedUserContext.stationName = (stationLIST.length === 0)? "" :stationLIST[0].station_name;
     updatedUserContext.train = inpParms["train_no"]
-    updatedUserContext.trainName = trainStationXREF[0].train_name;
+    updatedUserContext.trainName = (trainLIST.length === 0)? "" : trainLIST[0].train_name;
     setUserContext(updatedUserContext);
 
     //************** RETURN RESPONSE ***************

@@ -18,11 +18,11 @@
         "train_no"   : "22210",
         "train_name" : "Duronto Express",
         "train_stations" : [ 
-            {  "station_code" : "NDLS", "station": "Delhi"    },
-            {  "station_code" : "KOTA", "station": "Kota"     },
-            {  "station_code" : "RTM" , "station": "Ratlam"   },
-            {  "station_code" : "BRC" , "station": "Vadodara" },
-            {  "station_code" : "MMCT", "station": "Mumbai"   }   
+            {  "station_code" : "NDLS", "station": "Delhi"    ,"arrival_day" : "Day 1", "arrival_time" : "-",     "departure_day" : "Day 1", "departure_time" : "22:10", "halt": "-"},
+            {  "station_code" : "KOTA", "station": "Kota"     ,"arrival_day" : "Day 2", "arrival_time" : "03:45", "departure_day" : "Day 2", "departure_time" : "03:55", "halt": "10m"},
+            {  "station_code" : "RTM" , "station": "Ratlam"   ,"arrival_day" : "Day 2", "arrival_time" : "07:00", "departure_day" : "Day 2", "departure_time" : "07:05", "halt": "5m"},
+            {  "station_code" : "BRC" , "station": "Vadodara" ,"arrival_day" : "Day 2", "arrival_time" : "10:33", "departure_day" : "Day 2", "departure_time" : "10:43", "halt": "10m"},
+            {  "station_code" : "MMCT", "station": "Mumbai"   ,"arrival_day" : "Day 2", "arrival_time" : "15:50", "departure_day" : "Day 2", "departure_time" : "-",     "halt": "-"}  
         ]
     },
     {   
@@ -30,36 +30,24 @@
         "train_no"   : "12910",
         "train_name" : "Garibrath",
         "train_stations" : [ 
-            {  "station_code" : "NDLS", "station": "Delhi"    },
-            {  "station_code" : "MTJ" , "station": "Mathura"  },
-            {  "station_code" : "KOTA", "station": "Kota"     },
-            {  "station_code" : "RTM" , "station": "Ratlam"   },
-            {  "station_code" : "BRC" , "station": "Vadodara" },
-            {  "station_code" : "ST"  , "station": "Surat"    },
-            {  "station_code" : "MMCT", "station": "Mumbai"   }   
+            {  "station_code" : "NDLS", "station": "Delhi"    ,"arrival_day" : "Day 1", "arrival_time" : "-",     "departure_day" : "Day 1", "departure_time" : "16:30", "halt": "-"},
+            {  "station_code" : "MTJ" , "station": "Mathura"  ,"arrival_day" : "Day 1", "arrival_time" : "18:03", "departure_day" : "Day 1", "departure_time" : "18:05", "halt": "2m"},
+            {  "station_code" : "KOTA", "station": "Kota"     ,"arrival_day" : "Day 1", "arrival_time" : "22:00", "departure_day" : "Day 1", "departure_time" : "22:05", "halt": "5m"},
+            {  "station_code" : "RTM" , "station": "Ratlam"   ,"arrival_day" : "Day 2", "arrival_time" : "00:15", "departure_day" : "Day 2", "departure_time" : "00:18", "halt": "3m"},
+            {  "station_code" : "BRC" , "station": "Vadodara" ,"arrival_day" : "Day 2", "arrival_time" : "03:55", "departure_day" : "Day 2", "departure_time" : "04:05", "halt": "10m"},
+            {  "station_code" : "ST"  , "station": "Surat"    ,"arrival_day" : "Day 2", "arrival_time" : "05:37", "departure_day" : "Day 2", "departure_time" : "05:42", "halt": "5m"},
+            {  "station_code" : "MMCT", "station": "Mumbai"   ,"arrival_day" : "Day 2", "arrival_time" : "09:15", "departure_day" : "Day 2", "departure_time" : "-",     "halt": "-"}   
         ]
     },
     {   
         "id": "4", 
-        "train_no"   : "12432",
-        "train_name" : "Rajdhani",
-        "train_stations" : [ 
-            {  "station_code" : "NDLS", "station": "Delhi"    },
-            {  "station_code" : "KOTA", "station": "Kota"     },
-            {  "station_code" : "BRC" , "station": "Vadodara" },
-            {  "station_code" : "MMCT", "station": "Mumbai"   }   
-        ]
-    },
-    {   
-        "id": "5", 
         "train_no"   : "12904",
         "train_name" : "Golden Temple",
         "train_stations" : [ 
-            {  "station_code" : "NDLS", "station": "Delhi"    },
-            {  "station_code" : "MTJ" , "station": "Mathura"  },
-            {  "station_code" : "KOTA", "station": "Kota"     },
-            {  "station_code" : "RTM" , "station": "Ratlam"   },
-            {  "station_code" : "MMCT", "station": "Mumbai"   } 
+            {  "station_code" : "NDLS", "station": "Delhi"    ,"arrival_day" : "Day 1", "arrival_time" : "03:45", "departure_day" : "Day 1", "departure_time" : "04:00", "halt": "15m"},
+            {  "station_code" : "KOTA", "station": "Kota"     ,"arrival_day" : "Day 1", "arrival_time" : "10:10", "departure_day" : "Day 1", "departure_time" : "10:20", "halt": "10m"},
+            {  "station_code" : "BRC" , "station": "Vadodara" ,"arrival_day" : "Day 1", "arrival_time" : "18:01", "departure_day" : "Day 1", "departure_time" : "18:11", "halt": "10m"},
+            {  "station_code" : "MMCT", "station": "Mumbai"   ,"arrival_day" : "Day 1", "arrival_time" : "19:41", "departure_day" : "Day 1", "departure_time" : "-",     "halt": "-"}   
         ]
     }
 ]
