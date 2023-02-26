@@ -17,6 +17,11 @@ export default function Profile() {
         alertMessage: alertMessage.alertMessage
     }     
 
+    // document.getElementById("regFormUserName").value = userContext.name;
+    // document.getElementById("regFormMobile").value = userContext.mobile;
+    // document.getElementById("regFormEmail").value = userContext.email;
+    if (userContext.role === "restautant") document.getElementById("radioRestaurant").checked = true;
+
     //Reset alert message
     const handleCancel = () => {
         setAlert({ alertMessage: "", alertType: "default" });
@@ -59,19 +64,15 @@ export default function Profile() {
             return;
         }
 
-        //User address 
-        fld = document.getElementById("regFormUserAddress").value;
-        if (fld === ""){
-            setAlert({ alertMessage: "User address is mandatory", alertType: "error" });
-            document.getElementById("regFormUserAddress").focus();
-            return;  
-        }
-
         // setAlert({ alertMessage: "Details updated.", alertType: "success" });
         alert("Details updated");
         
     }
 
+    //Handle registration 
+    const handleChangePassword = (event) => {
+        alert("Change password feature is not enabled currently, working on it...")
+    }
     
     //************* RETURN **************************
     return (
@@ -82,32 +83,38 @@ export default function Profile() {
             <br />
             <div className="reg-form-components">
                 <label htmlFor="regFormUserName" className="form-label" >Name*</label>
-                <input type="text" className="form-control" id="regFormUserName" placeholder="Name" value={userContext.name}/>
+                <input type="text" className="form-control" id="regFormUserName" placeholder="Name" defaultValue={userContext.name}/>
             </div>
             <br />
             
             <div className="reg-form-components">
                 <label htmlFor="regFormMobile" className="form-label">Mobile*</label>
-                <input type="text" className="form-control" id="regFormMobile" placeholder="mobile number" value={userContext.mobile}/>
+                <input type="text" className="form-control" id="regFormMobile" placeholder="mobile number" defaultValue = {userContext.mobile}/>
             </div>
             <br />
 
             <div className="reg-form-components">
                 <label htmlFor="regFormEmail" className="form-label">Email</label>
-                <input type="text" className="form-control" id="regFormEmail" placeholder="xyz@gmail.com" value={userContext.email}/>
+                <input type="text" className="form-control" id="regFormEmail" placeholder="xyz@gmail.com" defaultValue = {userContext.email}/>
             </div> 
             <br /> 
 
             <div className="reg-form-components">
-                <label htmlFor="regFormAddress" className="form-label">Address</label>
-                <input type="text" className="form-control" id="regFormUserAddress" placeholder="Address" value={userContext.address}/>
+                <label>Profile Type: </label> <br/>
+                <input type="radio" id="radioCustomer" name="user-type" value="1" defaultChecked/>&nbsp;
+                <label htmlFor="chkVegRest">Customer</label>	&nbsp;
+                <input type="radio" id="radioRestaurant" name="user-type" value="2"/>&nbsp;
+                <label htmlFor="chkNonVegRest">Restaurant</label>	&nbsp;		
             </div>
             <br />
 
             <br />
             <div className="reg-form-components">
                 <Link to="#" className="btn btn-primary" role="button" onClick={handleProfileUpdate}>Update</Link>
+                &nbsp;&nbsp;                
+                <Link to="#" className="btn btn-info" role="button" onClick={handleChangePassword}>Change Password</Link>
             </div>
+           
             <br />
             <br />
             <br />

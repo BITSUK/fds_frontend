@@ -64,6 +64,8 @@ export default function Login(props) {
                             trainName : "",
                             station: "",
                             stationName: "",
+                            rest: data[0].user_id,
+                            restName: "",
                             jdate: "",
                             restaurant : "",
                             restaurantName: ""

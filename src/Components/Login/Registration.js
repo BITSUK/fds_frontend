@@ -322,9 +322,9 @@ export default function Registration() {
                 </div>
 
                 <div className="reg-form-components">
-                    <input type="checkbox" id="chkVegRest" name="restaurant-type" value="Veg" defaultChecked/> &nbsp;
+                    <input type="radio" id="chkVegRest" name="restaurant-type" value="Veg" defaultChecked/> &nbsp;
                     <label htmlFor="chkVegRest">Veg</label>	&nbsp;
-                    <input type="checkbox" id="chkNonVegRest" name="restaurant-type" value="Non-Veg"/> &nbsp;
+                    <input type="radio" id="chkNonVegRest" name="restaurant-type" value="Non-Veg"/> &nbsp;
                     <label htmlFor="chkNonVegRest">Non-Veg</label>	&nbsp;		
 			    </div> 
                 

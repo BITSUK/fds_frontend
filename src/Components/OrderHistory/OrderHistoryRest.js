@@ -13,8 +13,9 @@ export default function RestOrderHistory(){
     const [alertMessage, setAlert] = useContext(AlertContext);
     const [query, setQuery] = useState("");
 
-    const users_active_orders_temp = Active_Orders.filter(e => ((e.user_id == userContext.uid)&&(e.order_status != "Pending")));
-    const users_active_orders = users_active_orders_temp.filter(e => (e.order_no.toLowerCase().includes(query.toLowerCase())))
+    //History Order filter
+    const users_active_orders_temp = Active_Orders.filter(e => ((e.rest_id == userContext.uid)&&(e.order_status != "Pending")));
+    const users_active_orders = users_active_orders_temp.filter(e => (e.order_id.toLowerCase().includes(query.toLowerCase())))
 
     return(
         <>  
@@ -34,20 +35,19 @@ export default function RestOrderHistory(){
                             <div >                               
                                 <div className="order">
                                     {/* <br/> */}
-                                    {/* <p key={record.order_no}>
-                                        <p><b>Order No: {record.order_no}</b></p>
-                                        <p>Date: {record.delivery_date}</p>
-                                        <p>Station: {record.delivery_station}</p>
+                                    {/* <p key={record.order_id}>
+                                        <p><b>Order No: {record.order_id}</b></p>
+                                        <p>Date: {record.order_date}</p>
+                                        <p>Station: {record.station_code}</p>
                                         <p>Train/Coach/Seat No: {record.train_no}/{record.coach_no}/{record.seat_no}</p>
                                         <p >Status: <b className={record.order_status}>{record.order_status}</b></p>
                                     </p>  */}
                                     <br/>                               
                                     <Order 
-                                        order_no={record.order_no} 
-                                        delivery_date={record.delivery_date}  
-                                        delivery_station={record.delivery_station} 
-                                        train_no={record.train_no}  
-                                        train_name={record.train_name}   
+                                        order_id={record.order_id} 
+                                        order_date={record.order_date}  
+                                        station_code={record.station_code} 
+                                        train_no={record.train_no}                                         
                                         coach_no={record.coach_no}       
                                         seat_no={record.seat_no}    
                                         order_status={record.order_status}                                          

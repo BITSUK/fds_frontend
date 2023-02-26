@@ -12,6 +12,8 @@ export const defaultUser = {
     trainName : "",
     station: "",
     stationName: "",
+    rest: "",
+    restName : "",
     jdate: "",
     restaurant: "",
     restaurantName : ""

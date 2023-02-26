@@ -27,8 +27,8 @@ export default function OrderFoodMenu() {
 
     //update restaurant details in user context
     var updatedUserContext = userContext;
-    updatedUserContext.restaurant = inpParms["rest_id"];
-    updatedUserContext.restaurantName = filteredRestaurants[0].rest_name;
+    updatedUserContext.rest = inpParms["rest_id"];
+    updatedUserContext.restName = filteredRestaurants[0].rest_name;
     setUserContext(updatedUserContext);
 
     //set filter states
