@@ -7,16 +7,13 @@ import Alert from "../Alert/Alert.js";
 
 export default function Registration() {
 
-    // Obtain alert context and define a local alert object
     const [alertMessage, setAlert] = useContext(AlertContext);
-    const a = {
-        alertType: alertMessage.alertType,
-        alertMessage: alertMessage.alertMessage
-    }     
 
     const navigate = useNavigate();
 
+    //===================================================
     //Show and hide restuartant section 
+    //===================================================
     const showHideRest = (event) => {
         if (document.getElementById("chkRestaurant").checked) { 
             document.getElementById("restaurant-details").style.display = "block";
@@ -25,23 +22,28 @@ export default function Registration() {
         }
     }
 
+    //===================================================
     //Password focus
+    //===================================================
     const handlePasswordFocus = () => {
         setAlert({ alertMessage: "Password minimum 8 char and must have a Caps, Number and Symbol.", alertType: "default" });
         return;
     }
 
+    //===================================================
     //Reset alert message
+    //===================================================
     const handleCancel = () => {
         setAlert({ alertMessage: "", alertType: "default" });
         return;
     }
     
+    //===================================================
     //Handle registration 
+    //===================================================
     const handleRegistration = (event) => {
         var fld = "";
         setAlert({ alertMessage: "", alertType: "default" });
-
         
         //validate User Name
         fld = document.getElementById("regFormUserName").value;
@@ -49,13 +51,6 @@ export default function Registration() {
             setAlert({ alertMessage: "Enter user name", alertType: "error" });
             document.getElementById("regFormUserName").focus();
             return;     
-        }
-
-        //Ensure either Customer or restuartant or both are selected
-        if ((document.getElementById("chkCustomer").checked === false) && (document.getElementById("chkRestaurant").checked === false)) {
-            setAlert({ alertMessage: "Select role - Customer or Restaurant or both.", alertType: "error" });
-            document.getElementById("chkCustomer").focus();
-            return;
         }
 
         //validate email id
@@ -121,14 +116,6 @@ export default function Registration() {
         //Validate Restuarant field
         if (document.getElementById("chkRestaurant").checked === true) {
 
-            //User address is mandatory if restaurant role is selected
-            // fld = document.getElementById("regFormUserAddress").value;
-            // if (fld === ""){
-            //     setAlert({ alertMessage: "User address is mandatory", alertType: "error" });
-            //     document.getElementById("regFormUserAddress").focus();
-            //     return;  
-            // }
-
             //Restaurant name
             fld = document.getElementById("regFormRestName").value;
             if (fld === ""){
@@ -145,7 +132,6 @@ export default function Registration() {
                 return;  
             }
 
-
             //restaurant address
             fld = document.getElementById("regFormRestLocation").value;
             if (fld === ""){
@@ -155,9 +141,9 @@ export default function Registration() {
             }
 
             //Ensure type of restuarant is selected
-            if ((document.getElementById("chkVegRest").checked === false) && (document.getElementById("chkNonVegRest").checked === false)) {
+            if ((document.getElementById("radioVegRest").checked === false) && (document.getElementById("radioNonVegVegRest").checked === false)) {
                 setAlert({ alertMessage: "Select restaurant type - Veg Non-Veg.", alertType: "error" });
-                document.getElementById("chkVegRest").focus();
+                document.getElementById("radioVegRest").focus();
                 return;
             }
 
@@ -171,61 +157,61 @@ export default function Registration() {
         } 
 
         // Obtain the screen details for creating User and Restaurant records
-        var u_id = document.getElementById("regFormUserid").value;
-        var u_name = document.getElementById("regFormUserName").value;
-        var u_email = document.getElementById("regFormEmail").value;
-        var u_mobile = document.getElementById("regFormMobile").value;
-        var u_password = document.getElementById("regFormPassword1").value;
-        var u_role = (document.getElementById("chkRestaurant").checked === true) ? "2" : "1";
+        var u_id        = document.getElementById("regFormUserid").value;
+        var u_name      = document.getElementById("regFormUserName").value;
+        var u_email     = document.getElementById("regFormEmail").value;
+        var u_mobile    = document.getElementById("regFormMobile").value;
+        var u_password  = document.getElementById("regFormPassword1").value;
+        var u_role      = (document.getElementById("chkRestaurant").checked === true) ? "2" : "1";
 
-        var r_id = u_id;
-        var r_owner = u_id;
-        var r_cname = u_name;
-        var r_cmobile = u_mobile;
-        var r_rating = "";
-        var r_status = "1";
-        var r_name = "";
-        var r_address = "";
-        var r_location = "";
-        var r_type = "";
+        var r_id        = u_id;
+        var r_owner     = u_id;
+        var r_cname     = u_name;
+        var r_cmobile   = u_mobile;
+        var r_rating    = "";
+        var r_status    = "1";
+        var r_name      = "";
+        var r_address   = "";
+        var r_location  = "";
+        var r_type      = "";
 
         if (document.getElementById("chkRestaurant").checked === true) {
-            r_name = document.getElementById("regFormRestName").value;
-            r_address = document.getElementById("regFormRestAddress").value;
-            r_location = document.getElementById("regFormRestLocation").value;
-            r_type = (document.getElementById("chkNonVegRest").checked === true) ? "1" : "0"
+            r_name      = document.getElementById("regFormRestName").value;
+            r_address   = document.getElementById("regFormRestAddress").value;
+            r_location  = document.getElementById("regFormRestLocation").value;
+            r_type      = (document.getElementById("radioNonVegVegRest").checked === true) ? "1" : "0"
         }
         
         var payload = {
-            user_id: u_id,
-            user_name: u_name,
-            user_email: u_email,
-            user_mobile: u_mobile,
-            user_password: u_password,
-            user_role: u_role,
-            rest_id: r_id,
-            rest_name: r_name,
-            rest_address: r_address,
-            rest_location_code: r_location,
-            rest_owner: r_owner,
-            contact_person : r_cname,
-            contact_no : r_cmobile,
-            rest_type: r_type,
-            rest_status: "1",
-            rest_rating: r_status
+            user_id             : u_id,
+            user_name           : u_name,
+            user_email          : u_email,
+            user_mobile         : u_mobile,
+            user_password       : u_password,
+            user_role           : u_role,
+            rest_id             : r_id,
+            rest_name           : r_name,
+            rest_address        : r_address,
+            rest_location_code  : r_location,
+            rest_owner          : r_owner,
+            contact_person      : r_cname,
+            contact_no          : r_cmobile,
+            rest_type           : r_type,
+            rest_status         : "1",
+            rest_rating         : r_status
         }
 
         var requestOptions = {
             method: 'POST',
             headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
+                'Accept'        : 'application/json',
+                'Content-Type'  : 'application/json',
             },
             body: JSON.stringify(payload),
         }
 
         // Backend server call
-        var baseURL = "http://127.0.0.1:8000/fds/";
+        var baseURL     = "http://127.0.0.1:8000/fds/";
         var specificURL = "rest/api/users/registration/";
         var queryString = "";
 
@@ -235,8 +221,7 @@ export default function Registration() {
             .then(response => {
                     if(response.ok)  {
                         alert("Successfully registered.");
-                        // setAlert({ alertMessage: "Successfully registered.", alertType: "success" });
-                        return response.json();     // convert response to json
+                        return response.json();     
                     } 
                     // else some error has happened
                     return response.json().then(response => {
@@ -244,13 +229,12 @@ export default function Registration() {
                     })
                 }
             )
-            .then(function(data) {                  // process response
+            .then(function(data) { 
                 //console.log('API Response: ');
                 //console.log(data);                
-
-                a.alertMessage = "";
-                a.alertType = "default";
-                //setAlert(a);                    
+                // a.alertMessage = "";
+                // a.alertType = "default";
+                // setAlert(a);                    
                 
                 navigate('/login');
             })
@@ -258,24 +242,18 @@ export default function Registration() {
                 console.log("Error Registering:" + error);
                 alert ("Registration had issue, please try again");
             });
-        // fetch ends
-        
+        // fetch ends here
     }
 
-    
-    //************* RETURN **************************
+    //===================================================//
+    //==              RETURN RESPONSE                  ==//
+    //===================================================//
     return (
     <div>
         <Alert />
         <div className="reg-form-container" >            
             <br />
             <br />
-            <div className="reg-form-components" style={{display: 'none'}}>
-				<input type="checkbox" id="chkCustomer" name="role-type" value="Customer" defaultChecked /> &nbsp;
-                <label htmlFor="chkCustomer">Customer</label>	&nbsp;
-				{/* <input type="checkbox" id="chkRestaurant" name="role-type" value="Restaurant" onClick={showHideRest}/> &nbsp;
-                <label htmlFor="chkRestaurant">Restaurant</label>			 */}
-			</div>
             <div className="reg-form-components">
                 <label htmlFor="regFormUserName" className="form-label" style={{color: 'blue'}}>Name*</label>
                 <input type="text" className="form-control" id="regFormUserName" placeholder="Name"/>
@@ -293,11 +271,6 @@ export default function Registration() {
                 <label htmlFor="regFormMobile" className="form-label">Mobile*</label>
                 <input type="text" className="form-control" id="regFormMobile" placeholder="mobile number"/>
             </div> 
-            {/* <div className="reg-form-components">
-                <label htmlFor="regFormAddress" className="form-label">Address</label>
-                <input type="text" className="form-control" id="regFormUserAddress" placeholder="Address"/>
-            </div> */}
-
             
             <div className="reg-form-components">
                 <label htmlFor="regFormPassword1" className="form-label">Password</label>
@@ -309,8 +282,6 @@ export default function Registration() {
             <br/>
             <hr className="horizontal-line"/>
             <div className="reg-form-components">
-				{/* <input type="checkbox" id="chkCustomer" name="role-type" value="Customer" defaultChecked/> &nbsp;
-                <label htmlFor="chkCustomer">Customer</label>	&nbsp; */}
 				<input type="checkbox" id="chkRestaurant" name="role-type" value="Restaurant" onClick={showHideRest}/> &nbsp;
                 <label htmlFor="chkRestaurant" >Are you registering as a restaurant owner?</label>			
 			</div>          
@@ -322,10 +293,10 @@ export default function Registration() {
                 </div>
 
                 <div className="reg-form-components">
-                    <input type="radio" id="chkVegRest" name="restaurant-type" value="Veg" defaultChecked/> &nbsp;
-                    <label htmlFor="chkVegRest">Veg</label>	&nbsp;
-                    <input type="radio" id="chkNonVegRest" name="restaurant-type" value="Non-Veg"/> &nbsp;
-                    <label htmlFor="chkNonVegRest">Non-Veg</label>	&nbsp;		
+                    <input type="radio" id="radioVegRest" name="restaurant-type" value="Veg" defaultChecked/> &nbsp;
+                    <label htmlFor="radioVegRest">Veg</label>	&nbsp;
+                    <input type="radio" id="radioNonVegVegRest" name="restaurant-type" value="Non-Veg"/> &nbsp;
+                    <label htmlFor="radioNonVegVegRest">Non-Veg</label>	&nbsp;		
 			    </div> 
                 
                 <div className="reg-form-components">
@@ -338,23 +309,6 @@ export default function Registration() {
                     <input type="text" className="form-control" id="regFormRestLocation" placeholder="NDLS"/>
                 </div>              
 
-                {/* <div className="reg-form-components"> 
-                    <label>Operational Days: </label><br/>
-                    <input type="checkbox" id="chkMon" name="restaurant-type" value="Mon" defaultChecked/> &nbsp;
-                    <label htmlFor="chkMon">Mon</label>&nbsp;
-                    <input type="checkbox" id="chkTue" name="restaurant-type" value="Tue" defaultChecked/> &nbsp;
-                    <label htmlFor="chkTue">Tue</label>&nbsp;
-                    <input type="checkbox" id="chkWed" name="restaurant-type" value="Wed" defaultChecked/> &nbsp;
-                    <label htmlFor="chkWed">Wed</label>&nbsp;
-                    <input type="checkbox" id="chkThu" name="restaurant-type" value="Thu" defaultChecked/> &nbsp;
-                    <label htmlFor="chkThu">Thu</label>&nbsp;
-                    <input type="checkbox" id="chkFri" name="restaurant-type" value="Fri" defaultChecked/> &nbsp;
-                    <label htmlFor="chkFri">Fri</label>&nbsp;
-                    <input type="checkbox" id="chkSat" name="restaurant-type" value="Sat" defaultChecked/> &nbsp;
-                    <label htmlFor="chkSat">Sat</label>&nbsp;
-                    <input type="checkbox" id="chkSun" name="restaurant-type" value="Sun" defaultChecked/> &nbsp;
-                    <label htmlFor="chkSun">Sun</label>&nbsp;
-			    </div> */}
                 <br/>
             </div>
             <hr className="horizontal-line"/>

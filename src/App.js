@@ -97,9 +97,9 @@ export default function App() {
                     <Route exact path="/home" element={<RightPane />}/>
                     <Route exact path="/dashboard" element={<Blank message=""/>}/>
 					
-					          <Route exact path="/login" element={<Blank message="Enter user id and password to login. Password min 8 chars."/>}/>
-                    <Route exact path="/register" element={<Blank message="Enter user details to register. If user owns restaurant and he can register that too."/>}/>
-					          <Route exact path="/forgot-password" element={<Blank message="Reset password using OTP authentication. Password should be atleast 8 character."/>}/>
+					          <Route exact path="/login" element={<Blank message="Enter user id and password to login."/>}/>
+                    <Route exact path="/register" element={<Blank message="If user owns restaurant and he can register that too."/>}/>
+					          <Route exact path="/forgot-password" element={<Blank message="Currently its a dummy (simulated) OTP authentication process."/>}/>
                     
 					          <Route exact path="/order-food" element={<Blank message=""/>}/>
                     <Route exact path="/order-food/cart" element={<Blank message=""/>}/>
@@ -108,11 +108,11 @@ export default function App() {
                     <Route exact path="/order-food/rest/:station_code/:train_no" element={<Blank message=""/>}/>
                     <Route exact path="/order-food/restaurant/:rest_id" element={<DisplaySideCart />}/>
                     <Route exact path="/order-food/restaurant/:rest_id/:menu_id" element={<DisplaySideCart />}/>
-                    <Route exact path="/order-conf-page" element={<Blank message="Check details and make payment."/>} />
-                    <Route exact path="/payment" element={<Blank message="Choose payment option and provide payment details."/>} />
+                    <Route exact path="/order-conf-page" element={<Blank message="Check order details and pay."/>} />
+                    <Route exact path="/payment" element={<Blank message="Currently only card is enabled as payment option."/>} />
 
                     <Route exact path="/order-history/cust" element={<Blank message=""/>}/>
-                    <Route exact path="/order-history/rest" element={<Blank message="All orders till date."/>}/>
+                    <Route exact path="/order-history/rest" element={<Blank message="Orders till date."/>}/>
 					
                     <Route exact path="/rest-menu" element={<AddMenuItem/>}/>
                     <Route exact path="/rest-settings" element={<Blank message=""/>}/>

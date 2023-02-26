@@ -1,0 +1,6 @@
+Open Issues
+-----------
+1) User messaging approach needs to be improved. Currently we are using alert and global message State approach.
+2) Back link not working properly
+3) After password reset navigate to login not workin, need to check, code looks simple and ok.
+

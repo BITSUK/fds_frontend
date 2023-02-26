@@ -18,12 +18,14 @@ export default function Login(props) {
     
     const navigate = useNavigate();
 
-    // Handles Login 
+    //===========================================================
+    // Handle Login 
+    //===========================================================
     const handleLogin = (event) => {
 
         event.preventDefault();               
 
-        // Obtain the userid and password entered by user on screen
+        // Obtain entered userid and password
         var inputUserId = document.getElementById("loginFormUserId").value;        
         var inputPassword = document.getElementById("loginFormPassword").value;
         var inputRole = document.getElementById("radioCustomer").checked === true ? "1" : "2";
@@ -100,7 +102,9 @@ export default function Login(props) {
         }
     }    
 
-    //*********************** RETURN ******************************
+    //===================================================//
+    //==              RETURN RESPONSE                  ==//                      
+    //===================================================//
     return (
     <div className="no-margin">
         <Alert />
