@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {useContext} from "react";
 import {UserContext} from '../../Contexts/UserContext.js';
 import Active_Orders from '../../Data/Orders.json';
@@ -8,6 +8,37 @@ import './ActiveOrders.css';
 export default function ActiveOrders(){
 
     const [userContext, setUserContext] = useContext(UserContext);
+    const [ordersData, setOrdersData] = useState([{
+        "order_id": "",
+        "rest_id": "",
+        "order_date": "",
+        "delivery_date": "",
+        "user_id": "",
+        "station_code": "",
+        "train_no": "",
+        "coach_no": "",
+        "seat_no": 0,
+        "order_status": "",
+        "contact_no": "",				
+        "item_count": 0,
+        "total_amount": "",
+        "total_discount": "",
+        "tax": "",
+        "net_amount": ""
+    }]);
+
+    //fetch trains
+    useEffect(() => {
+        const fetchData = async () => {
+        const response = await fetch('http://127.0.0.1:8000/fds/rest/api/orders/');
+        const data = await response.json();
+        console.log("API Response:" + data.results);
+        setOrdersData(data.results);
+        };
+
+        fetchData();
+    }, []);
+
 
     //Active order filter
     var users_active_orders = "";
@@ -22,7 +53,7 @@ export default function ActiveOrders(){
             <div> 
                 {users_active_orders.length === 0 ? (
                     <div>
-                        <p className="order"><b>None</b></p>
+                        <p className="order"><b>No Active Orders</b></p>
                     </div>
                 ) : (   users_active_orders.map(record => (
                             <div >  

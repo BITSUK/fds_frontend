@@ -38,10 +38,14 @@ function MenuItem(props) {
 export default function RestMenu(){
     const [userContext, setUserContext] = useContext(UserContext);
     const [query, setQuery] = useState("");
+    var RestaurantDetailsMenu = [];
+
 
     //Search in Stations JSON
-    const RestaurantDetails = Restaurants.filter(e => (e.user_id.includes(userContext.uid)));
-    const RestaurantDetailsMenu = RestaurantDetails[0].menu_item.filter(e => (e.menu_name.toLowerCase().includes(query.toLowerCase())))
+    const RestaurantDetails = Restaurants.filter(e => (e.rest_id.includes(userContext.uid)));
+    if (RestaurantDetails.length > 0 ) {
+       RestaurantDetailsMenu = RestaurantDetails[0].menu_item.filter(e => (e.menu_name.toLowerCase().includes(query.toLowerCase())))
+    }
 
 
     //************ RETURN RESPONSE ************
@@ -50,7 +54,9 @@ export default function RestMenu(){
             <Alert />
             <div> 
 				<div>                
-				    <b>Restaurant : {RestaurantDetails[0].rest_name}</b>
+				    {/* <b>Restaurant : {RestaurantDetails[0].rest_name}</b> */}
+                    <b>Restaurant : {userContext.restName}</b>
+                    
                 </div>
                 <div>
                     <br/>
@@ -70,7 +76,7 @@ export default function RestMenu(){
                 <tbody>
                     {RestaurantDetailsMenu.length === 0 ? (
                         <div>
-                            <p className="table-row"><b>"No menu item found"</b></p>
+                            <p className="table-row"><b>No menu item found.</b></p>
                         </div>
                     ) : ( RestaurantDetailsMenu.map(record => ( 
                             <MenuItem 
