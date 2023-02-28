@@ -2,7 +2,7 @@ import React from 'react'
 import './ResetPassword.css';
 import {Link, useNavigate} from "react-router-dom";
 import { AlertContext } from '../../Contexts/AlertContext.js';
-import {useContext} from "react";
+import {useContext, useState} from "react";
 import Alert from "../Alert/Alert.js";
 
 export default function ResetPassword() {
@@ -10,8 +10,10 @@ export default function ResetPassword() {
     const navigate = useNavigate();
     
     const [alertMessage, setAlert] = useContext(AlertContext);
+    const [otpStatus, setOTPStatus] = useState("n");
     var uid = "";
-    var mobile = "";
+    var mobile = "";   
+    var new_password = "";  
 
     
     //==========================================================
@@ -21,6 +23,7 @@ export default function ResetPassword() {
 
         var fld = "";
         setAlert({ alertMessage: "", alertType: "default" });
+        setOTPStatus("n");
 
         //Validate user id
         fld = document.getElementById("regFormUserid").value;
@@ -46,10 +49,38 @@ export default function ResetPassword() {
         } 
         mobile = fld;
 
-        //setAlert({ alertMessage: "OTP generated.", alertType: "success" });
-        alert("OTP generated.");
-        document.getElementById("passwordRestSection").style.display = "block";
-        document.getElementById("resetFormOTP").focus();
+        var url = 'http://127.0.0.1:8000/fds/rest/api/users/?user_id=' + uid;
+        fetch(url)
+            .then(response => {
+                    if(response.ok)  {
+                        // setOTPStatus("y");
+                        return response.json();     
+                    } 
+                    alert ("User Id or mobile not valid, try again.");
+                    return response.json() 
+                }
+            )
+            .then(function(data) { 
+                console.log(data); 
+                if (data.count > 0) {
+                    if (data.results[0].user_mobile ===  mobile) {
+                        setOTPStatus("y");
+                        alert("OTP generated.");
+                        document.getElementById("passwordRestSection").style.display = "block";
+                        document.getElementById("regFormUserid").disabled =  true;
+                        document.getElementById("regFormMobile").disabled =  true;
+                        document.getElementById("resetFormOTP").focus();
+                    }
+                }
+                else{
+                    alert ("User Id or mobile not valid, try again."); 
+                }
+            })
+            .catch(error => {
+                console.log("Error in resetting password:" + error);
+                alert ("User Id or mobile not valid, try again.");
+            });
+
         return;
     }
 
@@ -96,16 +127,69 @@ export default function ResetPassword() {
             return;    
         } 
 
-        alert("Password reset successfully.");
+        uid = document.getElementById("regFormUserid").value;
+        new_password = p1;
 
-        //As navigate not working a temporay code to reset fields.
-        document.getElementById("regFormUserid").value =  "";
-        document.getElementById("regFormMobile").value = "";
-        document.getElementById("resetFormOTP").value = ""
-        document.getElementById("regFormPassword1").value = "";
-        document.getElementById("regFormPassword2").value = "";
-        
-        navigate('/login');
+        // Backend server call
+        var payload = {
+                user_id             : uid,
+                user_new_password   : new_password,
+        }
+
+        var requestOptions = {
+            method: 'PUT',
+            headers: {
+                'Accept'        : 'application/json',
+                'Content-Type'  : 'application/json',
+            },
+            body: JSON.stringify(payload),
+        }
+
+        var baseURL     = "http://127.0.0.1:8000/fds/";
+        var specificURL = "rest/api/users/change_password/";
+        var queryString = "";
+
+        var url = baseURL + specificURL + queryString;        
+                  
+        fetch(url, requestOptions)
+            .then(response => {
+                    if(response.status === 200)  {
+                        return response.json();     
+                    } 
+                    // else some error has happened
+                    return response.json().then(response => {
+                        throw new Error(response.error)
+                    })
+                }
+            )
+            .then(function(data) {
+                alert("Password changed successfully.");
+                document.getElementById("regFormUserid").disabled =  false;
+                document.getElementById("regFormMobile").disabled =  false;
+                document.getElementById("regFormUserid").value =  "";
+                document.getElementById("regFormMobile").value = "";
+                document.getElementById("resetFormOTP").value = "";
+                document.getElementById("regFormPassword1").value = "";
+                document.getElementById("regFormPassword2").value = "";                
+                document.getElementById("passwordRestSection").style.display = "none"; 
+                navigate('/login');
+                return;
+            })
+            .catch(error => {
+                console.log("Error Registering:" + error);
+                document.getElementById("regFormUserid").disabled =  false;
+                document.getElementById("regFormMobile").disabled =  false;
+                document.getElementById("regFormUserid").value =  "";
+                document.getElementById("regFormMobile").value = "";
+                document.getElementById("resetFormOTP").value = "";
+                document.getElementById("regFormPassword1").value = "";
+                document.getElementById("regFormPassword2").value = "";                
+                document.getElementById("passwordRestSection").style.display = "none"; 
+                alert ("Registration had issue, please try again");
+                return;
+            });
+        // fetch ends here
+
     }
     
     //===================================================//
@@ -135,10 +219,10 @@ export default function ResetPassword() {
                     <label htmlFor="resetFormOTP" className="form-label fld-password ">OTP</label>
                     <input type="text" className="form-control fld-password " id="resetFormOTP" placeholder="OTP"/>
                     <label htmlFor="resetFormPassword1" className="form-label">Password</label>
-                    <div>
-                        <input type="password" className="form-control fld-password" id="regFormPassword1" placeholder="password"/>
-                        <input type="text" className="form-control fld-password" id="regFormPassword2" placeholder="repeat"/>
-                    </div>
+                        <div>
+                            <input type="password" className="form-control fld-password" id="regFormPassword1" placeholder="password"/>
+                            <input type="text" className="form-control fld-password" id="regFormPassword2" placeholder="repeat"/>
+                        </div>
                 </div>            
                 <div className="reset-form-components" id="passwordFields">
                     <Link to="#" className="btn btn-primary" role="button" onClick={handleResetPassword}>Submit</Link>&nbsp;&nbsp;

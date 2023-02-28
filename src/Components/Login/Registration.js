@@ -230,12 +230,6 @@ export default function Registration() {
                 }
             )
             .then(function(data) { 
-                //console.log('API Response: ');
-                //console.log(data);                
-                // a.alertMessage = "";
-                // a.alertType = "default";
-                // setAlert(a);                    
-                
                 navigate('/login');
             })
             .catch(error => {
