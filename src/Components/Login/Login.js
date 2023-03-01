@@ -55,6 +55,7 @@ export default function Login(props) {
                         
                     if (data[0].user_id === inputUserId) {
                         setUserContext({
+                            id: data[0].id,
                             uid: data[0].user_id,
                             name: data[0].user_name,
                             mobile: data[0].user_mobile,

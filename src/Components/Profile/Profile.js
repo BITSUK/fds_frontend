@@ -17,10 +17,8 @@ export default function Profile() {
         alertMessage: alertMessage.alertMessage
     }     
 
-    // document.getElementById("regFormUserName").value = userContext.name;
-    // document.getElementById("regFormMobile").value = userContext.mobile;
-    // document.getElementById("regFormEmail").value = userContext.email;
-    if (userContext.role === "restautant") document.getElementById("radioRestaurant").checked = true;
+    // if (userContext.role === "restautant") document.getElementById("radioRestaurant").checked = true;
+    // document.getElementById("reg-form-components").disabled = true;
 
     //Reset alert message
     const handleCancel = () => {
@@ -40,6 +38,7 @@ export default function Profile() {
             document.getElementById("regFormUserName").focus();
             return;     
         }
+        var uname = fld;
 
         //validate mobile number
         fld = document.getElementById("regFormMobile").value;
@@ -54,7 +53,8 @@ export default function Profile() {
             document.getElementById("regFormMobile").focus();
             return;    
         } 
-        
+
+        var umobile = fld;
 
         //validate email id
         fld = document.getElementById("regFormEmail").value;
@@ -64,9 +64,75 @@ export default function Profile() {
             return;
         }
 
-        // setAlert({ alertMessage: "Details updated.", alertType: "success" });
-        alert("Details updated");
+        var uemail = fld;
         
+        // Backend server call
+        var baseURL     = "http://127.0.0.1:8000/fds/";
+        var specificURL = "rest/api/users/" + userContext.id ;
+        var queryString = "";
+
+        var url = baseURL + specificURL + queryString; 
+
+        fetch(url)
+        .then(response => {
+                if(response.status === 200)  {
+                    return response.json();     
+                } 
+                // else some error has happened
+                return response.json().then(response => {
+                    throw new Error(response.error)
+                })
+            }
+        )
+        .then(function(data) {
+
+            var payload = {
+                "user_id": userContext.uid,
+                "user_name": uname,
+                "user_email": uemail,
+                "user_mobile": umobile,
+                "user_password": data.user_password,
+                "user_role": (userContext.role === "customer")? "1" : "2"
+            }
+
+            var requestOptions = {
+                method: 'PUT',
+                headers: {
+                    'Accept'        : 'application/json',
+                    'Content-Type'  : 'application/json',
+                },
+                body: JSON.stringify(payload),
+            }
+            // ====
+            fetch(url, requestOptions)
+            .then(response => {
+                    if(response.status === 200)  {
+                        alert("Details updated successfully.");
+                        return response.json();     
+                    } 
+                    // else some error has happened
+                    return response.json().then(response => {
+                        throw new Error(response.error)
+                    })
+                }
+            )
+            .then(function(data) {
+                return;
+            })
+            .catch(error => {
+                console.log("Error Updating:" + error);
+                alert ("Update unsuccessful, please try after some time.");
+                return;
+            });
+            // ====
+            return;
+        })
+        .catch(error => {
+            console.log("Error Fetching:" + error);
+            alert ("System faced some issue, please try after some time.");
+            return;
+        });
+
     }
 
     //Handle registration 
@@ -100,11 +166,11 @@ export default function Profile() {
             <br /> 
 
             <div className="reg-form-components">
-                <label>Profile Type: </label> <br/>
-                <input type="radio" id="radioCustomer" name="user-type" value="1" defaultChecked/>&nbsp;
+                <label>Profile Type: {userContext.role}</label> <br/>
+                {/* <input type="radio" id="radioCustomer" name="user-type" value="1" defaultChecked/>&nbsp;
                 <label htmlFor="chkVegRest">Customer</label>	&nbsp;
                 <input type="radio" id="radioRestaurant" name="user-type" value="2"/>&nbsp;
-                <label htmlFor="chkNonVegRest">Restaurant</label>	&nbsp;		
+                <label htmlFor="chkNonVegRest">Restaurant</label>	&nbsp;		 */}
             </div>
             <br />
 

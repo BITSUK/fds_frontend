@@ -27,7 +27,7 @@ export default function ActiveOrders(){
         "net_amount": ""
     }]);
 
-    //fetch trains
+    //fetch orders
     useEffect(() => {
         const fetchData = async () => {
         const response = await fetch('http://127.0.0.1:8000/fds/rest/api/orders/');
@@ -39,13 +39,14 @@ export default function ActiveOrders(){
         fetchData();
     }, []);
 
-
     //Active order filter
     var users_active_orders = "";
     if (userContext.role == "restaurant") {
-        users_active_orders = Active_Orders.filter(e => (e.rest_id == userContext.uid) && ((e.order_status == "Pending")||(e.order_status == "Confirmed")));
+        users_active_orders = ordersData.filter(e => (e.rest_id == userContext.uid) && ((e.order_status == "2")||(e.order_status == "3")||(e.order_status == "4")));
+        //users_active_orders = Active_Orders.filter(e => (e.rest_id == userContext.uid) && ((e.order_status == "Pending")||(e.order_status == "Confirmed")));
     } else {
-        users_active_orders = Active_Orders.filter(e => (e.user_id == userContext.uid) && ((e.order_status == "Pending")||(e.order_status == "Confirmed")));
+        //users_active_orders = Active_Orders.filter(e => (e.user_id == userContext.uid) && ((e.order_status == "Pending")||(e.order_status == "Confirmed")));
+        users_active_orders = ordersData.filter(e => (e.user_id == userContext.uid) && ((e.order_status == "2")||(e.order_status == "3")||(e.order_status == "4")));
     }
 
     return(
@@ -59,15 +60,6 @@ export default function ActiveOrders(){
                             <div >  
                                 <br/>                             
                                 <div className="order">
-                                    {/* <br/>
-                                    <p key={record.order_id}>
-                                        <p><b>Order No: {record.order_id}</b></p>
-                                        <p>Date: {record.order_date}</p>
-                                        <p>Station: {record.station_code}</p>
-                                        <p>Train/Coach/Seat No: {record.train_no}/{record.coach_no}/{record.seat_no}</p>
-                                        <p><b className={record.order_status}>Status: {record.order_status}</b></p>
-                                    </p> 
-                                    <br/>   */}
                                     <Order 
                                         order_id={record.order_id} 
                                         order_date={record.order_date}  
@@ -75,7 +67,7 @@ export default function ActiveOrders(){
                                         train_no={record.train_no}                                       
                                         coach_no={record.coach_no}       
                                         seat_no={record.seat_no}    
-                                        order_status={record.order_status}                                          
+                                        order_status={record.order_status}
                                     />
                                 </div>
                             </div>

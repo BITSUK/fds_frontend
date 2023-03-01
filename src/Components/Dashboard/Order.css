@@ -11,6 +11,10 @@
     color: green;   
 }
 
+.Rejected {
+    color: rgb(255, 0, 0);   
+}
+
 .Cancelled {
     color: rgb(255, 0, 0);   
 }

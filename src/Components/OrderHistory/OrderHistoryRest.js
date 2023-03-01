@@ -43,7 +43,7 @@ export default function RestOrderHistory(){
     }, []);
 
     //History Orders - Restaurant +  filter
-    const users_active_orders_temp = Active_Orders.filter(e => ((e.rest_id == userContext.uid)&&(e.order_status != "Pending")));
+    const users_active_orders_temp = ordersData.filter(e => ((e.rest_id === userContext.uid) && (e.order_status != "2") && (e.order_status != "3") ));
     const users_active_orders = users_active_orders_temp.filter(e => (e.order_id.toLowerCase().includes(query.toLowerCase())))
 
     return(
@@ -77,6 +77,10 @@ export default function RestOrderHistory(){
                             </div>
                         ))
                 )}
+                <br/>
+                <br/>
+                <br/>
+                <br/>
             </div>
         </>
     )    

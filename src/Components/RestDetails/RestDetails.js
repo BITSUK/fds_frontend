@@ -90,6 +90,7 @@ export default function RestDetails() {
         var r_type = (document.getElementById("chkNonVegRest").checked === true) ? "1" : "0"
 
         var payload = {
+            "rest_id": restaurantsdata[0].rest_id,
             "rest_name": r_name,
             "rest_address": r_address,
             "rest_location_code": r_location,
@@ -97,8 +98,8 @@ export default function RestDetails() {
             "contact_person": restaurantsdata[0].contact_person,
             "contact_no": restaurantsdata[0].contact_no,
             "rest_type": r_type,
-            "rest_status": restaurantsdata[0].rest_status,
-            "rest_rating": restaurantsdata[0].rest_rating
+            "rest_rating": restaurantsdata[0].rest_rating,
+            "rest_status": restaurantsdata[0].rest_status
         }
 
         var requestOptions = {

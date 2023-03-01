@@ -5,7 +5,6 @@ Open Issues
 3) After password reset navigate to login not working, need to check, code looks simple and ok. A temporary provision to blankout fields adopted.
 4) Registration backend error messages are getting overridden.
 5) Why pages render multiple times (generic observation/issue).
-6) Reset password check user and mobile validity before generating OTP.
-7) Reset password update the database.
+6) Menu maint & ordering
 
 
