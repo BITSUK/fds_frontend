@@ -6,5 +6,6 @@ Open Issues
 4) Registration backend error messages are getting overridden.
 5) Why pages render multiple times (generic observation/issue).
 6) Menu maint & ordering
+7) Refresh page after confirm / reject order
 
 
