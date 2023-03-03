@@ -19,10 +19,39 @@ export default function OrderFoodMenu() {
     const [cart, setCart] = useContext(CartContext);
     const navigate = useNavigate();
 
+    const [restMenu, setRestMenu] = useState([{
+        "id": 0,
+        "menu_id": "",
+        "rest_id": "",
+        "item_name": "",
+        "item_desc": "",
+        "item_type": "",
+        "item_rate": "0.00",
+        "item_discount": "0.00",
+        "item_rating": 2,
+        "item_status": ""
+    }]);
+
+    //fetch menu items
+    useEffect(() => {
+        const fetchData = async () => {
+        const response = await fetch('http://127.0.0.1:8000/fds/rest/api/menuitems/');
+        const data = await response.json();
+        //console.log("API Response:" + data.results);
+        setRestMenu(data.results);
+        };
+
+        fetchData();
+    }, []);
+
     //Search Restaurant JSON 
     const filteredRestaurants = Restaurants.filter(e => (e.rest_id.toLowerCase().includes(inpParms["rest_id"].toLowerCase())));
-    const restMenuItems = filteredRestaurants[0].menu_item;
-    const filteredMenuItems1 = restMenuItems.filter(e => (e.menu_name.toLowerCase().includes(query.toLowerCase())))
+    // const restMenuItems = filteredRestaurants[0].menu_item;
+
+    //Get Restaurant Menu List
+    const restMenuItems = restMenu;
+    const filteredMenuItems0 = restMenuItems.filter(e => (e.rest_id.toLowerCase().includes(inpParms["rest_id"].toLowerCase())));
+    const filteredMenuItems1 = filteredMenuItems0.filter(e => (e.item_name.toLowerCase().includes(query.toLowerCase())))
     const filteredMenuItems2 = filteredMenuItems1.filter(e => (applyVegFilter(e)));
 
     //update restaurant details in user context
@@ -41,9 +70,9 @@ export default function OrderFoodMenu() {
 
     //set select based on filter criteria
     function applyVegFilter(item){
-        if (vegFilter === "Veg" && item.menu_type == "Veg") {
+        if (vegFilter === "Veg" && item.item_type == "0") {
             return item;
-        } else if (nonVegFilter === "Non-Veg" && item.menu_type == "Non-Veg") {
+        } else if (nonVegFilter === "Non-Veg" && item.item_type == "1") {
             return item;
         }
     }
@@ -149,19 +178,19 @@ export default function OrderFoodMenu() {
                         ) : (filteredMenuItems2.map(record => (
                             <div className="table-row">
                                 <div className="col-sm-6">                                    
-                                    {record.menu_name}
+                                    {record.item_name}
                                 </div>
                                 <div className="col-sm-1">                                    
-                                    {record.menu_price} 
+                                    {record.item_rate} 
                                 </div>
                                 <div className="col-sm-2">                                    
-                                    {record.menu_type}
+                                    {record.item_type}
                                 </div>
                                 <div className="col-sm-2">
                                     <div >                            
                                     {/* <Link to={`/order-food/restaurant/${userContext.restaurant}/${record.menu_id}?action=add&menuName=${record.menu_name}&menuPrice=${record.menu_price}`} key={record.menu_id}>Add</Link> */}
                                     {/* <Link to="#" key={record.menu_id} id={record.menu_id} name={record.menu_name}  price={record.menu_price} onClick={addToCart}>Add</Link> */}
-                                    <Link to="#" key={record.menu_id} onClick={(e) => addToCart(record.menu_id,record.menu_name,record.menu_price,e)}>Add</Link>
+                                    <Link to="#" key={record.menu_id} onClick={(e) => addToCart(record.menu_id,record.item_name,record.item_rate,e)}>Add</Link>
                                     </div>
                                 </div>
                             </div>
