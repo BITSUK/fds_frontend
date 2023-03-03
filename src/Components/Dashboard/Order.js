@@ -155,7 +155,9 @@ export default function Order(props){
     }
 
     var order_status = "";
-    if (props.order_status === "2") {
+    if (props.order_status === "0") {
+        order_status = "Initial";
+    } else if  (props.order_status === "2") {
         order_status = "Pending";
     } else if (props.order_status === "3") {
         order_status = "Confirmed";

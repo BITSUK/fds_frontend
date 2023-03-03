@@ -22,7 +22,7 @@ export default function Payment() {
     const [order, setOrder] = useContext(OrderContext);	
 
     const processPayment = (event) => {
-        event.preventDefault();  
+        // event.preventDefault();  
 
         //In future we will add API call here
 
@@ -52,14 +52,135 @@ export default function Payment() {
             a.alertType = "error";
             setAlert(a);
             //Pending: checks to validate only numbers are keys
-        } else {
-            a.alertMessage = "Order Placed Successfully. Order No: NT03456";
-            a.alertType = "success";
-            setAlert(a);
-            setPaymentStatus("paid");    
+        }
+        // } else {
+        //     a.alertMessage = "Order Placed Successfully. Order No: NT03456";
+        //     a.alertType = "success";
+        //     setAlert(a);
+        //     setPaymentStatus("paid");    
+        // }
+
+        var r = Math.floor((Math.random() * 10000000000) + 1);
+        var pid = "PID"+ r.toString();
+        var r2 = Math.floor((Math.random() * 100000) + 1);
+        var pref = pid + "R" + r2.toString();
+
+        var payload = {
+            "payment_id": pid,
+            "order_id": order.orderNumber,
+            "payment_date": order.orderDate,
+            "payment_amount": order.netprice,
+            "payment_mode": "Card",
+            "payment_ref": pref,
+            "payment_status": "1"
         }
 
+        var requestOptions = {
+            method: 'POST',
+            headers: {
+                'Accept'        : 'application/json',
+                'Content-Type'  : 'application/json',
+            },
+            body: JSON.stringify(payload),
+        }
 
+        // Backend server call
+        var baseURL     = "http://127.0.0.1:8000/fds/";
+        var specificURL = "rest/api/payments/";
+        var queryString = "";
+
+        var url = baseURL + specificURL + queryString;   
+
+        fetch(url, requestOptions)
+            .then(response => {
+                    if(response.ok)  {
+                        // alert("Payment successful for : " + order.orderNumber );
+                        //update order status
+                        updateOrderAsPaid(order.orderNumber);
+                        return response.json();     
+                    } 
+                    // else some error has happened
+                    return response.json().then(response => {
+                        // console.log("Error:" + response.error)
+                        throw new Error(response.error)
+                    })
+                }
+            )
+            .then(function(data) { 
+                // window.location.reload(false);
+                return;             
+            })
+            .catch(error => {
+                console.log("Error making payment:" + error);
+                // alert ("Error creating order. Try again.");
+            });
+        // fetch ends here
+        return;
+
+    }
+
+    //===================================================
+    //Update Order as paid 
+    //===================================================
+    const updateOrderAsPaid = (odr) => {
+
+        // Backend server call
+        var baseURL     = "http://127.0.0.1:8000/fds/";
+        var specificURL = "rest/api/orders/" ;
+        var queryString = "?order_id=" + odr;
+
+        var url = baseURL + specificURL + queryString; 
+
+        fetch(url)
+        .then(response => {
+                if(response.status === 200)  {
+                    return response.json();     
+                } 
+                // else some error has happened
+                return response.json().then(response => {
+                    throw new Error(response.error)
+                })
+            }
+        )
+        .then(function(data) {
+            var payload = data.results[0];
+            var url = baseURL + specificURL + payload.id; 
+            payload.order_status = 2;
+            delete payload.id;
+            
+            var requestOptions = {
+                method: 'PUT',
+                headers: {
+                    'Accept'        : 'application/json',
+                    'Content-Type'  : 'application/json',
+                },
+                body: JSON.stringify(payload),
+            }
+            // ====
+            fetch(url, requestOptions)
+            .then(response => {
+                    if(response.status === 200)  {
+                        alert("Payment successful, Order no: " + odr);
+                        return response.json();     
+                    } 
+                    // else some error has happened
+                    return response.json().then(response => {
+                        throw new Error(response.error)
+                    })
+                }
+            )
+            .then(function(data) {
+                return;
+            })
+            .catch(error => {
+                console.log("Error Updating:" + error);
+                alert ("Update unsuccessful, please try after some time.");
+                return;
+            });
+            // ====
+
+            return;
+        })
     }
 
     // Cancel Button
@@ -86,6 +207,7 @@ export default function Payment() {
         {(paymentStatus != "paid")   && 
             <div className="reset-form-container">            
                 <div>
+                    <b>Order No: </b> {order.orderNumber}<br/>
                     <b>Payment Amount: </b> {order.netprice}
                 </div>
                 <hr />                 
@@ -116,7 +238,7 @@ export default function Payment() {
                 <hr />
                 <div>
                     <Link to="/home" className="btn btn-danger" role="button" id="btnCancel" onClick={processCancel}>Cancel</Link>  &nbsp;&nbsp;
-                    <Link to="#" className="btn btn-primary" role="button" id="btnSubmit"  onClick={processPayment}>Submit</Link>
+                    <Link to="/dashboard" className="btn btn-primary" role="button" id="btnSubmit"  onClick={processPayment}>Submit</Link>
                 </div>
 
             </div>

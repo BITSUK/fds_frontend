@@ -31,16 +31,16 @@ export default function OrderConfirmation(props) {
     updatedOrder.train = userContext.train;
     updatedOrder.trainName = userContext.trainName;
     updatedOrder.deliveryDate = userContext.jdate;
+    var r = Math.floor((Math.random() * 10000000) + 1);
+    var odrno = "OID"+ r.toString();
+    updatedOrder.orderNumber = odrno;
     setOrder(updatedOrder);
 
-    //handle order confirmation
     //===================================================
-    //Handle registration 
+    //Handle order confirmation 
     //===================================================
     const handleOrderConfirmation = (event) => {
 
-        var r = Math.floor((Math.random() * 10000000) + 1);
-        var odrno = "OID"+ r.toString();
         var payload = {
             "order_id": odrno,
             "rest_id": userContext.rest,
@@ -52,7 +52,7 @@ export default function OrderConfirmation(props) {
             "train_no": order.train,
             "coach_no": order.seatDetails.substring(0,2),
             "seat_no": parseInt(order.seatDetails.substring(3,)),
-            "order_status": "2",
+            "order_status": "0",
             "item_count": order.orderItems.length,
             "total_amount": order.totalPrice,
             "total_discount": order.discount,
@@ -80,6 +80,13 @@ export default function OrderConfirmation(props) {
             .then(response => {
                     if(response.ok)  {
                         alert("Order number : " + odrno + ",payment step pending.");
+
+                        //for loop
+                        for (var i in order.orderItems) {
+                            var itm = order.orderItems[i];
+                            addOrderItems(odrno, itm);
+                        }
+
                         return response.json();     
                     } 
                     // else some error has happened
@@ -101,6 +108,60 @@ export default function OrderConfirmation(props) {
         return;
     }
 
+    //===================================================
+    //Add Order Items 
+    //===================================================
+    const addOrderItems = (o_no, o_item) => {
+
+        var payloadItem = {
+            "item_id": o_item.item_id,
+            "item_name": o_item.item_name,
+            "item_quantity": o_item.item_quantity,
+            "item_rate": o_item.item_price,
+            "item_discount": 0,
+            "order_id": o_no
+        }
+        
+        var requestOptions = {
+            method: 'POST',
+            headers: {
+                'Accept'        : 'application/json',
+                'Content-Type'  : 'application/json',
+            },
+            body: JSON.stringify(payloadItem),
+        }
+
+        // Backend server call
+        var baseURL     = "http://127.0.0.1:8000/fds/";
+        var specificURL = "rest/api/items/";
+        var queryString = "";
+
+        var url = baseURL + specificURL + queryString;   
+
+        fetch(url, requestOptions)
+            .then(response => {
+                    if(response.ok)  {
+                        // alert("Item added : " + o_item.item_id);
+                        return response.json();     
+                    } 
+                    // else some error has happened
+                    return response.json().then(response => {
+                        // console.log("Error:" + response.error)
+                        throw new Error(response.error)
+                    })
+                }
+            )
+            .then(function(data) { 
+                // window.location.reload(false);
+                return;             
+            })
+            .catch(error => {
+                console.log("Error adding order item:" + error);
+                // alert ("Error creating order. Try again.");
+            });
+        // fetch ends here
+        return;
+    }
     //************** RETURN ***************/
     return (
         <div className="container-fluid">

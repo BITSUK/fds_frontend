@@ -42,11 +42,11 @@ export default function ActiveOrders(){
     //Active order filter
     var users_active_orders = "";
     if (userContext.role == "restaurant") {
-        users_active_orders = ordersData.filter(e => (e.rest_id == userContext.uid) && ((e.order_status == "2")||(e.order_status == "3")||(e.order_status == "4")));
+        users_active_orders = ordersData.filter(e => (e.rest_id == userContext.uid) && ((e.order_status == "0")||(e.order_status == "2")||(e.order_status == "3")||(e.order_status == "4")));
         //users_active_orders = Active_Orders.filter(e => (e.rest_id == userContext.uid) && ((e.order_status == "Pending")||(e.order_status == "Confirmed")));
     } else {
         //users_active_orders = Active_Orders.filter(e => (e.user_id == userContext.uid) && ((e.order_status == "Pending")||(e.order_status == "Confirmed")));
-        users_active_orders = ordersData.filter(e => (e.user_id == userContext.uid) && ((e.order_status == "2")||(e.order_status == "3")||(e.order_status == "4")));
+        users_active_orders = ordersData.filter(e => (e.user_id == userContext.uid) && ((e.order_status == "0")||(e.order_status == "2")||(e.order_status == "3")||(e.order_status == "4")));
     }
 
     return(

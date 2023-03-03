@@ -41,8 +41,9 @@ export default function AddMenuItem() {
         var i_name   = document.getElementById("itemName").value;
         var i_price  = document.getElementById("itemPrice").value;
         var i_type   = (document.getElementById("chkVeg").checked === true) ? "0" : "1"; 
-        var i_mid = userContext.rest + i_name;
-        i_mid = (i_mid.length > 15) ? i_mid.substring(0,15) : i_mid;
+
+        var r = Math.floor((Math.random() * 10000000) + 1);
+        var i_mid = "MID"+ r.toString();
 
         var payload = {
             "menu_id": i_mid,
