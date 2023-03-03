@@ -39,8 +39,10 @@ export default function OrderConfirmation(props) {
     //===================================================
     const handleOrderConfirmation = (event) => {
 
+        var r = Math.floor((Math.random() * 10000000) + 1);
+        var odrno = "OID"+ r.toString();
         var payload = {
-            "order_id": order.orderNumber,
+            "order_id": odrno,
             "rest_id": userContext.rest,
             "order_date": order.orderDate,
             "delivery_date": order.deliveryDate,
@@ -49,7 +51,7 @@ export default function OrderConfirmation(props) {
             "station_code": order.station,
             "train_no": order.train,
             "coach_no": order.seatDetails.substring(0,2),
-            "seat_no": parseInt(order.seatDetails.substring(4,)),
+            "seat_no": parseInt(order.seatDetails.substring(3,)),
             "order_status": "2",
             "item_count": order.orderItems.length,
             "total_amount": order.totalPrice,
@@ -77,7 +79,7 @@ export default function OrderConfirmation(props) {
         fetch(url, requestOptions)
             .then(response => {
                     if(response.ok)  {
-                        alert("Order created : " + order.orderNumber);
+                        alert("Order number : " + odrno + ",payment step pending.");
                         return response.json();     
                     } 
                     // else some error has happened
