@@ -1,6 +1,6 @@
 import React from 'react'
 import './AddMenuItem.css';
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import { AlertContext } from '../../Contexts/AlertContext.js';
 import {UserContext} from '../../Contexts/UserContext.js';
 import {useContext} from "react";
@@ -9,6 +9,8 @@ import Alert from "../Alert/Alert.js";
 export default function AddMenuItem() {
 
     const [userContext, setUserContext] = useContext(UserContext);
+
+    const navigate = useNavigate();
 
     // Obtain alert context and define a local alert object
     const [alertMessage, setAlert] = useContext(AlertContext);
@@ -40,7 +42,7 @@ export default function AddMenuItem() {
         var i_price  = document.getElementById("itemPrice").value;
         var i_type   = (document.getElementById("chkVeg").checked === true) ? "0" : "1"; 
         var i_mid = userContext.rest + i_name;
-        i_mid = (i_mid.length > 15) ? i_mid.substring[0,15] : i_mid;
+        i_mid = (i_mid.length > 15) ? i_mid.substring(0,15) : i_mid;
 
         var payload = {
             "menu_id": i_mid,
@@ -83,7 +85,7 @@ export default function AddMenuItem() {
                 }
             )
             .then(function(data) { 
-                // navigate('/rest-menu');   
+                // window.location.reload(false);
                 return;             
             })
             .catch(error => {

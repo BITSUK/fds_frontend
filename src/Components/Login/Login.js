@@ -40,6 +40,7 @@ export default function Login(props) {
         } else if ((inputUserId.length > 4) &&  (inputPassword.length >= 8)) {    
             
             //Call Backend Login API
+            //Pending, convert this GET into a PUT call, or encrypt/encode the password
             var loginURL = "http://127.0.0.1:8000/fds/rest/api/users/login/" 
             var queryString = "?" + "user_id=" + inputUserId + "&user_password=" + inputPassword + "&user_role=" + inputRole
                       
