@@ -96,6 +96,7 @@ export default function OrderFoodMenu() {
         // updatedCart.taxes       = Number(updatedCart.taxes) + Number(price)*0.10;
         updatedCart.totalPrice  = Number(updatedCart.totalPrice) + Number(price);
         updatedCart.taxes       = Number(updatedCart.totalPrice)*0.10;
+        updatedCart.taxes = parseInt(updatedCart.taxes.toFixed())
         updatedCart.netprice    = updatedCart.totalPrice + updatedCart.taxes;
         setCart(updatedCart);
 

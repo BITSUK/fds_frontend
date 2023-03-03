@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {useContext} from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { OrderContext } from '../../Contexts/OrderContext.js';
 import { CartContext, emptyCart} from '../../Contexts/CartContext.js';
 import {UserContext} from '../../Contexts/UserContext.js';
@@ -9,6 +9,7 @@ import './OrderConfirmation.css';
 export default function OrderConfirmation(props) {
     const [order, setOrder] = useContext(OrderContext);
     const orderItems = order.orderItems;
+    const navigate = useNavigate();
     
     const [userContext, setUserContext] = useContext(UserContext);
 
@@ -23,6 +24,7 @@ export default function OrderConfirmation(props) {
     updatedOrder.netprice = cart.netprice;
 
     // updatedOrder.orderDate = new Date();
+    // updatedOrder.orderDate = updatedOrder.orderDate.substring(6,) + "-" + updatedOrder.orderDate.substring(3,4) + "-" + updatedOrder.orderDate.substring(0,1)
     updatedOrder.customerName = userContext.name;
     updatedOrder.station = userContext.station;
     updatedOrder.stationName = userContext.stationName;
@@ -30,6 +32,72 @@ export default function OrderConfirmation(props) {
     updatedOrder.trainName = userContext.trainName;
     updatedOrder.deliveryDate = userContext.jdate;
     setOrder(updatedOrder);
+
+    //handle order confirmation
+    //===================================================
+    //Handle registration 
+    //===================================================
+    const handleOrderConfirmation = (event) => {
+
+        var payload = {
+            "order_id": order.orderNumber,
+            "rest_id": userContext.rest,
+            "order_date": order.orderDate,
+            "delivery_date": order.deliveryDate,
+            "user_id": userContext.uid,
+            "contact_no": order.mobileNo,
+            "station_code": order.station,
+            "train_no": order.train,
+            "coach_no": order.seatDetails.substring(0,2),
+            "seat_no": parseInt(order.seatDetails.substring(4,)),
+            "order_status": "2",
+            "item_count": order.orderItems.length,
+            "total_amount": order.totalPrice,
+            "total_discount": order.discount,
+            "tax": parseInt(order.taxes.toFixed()),
+            "net_amount": order.netprice
+        }
+
+        var requestOptions = {
+            method: 'POST',
+            headers: {
+                'Accept'        : 'application/json',
+                'Content-Type'  : 'application/json',
+            },
+            body: JSON.stringify(payload),
+        }
+
+        // Backend server call
+        var baseURL     = "http://127.0.0.1:8000/fds/";
+        var specificURL = "rest/api/orders/";
+        var queryString = "";
+
+        var url = baseURL + specificURL + queryString;   
+
+        fetch(url, requestOptions)
+            .then(response => {
+                    if(response.ok)  {
+                        alert("Order created : " + order.orderNumber);
+                        return response.json();     
+                    } 
+                    // else some error has happened
+                    return response.json().then(response => {
+                        // console.log("Error:" + response.error)
+                        throw new Error(response.error)
+                    })
+                }
+            )
+            .then(function(data) { 
+                // window.location.reload(false);
+                return;             
+            })
+            .catch(error => {
+                console.log("Error creating order:" + error);
+                // alert ("Error creating order. Try again.");
+            });
+        // fetch ends here
+        return;
+    }
 
     //************** RETURN ***************/
     return (
@@ -128,7 +196,7 @@ export default function OrderConfirmation(props) {
                 <hr/>
                 <Link to="/order-food" className="btn btn-danger col-sm-3" role="button" >Cancel</Link>    
                 <div className="col-sm-3"></div>
-                <Link to="/payment" className="btn btn-primary col-sm-3" role="button" >Confirm & Pay</Link>    
+                <Link to="/payment" className="btn btn-primary col-sm-3" role="button" onClick={handleOrderConfirmation}>Confirm & Pay</Link>    
             </div>
         </div>
     )

@@ -1,7 +1,7 @@
 import { createContext } from 'react';
 
 export const sampleOrder = {    
-    orderDate    : "01/02/2023",
+    orderDate    : "2023-02-01",
     orderNumber  : "FDS0132",
     customerName : "HAPPY SINGH",
     mobileNo     : "9988776655",
@@ -11,7 +11,9 @@ export const sampleOrder = {
     train        : "12910",
     trainName    : "Garibrath",
     seatDetails  : "B1/20",
-    deliveryDate : "15/02/2023",
+    coach        : "B1",
+    seatno       : 20,
+    deliveryDate : "2023-01-01",
     orderItems: [
         {
             item_id : "ITM0001",
