@@ -4,45 +4,41 @@ import CustomerJourney from '../CentralPane/CustomerJourney.js';
 import Testimonials from '../CentralPane/Testimonials.js';
 import { useContext, useState, useEffect } from "react";
 import './OrderFood.css';
-// import Stations from '../../Data/Stations.json';
-// import Trains from '../../Data/Trains.json';
 import {Link} from "react-router-dom";
 import {UserContext} from '../../Contexts/UserContext.js';
 
-// alert("*** OUTSIDE ***");
 const DATE_TODAY = new Date().toISOString().substr(0, 10);
 
 export default function OrderFood(){
-    // alert("- inside -");
     const [userContext, setUserContext] = useContext(UserContext);
     const [mode, setMode] = useState("-");
     const [query, setQuery] = useState("");
     const [stationsdata, setStationsdata] = useState([{"station_code": "", "station_name": "" }]);
     const [trainsdata, setTrainsdata] = useState([{"train_no": "","train_name": ""}]);
 
-        //fetch stations
-        useEffect(() => {
-            const fetchData = async () => {
-            const response = await fetch('http://127.0.0.1:8000/fds/rest/api/stations/');
-            const data = await response.json();
-            // console.log(data.results);
-            setStationsdata(data.results);
-            };
+    //fetch stations
+    useEffect(() => {
+        const fetchData = async () => {
+        const response = await fetch('http://127.0.0.1:8000/fds/rest/api/stations/');
+        const data = await response.json();
+        // console.log(data.results);
+        setStationsdata(data.results);
+        };
 
-            fetchData();
-        }, []);
+        fetchData();
+    }, []);
 
-        //fetch trains
-        useEffect(() => {
-            const fetchData = async () => {
-            const response = await fetch('http://127.0.0.1:8000/fds/rest/api/trains/');
-            const data = await response.json();
-            // console.log(data.results);
-            setTrainsdata(data.results);
-            };
+    //fetch trains
+    useEffect(() => {
+        const fetchData = async () => {
+        const response = await fetch('http://127.0.0.1:8000/fds/rest/api/trains/');
+        const data = await response.json();
+        // console.log(data.results);
+        setTrainsdata(data.results);
+        };
 
-            fetchData();
-        }, []);
+        fetchData();
+    }, []);
     
     //Stations.filter
     const stationsList = stationsdata.filter(e => (e.station_code.toLowerCase().includes(query.toLowerCase())) || 
@@ -52,7 +48,9 @@ export default function OrderFood(){
     const trainsList = trainsdata.filter(e => (e.train_no.toLowerCase().includes(query)) ||
                                         (e.train_name.toLowerCase().includes(query))  );
             
-    //Function to validate journey date
+    // =======================================
+    // Function to validate journey date
+    // =======================================
     const checkJourneyDate = () => {
 
         var inptJDate = document.getElementById("jdate").value;
@@ -76,7 +74,9 @@ export default function OrderFood(){
 
     }   
 
-    //Set mode depending what user choose - Train or Station
+    // ==========================================================
+    // Set mode depending what user choose - Train or Station
+    // ==========================================================
     const handleRadioClick = (event) => {
 
         if (document.getElementById("radioTrain").checked == true ) { 
@@ -89,12 +89,16 @@ export default function OrderFood(){
         checkJourneyDate();
     }
     
-    //Handle Date Change
+    // ==========================
+    // Handle Date Change
+    // ==========================
     const handleDateChange = (event) => {
         checkJourneyDate();
     }
 
-    //Handle Search Button Click
+    // ==============================
+    // Handle Search Button Click
+    // ==============================
     const handleSubmit = (event) => {
         event.preventDefault();     
 
@@ -108,7 +112,9 @@ export default function OrderFood(){
         checkJourneyDate();
     }
 
-    //************ RETURN RESPONSE ************
+    // *******************************************************************
+    // *********          RETURN RESPOSNE                         ********
+    // *******************************************************************
     return(
         <>
             <div id="order-bar">

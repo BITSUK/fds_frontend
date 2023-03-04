@@ -12,11 +12,12 @@ import { AlertContext } from '../../Contexts/AlertContext.js';
 export default function Header(){
 	const [userContext, setUserContext] = useContext(UserContext);	
 
-	// Obtain alert context and define a local alert object    
 	const [alertMessage, setAlert] = useContext(AlertContext);
 	const a = {alertType: "default", alertMessage: ""}
 	
+	//------------------------
 	// Handles logout
+	//------------------------
 	const handleLogout = (event) => {
 		
 		setUserContext(defaultUser);
@@ -26,7 +27,9 @@ export default function Header(){
 		setAlert(a);
 	}
 
-	//***************** RETURN *****************
+	// *******************************************************************
+    // *********          RETURN RESPOSNE                         ********
+    // *******************************************************************
     return (
         <div className="header-container">
 			<div id="HTR" className="header-columns">

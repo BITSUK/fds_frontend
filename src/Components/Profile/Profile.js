@@ -9,29 +9,16 @@ import Alert from "../Alert/Alert.js";
 export default function Profile() {
 
     const [userContext, setUserContext] = useContext(UserContext);
-
-    // Obtain alert context and define a local alert object
     const [alertMessage, setAlert] = useContext(AlertContext);
-    const a = {
-        alertType: alertMessage.alertType,
-        alertMessage: alertMessage.alertMessage
-    }     
 
-    // if (userContext.role === "restautant") document.getElementById("radioRestaurant").checked = true;
-    // document.getElementById("reg-form-components").disabled = true;
-
-    //Reset alert message
-    const handleCancel = () => {
-        setAlert({ alertMessage: "", alertType: "default" });
-        return;
-    }
-    
-    //Handle registration 
+    //===============================================
+    // Handle Profile Update
+    //===============================================
     const handleProfileUpdate = (event) => {
         var fld = "";
         setAlert({ alertMessage: "", alertType: "default" });
 
-        //validate User Name
+        // Validate User Name
         fld = document.getElementById("regFormUserName").value;
         if (fld <= "") {
             setAlert({ alertMessage: "Enter user name", alertType: "error" });
@@ -40,15 +27,15 @@ export default function Profile() {
         }
         var uname = fld;
 
-        //validate mobile number
+        // Validate mobile number
         fld = document.getElementById("regFormMobile").value;
-        if (fld.length != 10){
+        if (fld.length !== 10){
             setAlert({ alertMessage: "Mobile number should be 10 characters and without country code", alertType: "error" });
             document.getElementById("regFormMobile").focus();
             return;     
         }
 
-        if ((fld.length != 10) || (fld.match("[A-Z]") != null) || (fld.match("[%@#$]") != null) || (fld.match("[a-z]") != null)) {
+        if ((fld.length !== 10) || (fld.match("[A-Z]") !== null) || (fld.match("[%@#$]") !== null) || (fld.match("[a-z]") != null)) {
             setAlert({ alertMessage: "Invalid mobile number", alertType: "error" });
             document.getElementById("regFormMobile").focus();
             return;    
@@ -56,7 +43,7 @@ export default function Profile() {
 
         var umobile = fld;
 
-        //validate email id
+        // Validate email id
         fld = document.getElementById("regFormEmail").value;
         if ((fld > "") && (fld.match("[@]") == null)) {
             setAlert({ alertMessage: "Invalid email id", alertType: "error" });
@@ -66,7 +53,9 @@ export default function Profile() {
 
         var uemail = fld;
         
-        // Backend server call
+        // --------------------------------------------------
+        // Backend server call - to get user details
+        // --------------------------------------------------
         var baseURL     = "http://127.0.0.1:8000/fds/";
         var specificURL = "rest/api/users/" + userContext.id ;
         var queryString = "";
@@ -78,7 +67,6 @@ export default function Profile() {
                 if(response.status === 200)  {
                     return response.json();     
                 } 
-                // else some error has happened
                 return response.json().then(response => {
                     throw new Error(response.error)
                 })
@@ -86,6 +74,9 @@ export default function Profile() {
         )
         .then(function(data) {
 
+            // --------------------
+            // Update user details
+            // --------------------
             var payload = {
                 "user_id": userContext.uid,
                 "user_name": uname,
@@ -103,14 +94,13 @@ export default function Profile() {
                 },
                 body: JSON.stringify(payload),
             }
-            // ====
+            
             fetch(url, requestOptions)
             .then(response => {
                     if(response.status === 200)  {
                         alert("Details updated successfully.");
                         return response.json();     
                     } 
-                    // else some error has happened
                     return response.json().then(response => {
                         throw new Error(response.error)
                     })
@@ -124,7 +114,6 @@ export default function Profile() {
                 alert ("Update unsuccessful, please try after some time.");
                 return;
             });
-            // ====
             return;
         })
         .catch(error => {
@@ -135,12 +124,16 @@ export default function Profile() {
 
     }
 
-    //Handle registration 
+    //===============================================
+    // Handle change password
+    //===============================================
     const handleChangePassword = (event) => {
-        alert("Change password feature is not enabled currently, working on it...")
+        alert("Change password feature is not enabled currently, use forgot password from the login screen.")
     }
-    
-    //************* RETURN **************************
+
+    // *******************************************************************
+    // *********          RETURN RESPOSNE                         ********
+    // *******************************************************************
     return (
     <div>
         <Alert />

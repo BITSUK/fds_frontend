@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import {useContext} from "react";
 import {UserContext} from '../../Contexts/UserContext.js';
-import Active_Orders from '../../Data/Orders.json';
 import Order from './Order.js';
 import './ActiveOrders.css';
 
 export default function ActiveOrders(){
 
     const [userContext, setUserContext] = useContext(UserContext);
+    const [query, setQuery] = useState("");
     const [ordersData, setOrdersData] = useState([{
         "order_id": "",
         "rest_id": "",
@@ -27,7 +27,9 @@ export default function ActiveOrders(){
         "net_amount": ""
     }]);
 
-    //fetch orders
+    // -------------------------
+    // Fetch orders
+    // -------------------------
     useEffect(() => {
         const fetchData = async () => {
         const response = await fetch('http://127.0.0.1:8000/fds/rest/api/orders/');
@@ -39,18 +41,25 @@ export default function ActiveOrders(){
         fetchData();
     }, []);
 
-    //Active order filter
+    // Order filtering
     var users_active_orders = "";
     if (userContext.role == "restaurant") {
         users_active_orders = ordersData.filter(e => (e.rest_id == userContext.uid) && ((e.order_status == "0")||(e.order_status == "2")||(e.order_status == "3")||(e.order_status == "4")));
-        //users_active_orders = Active_Orders.filter(e => (e.rest_id == userContext.uid) && ((e.order_status == "Pending")||(e.order_status == "Confirmed")));
     } else {
-        //users_active_orders = Active_Orders.filter(e => (e.user_id == userContext.uid) && ((e.order_status == "Pending")||(e.order_status == "Confirmed")));
         users_active_orders = ordersData.filter(e => (e.user_id == userContext.uid) && ((e.order_status == "0")||(e.order_status == "2")||(e.order_status == "3")||(e.order_status == "4")));
     }
+    users_active_orders = users_active_orders.filter(e => (e.order_id.toLowerCase().includes(query.toLowerCase())))
 
+    // *******************************************************************
+    // *********          RETURN RESPOSNE                         ********
+    // *******************************************************************
     return(
         <>
+            <div>
+                <br/>
+                <label> Search Order No:</label>
+                <input type="text" className="form-control" id="Search" placeholder="Search Menu..." onChange={e => setQuery(e.target.value)} />
+            </div> 
             <div> 
                 {users_active_orders.length === 0 ? (
                     <div>

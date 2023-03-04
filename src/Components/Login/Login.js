@@ -11,8 +11,6 @@ export default function Login(props) {
     
     const [userContext, setUserContext] = useContext(UserContext);	
     const [cart, setCart] = useContext(CartContext);
-
-    // Obtain alert context and define a local alert object
     const [alertMessage, setAlert] = useContext(AlertContext);
     const a = { alertType: "default", alertMessage: "" }     
     
@@ -36,7 +34,6 @@ export default function Login(props) {
             a.alertType = "error";
             setAlert(a);
 
-        // } else if ((inputUserId.length === 6) &&  (inputPassword.length >= 8) && (inputUserId.substr(0,3) === 'UID')) {
         } else if ((inputUserId.length > 4) &&  (inputPassword.length >= 8)) {    
             
             //Call Backend Login API
@@ -78,7 +75,7 @@ export default function Login(props) {
                         setAlert(a);                    
                         
                         alert("Login Successful");
-
+                        // setCart(emptyCart);
                         navigate('/dashboard');
                     } else {
                         a.alertMessage = "Userid or password not valid, please try again.";

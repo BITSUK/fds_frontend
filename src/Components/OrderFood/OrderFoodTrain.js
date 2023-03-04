@@ -25,6 +25,9 @@ function TrainRow(props) {
     );
 }
 
+// ============================================
+// Search using train 
+// ============================================
 export default function OrderFoodTrain(){
     const [userContext, setUserContext] = useContext(UserContext);
     const inpParms = useParams(); 
@@ -38,7 +41,9 @@ export default function OrderFoodTrain(){
     updatedUserContext.trainName = trainStationXREF[0].train_name;
     setUserContext(updatedUserContext);
 
-    //************ RETURN RESPONSE ************
+    // *******************************************************************
+    // *********          RETURN RESPOSNE                         ********
+    // *******************************************************************
     return(
         <>
             <Alert />

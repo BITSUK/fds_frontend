@@ -42,8 +42,10 @@ export default function OrderHistoryCust(){
 
     //History Orders - Customer
     const users_active_orders = Active_Orders.filter(e => (e.user_id == userContext.uid) && ((e.order_status == "Delivered")||(e.order_status == "Cancelled")));
-    // const users_active_orders = ordersData.filter(e => (e.user_id == userContext.uid) && ((e.order_status == "8")||(e.order_status == "10")));
 
+    // *******************************************************************
+    // *********          RETURN RESPOSNE                         ********
+    // *******************************************************************
     return(
         <>
             <Alert/>

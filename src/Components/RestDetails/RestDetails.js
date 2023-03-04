@@ -33,27 +33,15 @@ export default function RestDetails() {
         fetchData();
     }, []);
 
-    // if (restaurantsdata[0] != null) {
-    //     document.getElementById("regFormRestName").value = restaurantsdata[0].rest_name;
-    //     document.getElementById("regFormRestAddress").value = restaurantsdata[0].rest_address;
-    //     document.getElementById("regFormRestLocation").value = restaurantsdata[0].rest_location_code;
-    // }
-    if (restaurantsdata.rest_type === "1") document.getElementById("chkNonVegRest").checked = true;
-
-    // Obtain alert context and define a local alert object
-    const [alertMessage, setAlert] = useContext(AlertContext);
-    const a = {
-        alertType: alertMessage.alertType,
-        alertMessage: alertMessage.alertMessage
-    }  
-    
-    //Reset alert message
-    const handleCancel = () => {
-        setAlert({ alertMessage: "", alertType: "default" });
-        return;
+    if (restaurantsdata.rest_type === "1") {
+        document.getElementById("chkNonVegRest").checked = true;
     }
+    const [alertMessage, setAlert] = useContext(AlertContext);
+    const a = { alertType: alertMessage.alertType, alertMessage: alertMessage.alertMessage }  
     
-    //Handle Update 
+    // ------------------
+    // Handle Update 
+    // ------------------
     const handleRestUpdate = (event) => {
         var fld = "";
         setAlert({ alertMessage: "", alertType: "default" });
@@ -66,7 +54,7 @@ export default function RestDetails() {
             return;  
         }
 
-        //restaurant address
+        //Restaurant address
         fld = document.getElementById("regFormRestAddress").value;
         if (fld === ""){
             setAlert({ alertMessage: "Restuarant address is mandatory", alertType: "error" });
@@ -74,15 +62,13 @@ export default function RestDetails() {
             return;  
         }
 
-        //restaurant location
+        //Restaurant location
         fld = document.getElementById("regFormRestLocation").value;
         if (fld === ""){
             setAlert({ alertMessage: "Restuarant location is mandatory", alertType: "error" });
             document.getElementById("regFormRestLocation").focus();
             return;  
         }
-
-        // Backend API call
 
         var r_name = document.getElementById("regFormRestName").value;
         var r_address = document.getElementById("regFormRestAddress").value;
@@ -111,7 +97,9 @@ export default function RestDetails() {
             body: JSON.stringify(payload),
         }
 
+        //-----------------------
         // Backend server call
+        //-----------------------
         var baseURL = "http://127.0.0.1:8000/fds/";
         var specificURL = "rest/api/restaurants/" + restaurantsdata[0].id;
         var queryString = "";
@@ -124,20 +112,13 @@ export default function RestDetails() {
                         alert("Successfully updated.");
                         return response.json();     // convert response to json
                     } 
-                    // else some error has happened
                     return response.json().then(response => {
                         throw new Error(response.error)
                     })
                 }
             )
-            .then(function(data) {                  // process response
-                //console.log('API Response: ');
+            .then(function(data) {                 
                 //console.log(data);                
-
-                a.alertMessage = "";
-                a.alertType = "default";
-                //setAlert(a);                    
-                
             })
             .catch(error => {
                 console.log("Error upgating rest:" + error);
@@ -145,13 +126,11 @@ export default function RestDetails() {
             });
         // fetch ends
 
-        // setAlert({ alertMessage: "Details updated.", alertType: "success" });
-        // alert("Details updated");
-        
     }
 
-    
-    //************* RETURN **************************
+    // *******************************************************************
+    // *********          RETURN RESPOSNE                         ********
+    // *******************************************************************
     return (
     <div>
         <Alert />

@@ -13,9 +13,10 @@ export default function DisplayCart(props) {
     const [cart, setCart] = useContext(CartContext);
     const cartItems = cart.items;  //Extract cart items in a separate variable
 
+    // ================================
     // Sets the cart to empty
+    // ================================
     const emptyTheCart = (event) => {
-        // setCart(emptyCart);     
         setCart({    
             totalPrice  : "0",
             discount    : "0",
@@ -26,9 +27,10 @@ export default function DisplayCart(props) {
         })
     }
 
+    // ============================================
     // Handles item deletes from the cart
+    // ============================================        
     const handleDeleteItem = (id,price,event) => {
-        // event.preventDefault();
 
         var updatedCart = cart;
         var itemPosition = -1;
@@ -39,11 +41,11 @@ export default function DisplayCart(props) {
                 break;
             }
         }
-        // alert("item " + event.target.name + " is at " + itemPosition + " position");
 
         if (itemPosition > -1) {
             if (itemPosition === 0 ) {
                 //first item is not allowed to be delete, to overcome an known issue
+                //user can use empty cart for the time being
             }else {
                 delete updatedCart.items[itemPosition];
 
@@ -54,12 +56,12 @@ export default function DisplayCart(props) {
             }
         }
 
-        
-
-        return; //This code is not written
+        return; 
     }
 
-    //Handles checkout
+    // ==============================
+    // Handles checkout
+    // ==============================
     const handleCheckOut = ( event) => {
         event.preventDefault(); 
          
@@ -71,7 +73,9 @@ export default function DisplayCart(props) {
 
     }
 
-    // ****************** RETURN ********************
+	// *******************************************************************
+    // *********          RETURN RESPOSNE                         ********
+    // *******************************************************************
     return (
         <div className="container-fluid">
             <div className="row">

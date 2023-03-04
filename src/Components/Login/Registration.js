@@ -8,7 +8,6 @@ import Alert from "../Alert/Alert.js";
 export default function Registration() {
 
     const [alertMessage, setAlert] = useContext(AlertContext);
-
     const navigate = useNavigate();
 
     //===================================================
@@ -210,7 +209,9 @@ export default function Registration() {
             body: JSON.stringify(payload),
         }
 
+        // ---------------------
         // Backend server call
+        // ---------------------
         var baseURL     = "http://127.0.0.1:8000/fds/";
         var specificURL = "rest/api/users/registration/";
         var queryString = "";
@@ -223,7 +224,6 @@ export default function Registration() {
                         alert("Successfully registered.");
                         return response.json();     
                     } 
-                    // else some error has happened
                     return response.json().then(response => {
                         throw new Error(response.error)
                     })

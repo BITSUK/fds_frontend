@@ -7,7 +7,9 @@ import Alert from "../Alert/Alert.js";
 
 function MenuItem(props) {
 
+    // =====================
     // Handles Update 
+    // =====================
     const handleItemUpdate = (event) => {
         event.preventDefault(); 
 
@@ -35,8 +37,9 @@ function MenuItem(props) {
             return;  
         }
 
-
+        // -----------------------
         // Backend server call
+        // -----------------------
         var baseURL     = "http://127.0.0.1:8000/fds/";
         var specificURL = "rest/api/menuitems/" ;
         var queryString = "?menu_id=" + event.target.name;
@@ -48,7 +51,6 @@ function MenuItem(props) {
                 if(response.status === 200)  {
                     return response.json();     
                 } 
-                // else some error has happened
                 return response.json().then(response => {
                     throw new Error(response.error)
                 })
@@ -72,14 +74,12 @@ function MenuItem(props) {
                 },
                 body: JSON.stringify(payload),
             }
-            // ====
             fetch(url, requestOptions)
             .then(response => {
                     if(response.status === 200)  {
                         alert("Item updated.");
                         return response.json();     
                     } 
-                    // else some error has happened
                     return response.json().then(response => {
                         throw new Error(response.error)
                     })
@@ -93,7 +93,6 @@ function MenuItem(props) {
                 alert ("Update unsuccessful, please try after some time.");
                 return;
             });
-            // ====
             return;
         })
         .catch(error => {
@@ -105,7 +104,9 @@ function MenuItem(props) {
     }
 
 
+    // =====================
     // Handles Delete 
+    // =====================
     const handleItemDelete = (event) => {
         event.preventDefault(); 
 
@@ -121,7 +122,6 @@ function MenuItem(props) {
                 if(response.status === 200)  {
                     return response.json(); 
                 } 
-                // else some error has happened
                 return response.json().then(response => {
                     throw new Error(response.error)
                 })
@@ -140,14 +140,12 @@ function MenuItem(props) {
                 },
                 body: JSON.stringify(payload),
             }
-            // ====
             fetch(url, requestOptions)
             .then(response => {
                     if(response.status === 204)  {
                         alert("Item deleted. Refresh manually");
                         return;     
                     } 
-                    // else some error has happened
                     return response.json().then(response => {
                         throw new Error(response.error)
                     })
@@ -158,7 +156,6 @@ function MenuItem(props) {
                 alert ("Update unsuccessful, please try after some time.");
                 return;
             });
-            // ====
             return;
         })
         .catch(error => {
@@ -176,15 +173,15 @@ function MenuItem(props) {
         i_type = "Non-Veg";
     }
 
+    // *******************************************************************
+    // *********          RETURN RESPOSNE                         ********
+    // *******************************************************************
     return (
         <>
             <tr>
-                {/* <td id={props.itm_id + "-id"}>{props.itm_id}</td> */}
                 <td><input type="text" id={props.itm_id + "-nm"} defaultValue= {props.itm_name} /> </td>
                 <td><input type="text" id={props.itm_id + "-ty"} defaultValue= {i_type} /> </td>
                 <td><input type="text" id={props.itm_id + "-pr"} defaultValue= {props.itm_price} /> </td>
-                {/* <td><input type="text" id={props.itm_disc + "-pd"} defaultValue= {props.itm_disc} /> </td> */}
-                {/* <td><input type="text" id={props.itm_rating + "-pi"} defaultValue= {props.itm_rating} /> </td> */}
                 <td scope="row">
                     <Link to="#" onClick={handleItemUpdate} name={props.itm_id} > Update </Link> /
                     <Link to="#" onClick={handleItemDelete} name={props.itm_id} > Delete </Link>
@@ -240,18 +237,16 @@ export default function RestMenu(){
         fetchData();
     }, []);
 
-
     //Search in Stations JSON
     const RestaurantDetails = restMenu.filter(e => (e.rest_id.includes(userContext.uid)));
-    // const RestaurantDetails = Restaurants.filter(e => (e.rest_id.includes(userContext.uid)));
-    
     if (RestaurantDetails.length > 0 ) {
         RestaurantDetailsMenu = RestaurantDetails;
-    //    RestaurantDetailsMenu = RestaurantDetails[0].filter(e => (e.item_name.toLowerCase().includes(query.toLowerCase())))
     }
 
 
-    //************ RETURN RESPONSE ************
+    // *******************************************************************
+    // *********          RETURN RESPOSNE                         ********
+    // *******************************************************************
     return(
         <>
             <Alert />

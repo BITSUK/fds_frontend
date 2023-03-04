@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import './FAQ.css';
-import {Link, useNavigate } from "react-router-dom";
 import Alert from "../Alert/Alert.js";
+import './FAQ.css';
 
 export default function FAQ() {
     const [questions, setQuestions] = useState([
@@ -14,7 +13,6 @@ export default function FAQ() {
     <>
       <Alert />
       <div className="faq-container">
-        {/* <Link to="/" className="btn btn-info" role="button">Go Back</Link> */}
         <h1 className="faq-title">FAQs </h1>
         <ul className="faq-list">
           {questions.map((item, index) => (

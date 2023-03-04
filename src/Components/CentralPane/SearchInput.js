@@ -4,33 +4,32 @@ import { AlertContext } from '../../Contexts/AlertContext.js';
 import {useContext} from "react";
 import { Link, useNavigate} from "react-router-dom";
 
+// ============================================================================
+// Dislays Search Train / Station section of screen 
+// ============================================================================
 export default function SearchInput(){
 	const navigate = useNavigate();
-
-	// Obtain alert context and define a local alert object
     const [alertMessage, setAlert] = useContext(AlertContext);
-    const a = {
-        alertType: alertMessage.alertType,
-        alertMessage: alertMessage.alertMessage
-    }
 
+	// ====================================
+	// Handles click on radio button
+	// ====================================
 	const handleRadioClick = (event) => {
 		navigate("/order-food");
 	}
 
-	//Handles click on Search button
+	// ====================================
+	// Handles click on Search button
+	// ====================================
 	const handleSearch = (event) => {
-
 		event.preventDefault();   
 		navigate("/order-food");
-		//set default message
-		a.alertMessage = "";
-		a.alertType = "default";
-		setAlert(a);
-
+		setAlert({ alertMessage: "", alertType: "default" });
 	}
 
-	// ****************** RETURN ********************
+	// *******************************************************************
+    // *********          RETURN RESPOSNE                         ********
+    // *******************************************************************
     return (
         <>
 			<div id="order-bar">

@@ -13,7 +13,9 @@ export default function Order(props){
 
         event.preventDefault(); 
         
+        // --------------------------
         // Backend server call
+        // --------------------------
         var baseURL     = "http://127.0.0.1:8000/fds/";
         var specificURL = "rest/api/orders/" ;
         var queryString = "?order_id=" + event.target.name;
@@ -25,20 +27,19 @@ export default function Order(props){
                 if(response.status === 200)  {
                     return response.json();     
                 } 
-                // else some error has happened
                 return response.json().then(response => {
                     throw new Error(response.error)
                 })
             }
         )
         .then(function(data) {
+            // ------------------------------
+            // Update status to confirmed
+            // -------------------------------
             var payload = data.results[0];
-            
             var url = baseURL + specificURL + payload.id; 
-
             payload.order_status = '3';         //confirmed
             delete payload.id;
-            
 
             var requestOptions = {
                 method: 'PUT',
@@ -48,14 +49,12 @@ export default function Order(props){
                 },
                 body: JSON.stringify(payload),
             }
-            // ====
             fetch(url, requestOptions)
             .then(response => {
                     if(response.status === 200)  {
                         alert("Order confirmed. To see page refreshed navigate to another page and come back.");
                         return response.json();     
                     } 
-                    // else some error has happened
                     return response.json().then(response => {
                         throw new Error(response.error)
                     })
@@ -69,7 +68,6 @@ export default function Order(props){
                 alert ("Update unsuccessful, please try after some time.");
                 return;
             });
-            // ====
             return;
         })
         .catch(error => {
@@ -79,7 +77,6 @@ export default function Order(props){
         });
         return;
     }
-
 
     //=====================================================================
     // Handle Reject Order
@@ -87,7 +84,10 @@ export default function Order(props){
     const handleRejectOrder = (event) => {
 
         event.preventDefault(); 
+
+        //-------------------------------------
         // Backend server call
+        //-------------------------------------
         var baseURL     = "http://127.0.0.1:8000/fds/";
         var specificURL = "rest/api/orders/" ;
         var queryString = "?order_id=" + event.target.name;
@@ -99,21 +99,22 @@ export default function Order(props){
                 if(response.status === 200)  {
                     return response.json();     
                 } 
-                // else some error has happened
                 return response.json().then(response => {
                     throw new Error(response.error)
                 })
             }
         )
         .then(function(data) {
+
+            // ------------------------------
+            // Update status to rejected
+            // -------------------------------
             var payload = data.results[0];
-            
             var url = baseURL + specificURL + payload.id; 
 
             payload.order_status = '4';         //rejected
             delete payload.id;
             
-
             var requestOptions = {
                 method: 'PUT',
                 headers: {
@@ -122,14 +123,13 @@ export default function Order(props){
                 },
                 body: JSON.stringify(payload),
             }
-            // ====
+            
             fetch(url, requestOptions)
             .then(response => {
                     if(response.status === 200)  {
                         alert("Order rejected. To see page refreshed navigate to another page and come back.");
                         return response.json();     
                     } 
-                    // else some error has happened
                     return response.json().then(response => {
                         throw new Error(response.error)
                     })
@@ -143,7 +143,7 @@ export default function Order(props){
                 alert ("Update unsuccessful, please try after some time.");
                 return;
             });
-            // ====
+            
             return;
         })
         .catch(error => {
@@ -154,6 +154,9 @@ export default function Order(props){
         return;
     }
 
+    //-------------------------------------
+    // Convert status code to display text
+    //-------------------------------------
     var order_status = "";
     if (props.order_status === "0") {
         order_status = "Initial";
@@ -169,6 +172,9 @@ export default function Order(props){
         order_status = props.order_status;
     }
 
+    // *******************************************************************
+    // *********          RETURN RESPOSNE                         ********
+    // *******************************************************************
     return(
         <>
             <div className="container-fluid ">

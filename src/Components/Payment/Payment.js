@@ -11,20 +11,15 @@ export default function Payment() {
 
     const [paymentStatus, setPaymentStatus] = useState("unpaid");
     const navigate = useNavigate();
-
-    // Obtain alert context and define a local alert object
     const [alertMessage, setAlert] = useContext(AlertContext);
-    const a = {
-        alertType: alertMessage.alertType,
-        alertMessage: alertMessage.alertMessage
-    } 
-    
+    const a = {alertType: alertMessage.alertType, alertMessage: alertMessage.alertMessage  } 
     const [order, setOrder] = useContext(OrderContext);	
 
+    // ===================
+    // Process payment
+    // ===================
     const processPayment = (event) => {
         // event.preventDefault();  
-
-        //In future we will add API call here
 
         var inputCardNo = document.getElementById("cardNo").value;
         var inputName = document.getElementById("name").value;
@@ -32,11 +27,9 @@ export default function Payment() {
         var inputCardCCV = document.getElementById("ccv").value;
 
         if ((inputCardNo === "") || (inputName === "") || (inputCardExpiry === "") || (inputCardCCV === "")) {
-            
             a.alertMessage = "Mandatory details missing, please check.";
             a.alertType = "error";
             setAlert(a);
-
         } else if ((inputCardNo.length != 19) && (inputCardNo.length != 16)) {
             a.alertMessage = "Invalid Card Number.";
             a.alertType = "error";
@@ -53,12 +46,6 @@ export default function Payment() {
             setAlert(a);
             //Pending: checks to validate only numbers are keys
         }
-        // } else {
-        //     a.alertMessage = "Order Placed Successfully. Order No: NT03456";
-        //     a.alertType = "success";
-        //     setAlert(a);
-        //     setPaymentStatus("paid");    
-        // }
 
         var r = Math.floor((Math.random() * 10000000000) + 1);
         var pid = "PID"+ r.toString();
@@ -84,7 +71,9 @@ export default function Payment() {
             body: JSON.stringify(payload),
         }
 
+        // ------------------------
         // Backend server call
+        // ------------------------
         var baseURL     = "http://127.0.0.1:8000/fds/";
         var specificURL = "rest/api/payments/";
         var queryString = "";
@@ -99,7 +88,6 @@ export default function Payment() {
                         updateOrderAsPaid(order.orderNumber);
                         return response.json();     
                     } 
-                    // else some error has happened
                     return response.json().then(response => {
                         // console.log("Error:" + response.error)
                         throw new Error(response.error)
@@ -107,14 +95,11 @@ export default function Payment() {
                 }
             )
             .then(function(data) { 
-                // window.location.reload(false);
                 return;             
             })
             .catch(error => {
                 console.log("Error making payment:" + error);
-                // alert ("Error creating order. Try again.");
             });
-        // fetch ends here
         return;
 
     }
@@ -136,7 +121,6 @@ export default function Payment() {
                 if(response.status === 200)  {
                     return response.json();     
                 } 
-                // else some error has happened
                 return response.json().then(response => {
                     throw new Error(response.error)
                 })
@@ -163,7 +147,6 @@ export default function Payment() {
                         alert("Payment successful, Order no: " + odr);
                         return response.json();     
                     } 
-                    // else some error has happened
                     return response.json().then(response => {
                         throw new Error(response.error)
                     })
@@ -177,20 +160,23 @@ export default function Payment() {
                 alert ("Update unsuccessful, please try after some time.");
                 return;
             });
-            // ====
 
             return;
         })
     }
 
+    // ===================
     // Cancel Button
+    // ===================
     const processCancel = (event) => {
         a.alertMessage = "";
         a.alertType = "default";
         setAlert(a);
     }
 
+    // ===================
     // Go Back Button
+    // ===================
     const handleGoBack = (event) => {
         a.alertMessage = "";
         a.alertType = "default";
@@ -199,7 +185,9 @@ export default function Payment() {
         return;
     }
     
-    //********************** RETURN *******************
+    // *******************************************************************
+    // *********          RETURN RESPOSNE                         ********
+    // *******************************************************************
     return (
         
     <div>

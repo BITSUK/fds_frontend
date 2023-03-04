@@ -23,6 +23,9 @@ function StationRow(props) {
         </>
     );
 }
+// ============================================
+// Search using station 
+// ============================================
 export default function OrderFoodStation(){
     const [userContext, setUserContext] = useContext(UserContext);
     const inpParms = useParams(); 
@@ -36,7 +39,9 @@ export default function OrderFoodStation(){
     updatedUserContext.stationName = stationTrainXREF[0].station_name;
     setUserContext(updatedUserContext);
 
-    //************ RETURN RESPONSE ************
+    // *******************************************************************
+    // *********          RETURN RESPOSNE                         ********
+    // *******************************************************************
     return(
         <>
             <Alert />

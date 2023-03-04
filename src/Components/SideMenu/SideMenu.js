@@ -13,7 +13,9 @@ export default function SideMenu(){
     const [alertMessage, setAlert] = useContext(AlertContext);
     const a = { alertType: "default", alertMessage: ""};
 	
+	// ------------------
 	// Handles Logout
+	// ------------------
 	const handleLogout = (event) => {
 
 		setUserContext(defaultUser);
@@ -23,7 +25,9 @@ export default function SideMenu(){
 		setAlert(a);
 	}
 
-	//Role base menu
+	// -----------------------
+	// Show role base menu
+	// -----------------------
 	function ShowMenuOptions() {
 		return (
 			<>
@@ -43,7 +47,9 @@ export default function SideMenu(){
 		);
 	}
 	
-	//******************** RETURN ***************/
+	// *******************************************************************
+    // *********          RETURN RESPOSNE                         ********
+    // *******************************************************************
     return(
         <>
 			<div className="column left-nav" id="BML">

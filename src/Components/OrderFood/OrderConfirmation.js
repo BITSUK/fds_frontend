@@ -10,11 +10,10 @@ export default function OrderConfirmation(props) {
     const [order, setOrder] = useContext(OrderContext);
     const orderItems = order.orderItems;
     const navigate = useNavigate();
-    
     const [userContext, setUserContext] = useContext(UserContext);
-
     const [cart, setCart] = useContext(CartContext);
-    const cartItems = cart.items;  //Extract cart items in a separate variable
+    
+    const cartItems = cart.items;  
 
     var updatedOrder = order;
     updatedOrder.orderItems = cartItems;
@@ -22,15 +21,13 @@ export default function OrderConfirmation(props) {
     updatedOrder.discount = cart.discount;
     updatedOrder.taxes = cart.taxes;
     updatedOrder.netprice = cart.netprice;
-
-    // updatedOrder.orderDate = new Date();
-    // updatedOrder.orderDate = updatedOrder.orderDate.substring(6,) + "-" + updatedOrder.orderDate.substring(3,4) + "-" + updatedOrder.orderDate.substring(0,1)
     updatedOrder.customerName = userContext.name;
     updatedOrder.station = userContext.station;
     updatedOrder.stationName = userContext.stationName;
     updatedOrder.train = userContext.train;
     updatedOrder.trainName = userContext.trainName;
     updatedOrder.deliveryDate = userContext.jdate;
+    
     var r = Math.floor((Math.random() * 10000000) + 1);
     var odrno = "OID"+ r.toString();
     updatedOrder.orderNumber = odrno;
@@ -69,7 +66,9 @@ export default function OrderConfirmation(props) {
             body: JSON.stringify(payload),
         }
 
+        //----------------------------------
         // Backend server call
+        //----------------------------------
         var baseURL     = "http://127.0.0.1:8000/fds/";
         var specificURL = "rest/api/orders/";
         var queryString = "";
@@ -89,7 +88,6 @@ export default function OrderConfirmation(props) {
 
                         return response.json();     
                     } 
-                    // else some error has happened
                     return response.json().then(response => {
                         // console.log("Error:" + response.error)
                         throw new Error(response.error)
@@ -104,12 +102,11 @@ export default function OrderConfirmation(props) {
                 console.log("Error creating order:" + error);
                 // alert ("Error creating order. Try again.");
             });
-        // fetch ends here
         return;
     }
 
     //===================================================
-    //Add Order Items 
+    // Add Order Items 
     //===================================================
     const addOrderItems = (o_no, o_item) => {
 
@@ -131,7 +128,9 @@ export default function OrderConfirmation(props) {
             body: JSON.stringify(payloadItem),
         }
 
+        // --------------------
         // Backend server call
+        // --------------------
         var baseURL     = "http://127.0.0.1:8000/fds/";
         var specificURL = "rest/api/items/";
         var queryString = "";
@@ -144,7 +143,6 @@ export default function OrderConfirmation(props) {
                         // alert("Item added : " + o_item.item_id);
                         return response.json();     
                     } 
-                    // else some error has happened
                     return response.json().then(response => {
                         // console.log("Error:" + response.error)
                         throw new Error(response.error)
@@ -152,17 +150,18 @@ export default function OrderConfirmation(props) {
                 }
             )
             .then(function(data) { 
-                // window.location.reload(false);
                 return;             
             })
             .catch(error => {
                 console.log("Error adding order item:" + error);
-                // alert ("Error creating order. Try again.");
             });
         // fetch ends here
         return;
     }
-    //************** RETURN ***************/
+    
+    // *******************************************************************
+    // *********          RETURN RESPOSNE                         ********
+    // *******************************************************************
     return (
         <div className="container-fluid">
             <div className="row ">

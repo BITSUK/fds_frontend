@@ -5,41 +5,47 @@ import { CartContext, emptyCart} from '../../Contexts/CartContext.js';
 import {UserContext} from '../../Contexts/UserContext.js';
 import './DisplayCart.css';
 
-//This component displays the Cart items to the user
+// =================================================================================================
+// This component displays the Cart items to the user
+// =================================================================================================
 export default function DisplayCart(props) {
     
     const navigate = useNavigate();
     const [userContext, setUserContext] = useContext(UserContext);
     
     const [cart, setCart] = useContext(CartContext);
-    const cartItems = cart.items;  //Extract cart items in a separate variable
+    const cartItems = cart.items;  
 
+    // =======================
     // Sets the cart to empty
+    // =======================
     const emptyTheCart = (event) => {
         setCart(emptyCart);     
     }
 
+    // ======================================
     // Handles item deletes from the cart
+    // ======================================
     const handleDeleteItem = (event) => {
             return; //This code is not written
     }
 
-    //Handles checkout
+    // ======================================
+    // Handles checkout
+    // ======================================
     const handleCheckOut = (event) => {
         event.preventDefault();  
         if (cartItems.length === 0)  {
             alert("Cannot checkout as your cart is empty.");
         } else {
-            // if (userContext.isLoggedIn) {
-                navigate("/order-conf-page");
-            // } else {
-            //     alert("Please login.");
-            // }
+            navigate("/order-conf-page");
         }
 
     }
 
-    // ****************** RETURN ********************
+	// *******************************************************************
+    // *********          RETURN RESPOSNE                         ********
+    // *******************************************************************
     return (
         <div className="container-fluid">
             <div className="row">

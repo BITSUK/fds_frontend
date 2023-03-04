@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {useContext} from "react";
 import {UserContext} from '../../Contexts/UserContext.js';
-import Active_Orders from '../../Data/Orders.json';
 import Alert from "../Alert/Alert.js";
 import Order from '../Dashboard/Order.js';
 import './OrderHistory.css';
@@ -46,6 +45,9 @@ export default function RestOrderHistory(){
     const users_active_orders_temp = ordersData.filter(e => ((e.rest_id === userContext.uid) && (e.order_status != "2") && (e.order_status != "3") ));
     const users_active_orders = users_active_orders_temp.filter(e => (e.order_id.toLowerCase().includes(query.toLowerCase())))
 
+    // *******************************************************************
+    // *********          RETURN RESPOSNE                         ********
+    // *******************************************************************
     return(
         <>  
         <Alert/>

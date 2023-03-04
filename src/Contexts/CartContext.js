@@ -6,7 +6,7 @@ export const emptyCart = {
     taxes       : "0",
     netprice    : "0",
     status      : "initial",
-    items       : []       
+    items       : [{}]       
 }
 
 export const sampleCart = {    

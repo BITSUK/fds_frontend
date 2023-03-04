@@ -9,17 +9,13 @@ import Alert from "../Alert/Alert.js";
 export default function AddMenuItem() {
 
     const [userContext, setUserContext] = useContext(UserContext);
-
     const navigate = useNavigate();
-
-    // Obtain alert context and define a local alert object
     const [alertMessage, setAlert] = useContext(AlertContext);
-    const a = {
-        alertType: alertMessage.alertType,
-        alertMessage: alertMessage.alertMessage
-    }     
+    const a = { alertType: alertMessage.alertType, alertMessage: alertMessage.alertMessage }     
 
-    //Reset alert message
+    // ---------------------
+    // Reset alert message
+    // ---------------------
     const handleAddItem = () => {
 
         //Item Name
@@ -66,7 +62,9 @@ export default function AddMenuItem() {
             body: JSON.stringify(payload),
         }
 
+        // ---------------------
         // Backend server call
+        // ---------------------
         var baseURL     = "http://127.0.0.1:8000/fds/";
         var specificURL = "rest/api/menuitems/";
         var queryString = "";
@@ -79,7 +77,6 @@ export default function AddMenuItem() {
                         alert("Item added. Please manually refresh the page.");
                         return response.json();     
                     } 
-                    // else some error has happened
                     return response.json().then(response => {
                         throw new Error(response.error)
                     })
@@ -100,10 +97,10 @@ export default function AddMenuItem() {
 
         return;
     }
-        
-
     
-    //************* RETURN **************************
+    // *******************************************************************
+    // *********          RETURN RESPOSNE                         ********
+    // *******************************************************************
     return (
     <div>
         <div className="reg-form-container">            

@@ -29,53 +29,52 @@ export default function OrderFoodRest() {
         "rest_rating": 0
     }]);
 
-        //fetch stations
-        useEffect(() => {
-            const fetchData = async () => {
-            const response = await fetch('http://127.0.0.1:8000/fds/rest/api/stations/');
-            const data = await response.json();
-            // console.log(data.results);
-            setStationsdata(data.results);
-            };
+    //fetch stations
+    useEffect(() => {
+        const fetchData = async () => {
+        const response = await fetch('http://127.0.0.1:8000/fds/rest/api/stations/');
+        const data = await response.json();
+        // console.log(data.results);
+        setStationsdata(data.results);
+        };
 
-            fetchData();
-        }, []);
+        fetchData();
+    }, []);
 
-        //fetch trains
-        useEffect(() => {
-            const fetchData = async () => {
-            const response = await fetch('http://127.0.0.1:8000/fds/rest/api/trains/');
-            const data = await response.json();
-            // console.log(data.results);
-            setTrainsdata(data.results);
-            };
+    //fetch trains
+    useEffect(() => {
+        const fetchData = async () => {
+        const response = await fetch('http://127.0.0.1:8000/fds/rest/api/trains/');
+        const data = await response.json();
+        // console.log(data.results);
+        setTrainsdata(data.results);
+        };
 
-            fetchData();
-        }, []);
+        fetchData();
+    }, []);
 
-        //fetch trains
-        useEffect(() => {
-            const fetchData = async () => {
-            const response = await fetch('http://127.0.0.1:8000/fds/rest/api/restaurants/');
-            const data = await response.json();
-            // console.log(data.results);
-            setRestaurantsdata(data.results);
-            };
+    //fetch restaurants
+    useEffect(() => {
+        const fetchData = async () => {
+        const response = await fetch('http://127.0.0.1:8000/fds/rest/api/restaurants/');
+        const data = await response.json();
+        // console.log(data.results);
+        setRestaurantsdata(data.results);
+        };
 
-            fetchData();
-        }, []);
+        fetchData();
+    }, []);
 
-    //Filter Restaurants JSON
+    //Filter Restaurants 
     const filteredRestaurants = restaurantsdata.filter(e => 
         (e.rest_location_code.toLowerCase().includes(inpParms["station_code"].toLowerCase())));
-
     const currentItems = filteredRestaurants.filter(e => 
         (e.rest_name.toLowerCase().includes(query.toLowerCase())));
 
-    //Search in Stations JSON
+    //Search in Stations 
     const stationLIST = stationsdata.filter(e => (e.station_code.includes(inpParms["station_code"])));
 
-    //Search in Trains JSON
+    //Search in Trains 
     const trainLIST = trainsdata.filter(e => (e.train_no.includes(inpParms["train_no"])));
 
     //Update station and train in userContext
@@ -86,7 +85,9 @@ export default function OrderFoodRest() {
     updatedUserContext.trainName = (trainLIST.length === 0)? "" : trainLIST[0].train_name;
     setUserContext(updatedUserContext);
 
-    //************** RETURN RESPONSE ***************
+    // *******************************************************************
+    // *********          RETURN RESPOSNE                         ********
+    // *******************************************************************
     return (
         <>
             <Alert />

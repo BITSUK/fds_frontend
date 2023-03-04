@@ -10,7 +10,6 @@ import './Dashboard.css';
 export default function Dashboard(){
     const [userContext, setUserContext] = useContext(UserContext);	
 
-    //Dependiing upon user type show different dashboard
     return(
         <>
            {(userContext.role == "customer")   && <DashboardCust />} 
