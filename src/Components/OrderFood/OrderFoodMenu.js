@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate} from "react-router-dom";
+import { Link} from "react-router-dom";
 import Restaurants from '../../Data/Restaurants.json';
 import './OrderFoodMenu.css';
 import {useContext} from "react";
@@ -12,13 +12,39 @@ import {UserContext} from '../../Contexts/UserContext.js';
 export default function OrderFoodMenu() {
     const [userContext, setUserContext] = useContext(UserContext);
     const inpParms = useParams();
-    const [inpSearchParms,setInpSearchParms] = useSearchParams();
     const [query, setQuery] = useState("");
     const [vegFilter, setVegFilter] = useState("Veg");
     const [nonVegFilter, setNonVegFilter] = useState("Non-Veg");
     const [cart, setCart] = useContext(CartContext);
-    const navigate = useNavigate();
+    
+    var restid = inpParms["rest_id"];
+    var restname = "";
 
+    // =========================================
+    // Fetch Restaurant Details (JSON) 
+    // =========================================
+
+    //fetch trains
+    useEffect(() => {
+        const fetchData = async () => {
+        const response = await fetch('http://127.0.0.1:8000/fds/rest/api/restaurants/?rest_id=' + restid);
+        const data = await response.json();
+        // console.log(data.results);
+        if (data.results.length > 0 ) {
+            restname = data.results[0].rest_name;
+            var updatedUserContext = userContext;
+            updatedUserContext.rest = restid;
+            updatedUserContext.restName = restname;
+            setUserContext(updatedUserContext);
+        }
+        };
+
+        fetchData();
+    }, []);
+
+    // =======================
+    // Fetch menu items
+    // =======================
     const [restMenu, setRestMenu] = useState([{
         "id": 0,
         "menu_id": "",
@@ -32,7 +58,6 @@ export default function OrderFoodMenu() {
         "item_status": ""
     }]);
 
-    //fetch menu items
     useEffect(() => {
         const fetchData = async () => {
         const response = await fetch('http://127.0.0.1:8000/fds/rest/api/menuitems/');
@@ -44,23 +69,15 @@ export default function OrderFoodMenu() {
         fetchData();
     }, []);
 
-    //Search Restaurant JSON 
-    const filteredRestaurants = Restaurants.filter(e => (e.rest_id.toLowerCase().includes(inpParms["rest_id"].toLowerCase())));
-    // const restMenuItems = filteredRestaurants[0].menu_item;
-
-    //Get Restaurant Menu List
+    // Filter Restaurant Menu List
     const restMenuItems = restMenu;
     const filteredMenuItems0 = restMenuItems.filter(e => (e.rest_id.toLowerCase().includes(inpParms["rest_id"].toLowerCase())));
     const filteredMenuItems1 = filteredMenuItems0.filter(e => (e.item_name.toLowerCase().includes(query.toLowerCase())))
     const filteredMenuItems2 = filteredMenuItems1.filter(e => (applyVegFilter(e)));
 
-    //update restaurant details in user context
-    var updatedUserContext = userContext;
-    updatedUserContext.rest = inpParms["rest_id"];
-    updatedUserContext.restName = filteredRestaurants[0].rest_name;
-    setUserContext(updatedUserContext);
-
-    //set filter states
+    // ================================
+    // Set filter states
+    // ================================
     const processCheckBox = () => {
         var inpV = document.getElementById("btnVeg").checked == true ? "Veg" : "$";
         var inpNV = document.getElementById("btnNonVeg").checked == true ? "Non-Veg" : "$";
@@ -68,7 +85,9 @@ export default function OrderFoodMenu() {
         setNonVegFilter(inpNV);
     }  
 
-    //set select based on filter criteria
+    // ==============================================
+    // Resultset select based on filter criteria
+    // ==============================================
     function applyVegFilter(item){
         if (vegFilter === "Veg" && item.item_type == "0") {
             return item;
@@ -77,11 +96,12 @@ export default function OrderFoodMenu() {
         }
     }
     
-    //add item to cart using function
+    // =================================================
+    // Add item to cart
+    // =================================================
     const addToCart = (id, name, price, event) => {
-        // alert ("clicked " + id + " " + name + " " + price);
+        
         var tempCartItem = cart.items;
-
         tempCartItem[tempCartItem.length] = {
                 item_id : id.toString(),
                 item_name : name,
@@ -91,67 +111,24 @@ export default function OrderFoodMenu() {
         
         var updatedCart = cart;
         updatedCart.items       = tempCartItem;
-        // updatedCart.totalPrice  = Number(updatedCart.totalPrice) + Number(price);
-        // updatedCart.netprice    = Number(updatedCart.netprice) + Number(price);
-        // updatedCart.taxes       = Number(updatedCart.taxes) + Number(price)*0.10;
         updatedCart.totalPrice  = Number(updatedCart.totalPrice) + Number(price);
         updatedCart.taxes       = Number(updatedCart.totalPrice)*0.10;
-        updatedCart.taxes = parseInt(updatedCart.taxes.toFixed())
+        updatedCart.taxes       = parseInt(updatedCart.taxes.toFixed())
         updatedCart.netprice    = updatedCart.totalPrice + updatedCart.taxes;
         setCart(updatedCart);
 
     }
 
-    // //add to cart using url 
-    // if ((inpSearchParms.get("action") != null) && (inpSearchParms.get("action") === 'add')){
-    //     // addToCart(inpParms["menu_id"],inpSearchParms.get("menuName"),inpSearchParms.get("menuPrice"));
-        
-    //     var tempCartItem = cart.items;
-    //     var tempPrice = 0;
-
-    //     // code is complex as we are facing an issue
-    //     if (tempCartItem.length > 0) {
-    //         if (tempCartItem[tempCartItem.length - 1].item_id != inpParms["menu_id"] ) {
-    //             tempCartItem[tempCartItem.length] = {
-    //                 item_id : inpParms["menu_id"],
-    //                 item_name : inpSearchParms.get("menuName"),
-    //                 item_price : inpSearchParms.get("menuPrice"),
-    //                 item_quantity : "1"
-    //             }
-    //             tempPrice = inpSearchParms.get("menuPrice");
-
-    //         }            
-    //     } else {
-    //         tempCartItem[tempCartItem.length] = {
-    //             item_id : inpParms["menu_id"],
-    //             item_name : inpSearchParms.get("menuName"),
-    //             item_price : inpSearchParms.get("menuPrice"),
-    //             item_quantity : "1"
-    //         }
-    //         tempPrice = inpSearchParms.get("menuPrice");
-    //     }
-
-    //     var updatedCart = cart;
-    //     updatedCart.items = tempCartItem;
-    //     updatedCart.totalPrice = Number(updatedCart.totalPrice) + Number(tempPrice);
-    //     updatedCart.netprice = Number(updatedCart.netprice) + Number(tempPrice);
-    //     updatedCart.taxes = Number(updatedCart.taxes) + Number(tempPrice)*0.10;
-
-    //     setCart(updatedCart);
-    //     var url = "/order-food/restaurant/" + userContext.restaurant;
-    //     navigate(url);
-
-    //     // alert("Item added successfully");
-    // }
-
-    //**************** RETURN RESPONSE ***************
+    // *************************************************************************
+    // ****************         RETURN RESPONSE                  ***************
+    // *************************************************************************
     return (
         <>
             <Alert />
         
             <div className="container-fluid">
                 <div className="row content">
-                    <div>Menu Items of <b>{updatedUserContext.restaurantName}</b></div>
+                    <div>Menu Items of <b>{userContext.restName}</b></div>
                     <br/>
                     <div className="col-sm-12">
                         <div >
@@ -189,8 +166,6 @@ export default function OrderFoodMenu() {
                                 </div>
                                 <div className="col-sm-2">
                                     <div >                            
-                                    {/* <Link to={`/order-food/restaurant/${userContext.restaurant}/${record.menu_id}?action=add&menuName=${record.menu_name}&menuPrice=${record.menu_price}`} key={record.menu_id}>Add</Link> */}
-                                    {/* <Link to="#" key={record.menu_id} id={record.menu_id} name={record.menu_name}  price={record.menu_price} onClick={addToCart}>Add</Link> */}
                                     <Link to="#" key={record.menu_id} onClick={(e) => addToCart(record.menu_id,record.item_name,record.item_rate,e)}>Add</Link>
                                     </div>
                                 </div>

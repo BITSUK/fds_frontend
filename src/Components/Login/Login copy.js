@@ -62,9 +62,7 @@ export default function Login(props) {
                         stationName: "",
                         rest: "",
                         restName: "",
-                        jdate: "",
-                        restaurant : "",
-                        restaurantName: ""
+                        jdate: ""
 
                     })
                     

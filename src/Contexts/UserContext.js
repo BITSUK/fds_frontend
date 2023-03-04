@@ -15,8 +15,7 @@ export const defaultUser = {
     rest: "",
     restName : "",
     jdate: "",
-    restaurant: "",
-    restaurantName : ""
+    restaurant: ""
 }
 
 export const UserContext = createContext(defaultUser);

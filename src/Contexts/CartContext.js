@@ -10,22 +10,16 @@ export const emptyCart = {
 }
 
 export const sampleCart = {    
-    totalPrice  : "370",
+    totalPrice  : "110",
     discount    : "0",
-    taxes       : "30",
-    netprice    : "400",
-    status      : "paid",
+    taxes       : "10",
+    netprice    : "120",
+    status      : "initial",
     items: [
         {
             item_id : "FDSI001",
             item_name : "Veg Thali",
             item_price : "110",
-            item_quantity : "2"
-        },
-        {
-            item_id : "FDSI002",
-            item_name : "Masala Dhosa",
-            item_price : "80",
             item_quantity : "1"
         }
 

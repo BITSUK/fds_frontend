@@ -69,11 +69,8 @@ export default function Login(props) {
                             station: "",
                             stationName: "",
                             rest: data[0].user_id,
-                            restName: data[0].user_name,
-                            jdate: "",
-                            restaurant : "",
-                            restaurantName: ""
-
+                            restName: "",
+                            jdate: ""
                         })
                         
                         a.alertMessage = "";
@@ -82,7 +79,6 @@ export default function Login(props) {
                         
                         alert("Login Successful");
 
-                        // (cart.totalPrice === "0") ? navigate('/dashboard') : navigate('/order-conf-page'); 
                         navigate('/dashboard');
                     } else {
                         a.alertMessage = "Userid or password not valid, please try again.";

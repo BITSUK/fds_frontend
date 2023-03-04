@@ -1,7 +1,7 @@
 [     
     {
         "rest_id": "RID001",
-        "rest_name": "Shree Sai Bhojanle",
+        "rest_name": "Foodze",
         "rest_location_code": "NDLS",
         "rest_location": "Delhi",
         "rating": 4,
@@ -92,7 +92,7 @@
     },
 	{
         "rest_id": "RID002",
-        "rest_name": "Oberoi",
+        "rest_name": "Shree Bhojnale",
         "rest_location_code": "NDLS",
         "rest_location": "Delhi",
         "rating": 3,
@@ -119,7 +119,7 @@
     },
 	{
         "rest_id": "RID003",
-        "rest_name": "Pizza Hut",
+        "rest_name": "Om Sweets",
         "rest_location_code": "NDLS",
         "rest_location": "Delhi",
         "rating": 2,
@@ -173,7 +173,7 @@
     },
     {
         "rest_id": "RID005",
-        "rest_name": "Domino",
+        "rest_name": "Vaishno Bhojanale",
         "rest_location_code": "RTM",
         "rest_location": "Ratlam",
         "rating": 4,
@@ -200,7 +200,7 @@
     },
 	{
         "rest_id": "RID006",
-        "rest_name": "Sai Bhojanle",
+        "rest_name": "Domino",
         "rest_location_code": "RTM",
         "rest_location": "Ratlam",
         "rating": 4,
@@ -283,7 +283,7 @@
     },
 	{
         "rest_id": "RID007",
-        "rest_name": "Oberoi",
+        "rest_name": "Taj Restro",
         "rest_location_code": "MMCT",
         "rest_location": "Mumbai",
         "rating": 3,

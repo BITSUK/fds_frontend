@@ -199,6 +199,22 @@ export default function RestMenu(){
     const [query, setQuery] = useState("");
     var RestaurantDetailsMenu = [];
 
+    //fetch restaurant name and update context
+    useEffect(() => {
+        const fetchData = async () => {
+        const response = await fetch('http://127.0.0.1:8000/fds/rest/api/restaurants/?rest_id=' + userContext.rest);
+        const data = await response.json();
+        // console.log(data.results);
+        if (data.results.length > 0 ) {
+            var updatedUserContext = userContext;
+            updatedUserContext.restName =data.results[0].rest_name;
+            setUserContext(updatedUserContext);
+        }
+        };
+
+        fetchData();
+    }, []);
+
     const [restMenu, setRestMenu] = useState([{
         "id": 0,
         "menu_id": "",

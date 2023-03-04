@@ -122,9 +122,9 @@ export default function AddMenuItem() {
             
             <div className="reg-form-components">
                 <label className="form-label" >Item Type*</label> <br/>
-                <input type="checkbox" id="chkVeg" name="item-type" value="Veg" defaultChecked/> &nbsp;
+                <input type="radio" id="chkVeg" name="item-type" value="Veg" defaultChecked/> &nbsp;
                 <label htmlFor="chkVeg">Veg</label>	&nbsp;
-                <input type="checkbox" id="chkNonVeg" name="item-type" value="Non-Veg"/> &nbsp;
+                <input type="radio" id="chkNonVeg" name="item-type" value="Non-Veg"/> &nbsp;
                 <label htmlFor="chkNonVeg">Non-Veg</label>	&nbsp;		
             </div> 
             <br />
