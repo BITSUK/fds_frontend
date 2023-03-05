@@ -22,6 +22,7 @@ export default function OrderConfirmation(props) {
     updatedOrder.taxes = cart.taxes;
     updatedOrder.netprice = cart.netprice;
     updatedOrder.customerName = userContext.name;
+    updatedOrder.mobileNo = userContext.mobile;
     updatedOrder.station = userContext.station;
     updatedOrder.stationName = userContext.stationName;
     updatedOrder.train = userContext.train;
@@ -37,6 +38,15 @@ export default function OrderConfirmation(props) {
     //Handle order confirmation 
     //===================================================
     const handleOrderConfirmation = (event) => {
+
+        //validate seat no
+        var fld = document.getElementById("SeatDtls").value;
+        if ((fld > "") && (fld.match("[/]") === null)) {
+            event.preventDefault();  
+            alert("Error: Coach and seat to be mentioned as B1/20");
+            document.getElementById("SeatDtls").focus();
+            return;
+        }
 
         var payload = {
             "order_id": odrno,
@@ -78,7 +88,7 @@ export default function OrderConfirmation(props) {
         fetch(url, requestOptions)
             .then(response => {
                     if(response.ok)  {
-                        alert("Order number : " + odrno + ",payment step pending.");
+                        // alert("Order number : " + odrno + ",payment step pending.");
 
                         //for loop
                         for (var i in order.orderItems) {
@@ -185,20 +195,18 @@ export default function OrderConfirmation(props) {
                         <b>Mobile No:</b>
                         <input type="text" id="mobileNo" value= {order.mobileNo} /> 
                     </div>
-                )
+                )                
                 }
-                {/* <div className="col-sm-12"><b>Mobile No:</b> {order.mobileNo} </div> */}
+                <div className="col-sm-12"><b>Restaurant:</b> {order.restaurant} </div>
                 <div className="col-sm-12"><b>Station:</b> {order.stationName} </div>
-                {/* <div className="col-sm-12"><b>Delivery Date:</b> {order.deliveryDate} </div> */}
                 <div className="col-sm-12">
                     <b>Delivery Date:</b>
-                    <input type="text" id="deliveryDate" value= {order.deliveryDate} placeholder="25-02-2023"/> 
-                    {/* <input type="date" id="deliveryDate" name="deliveryDate" value= {order.deliveryDate}></input> */}
+                    <input type="text" id="deliveryDate" value= {order.deliveryDate} placeholder="2023-02-25"/> 
                 </div>
                 <div className="col-sm-12"><b>Train:</b> {order.train} {order.trainName} </div>
                 <div className="col-sm-12">
                     <b>Coach/Seat:</b>
-                    <input type="text" id="SeatDtls" value= {order.seatDetails}/> 
+                    <input type="text" id="SeatDtls" defaultValue={order.seatDetails}/> 
                 </div>
 
                 <div className="col-sm-12">.</div>

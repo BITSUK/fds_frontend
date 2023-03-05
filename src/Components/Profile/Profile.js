@@ -99,6 +99,11 @@ export default function Profile() {
             .then(response => {
                     if(response.status === 200)  {
                         alert("Details updated successfully.");
+                        var updatedUserContext = userContext;
+                        updatedUserContext.name =uname;
+                        updatedUserContext.mobile =uemail;
+                        updatedUserContext.email =umobile;
+                        setUserContext(updatedUserContext);
                         return response.json();     
                     } 
                     return response.json().then(response => {

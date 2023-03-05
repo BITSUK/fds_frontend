@@ -110,6 +110,9 @@ export default function RestDetails() {
             .then(response => {
                     if(response.ok)  {
                         alert("Successfully updated.");
+                        var updatedUserContext = userContext;
+                        updatedUserContext.restName =r_name;
+                        setUserContext(updatedUserContext);
                         return response.json();     // convert response to json
                     } 
                     return response.json().then(response => {
