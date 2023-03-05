@@ -74,7 +74,7 @@ export default function AddMenuItem() {
         fetch(url, requestOptions)
             .then(response => {
                     if(response.ok)  {
-                        alert("Item added. Please manually refresh the page.");
+                        alert("Item added. To refresh view navigate to another page and come back."); //Instead of locate state we can use application level context to fix this
                         return response.json();     
                     } 
                     return response.json().then(response => {
