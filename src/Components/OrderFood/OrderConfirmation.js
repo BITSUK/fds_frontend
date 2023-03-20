@@ -184,7 +184,7 @@ export default function OrderConfirmation(props) {
                 ) : (
                     <div className="col-sm-12">
                         <b>Customer Name:</b>
-                        <input type="text" id="SeatDtls" value= {order.customerName}/>
+                        <input type="text" id="custName" value= {order.customerName}/>
                     </div>
                 )
                 }

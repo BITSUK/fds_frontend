@@ -75,7 +75,7 @@ export default function Login(props) {
                         setAlert(a);                    
                         
                         alert("Login Successful");
-                        // setCart(emptyCart);
+                        setCart(emptyCart);
                         navigate('/dashboard');
                     } else {
                         a.alertMessage = "Userid or password not valid, please try again.";

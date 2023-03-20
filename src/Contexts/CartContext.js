@@ -10,18 +10,18 @@ export const emptyCart = {
 }
 
 export const sampleCart = {    
-    totalPrice  : "110",
+    totalPrice  : "0",
     discount    : "0",
-    taxes       : "10",
-    netprice    : "120",
+    taxes       : "0",
+    netprice    : "0",
     status      : "initial",
-    items: [
-        {
-            item_id : "FDSI001",
-            item_name : "Veg Thali",
-            item_price : "110",
-            item_quantity : "1"
-        }
+    items: [ 
+        // {
+        //     item_id : "FDSI001",
+        //     item_name : "Veg Thali",
+        //     item_price : "110",
+        //     item_quantity : "1"
+        // }
 
     ]
 }

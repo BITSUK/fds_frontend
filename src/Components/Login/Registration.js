@@ -84,8 +84,8 @@ export default function Registration() {
 
         //Validate user id
         fld = document.getElementById("regFormUserid").value;
-        if (fld.length < 4) {            
-            setAlert({ alertMessage: "User id should not be less than 4 characters", alertType: "error" });
+        if ((fld.length < 4) || (fld.length > 15)) {            
+            setAlert({ alertMessage: "User id should be more than 4 character and not exceeding 15 characters", alertType: "error" });
             document.getElementById("regFormUserid").focus();
             return;    
         } 
@@ -100,11 +100,11 @@ export default function Registration() {
             return;    
         } 
 
-        if ((p1.match("[0-9]") === null) || (p1.match("[%@#$]") === null) || (p1.match("[A-Z]") === null)|| (p1.match("[a-z]") === null)) {
-            setAlert({ alertMessage: "Password minimum 8 char and must have a Caps, Number and Symbol.", alertType: "error" });
-            document.getElementById("regFormPassword1").focus();
-            return;    
-        } 
+        // if ((p1.match("[0-9]") === null) || (p1.match("[%@#$]") === null) || (p1.match("[A-Z]") === null)|| (p1.match("[a-z]") === null)) {
+        //     setAlert({ alertMessage: "Password minimum 8 char and must have a Caps, Number and Symbol.", alertType: "error" });
+        //     document.getElementById("regFormPassword1").focus();
+        //     return;    
+        // } 
 
         if (p1 !== p2) {            
             setAlert({ alertMessage: "Password do not match", alertType: "error" });

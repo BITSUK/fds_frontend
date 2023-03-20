@@ -162,7 +162,7 @@ export default function OrderFoodMenu() {
                                     {record.item_rate} 
                                 </div>
                                 <div className="col-sm-2">                                    
-                                    {record.item_type}
+                                    {record.item_type == "0"? "Veg" : "Non-Veg"}
                                 </div>
                                 <div className="col-sm-2">
                                     <div >                            
