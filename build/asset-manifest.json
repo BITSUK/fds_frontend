@@ -1,0 +1,34 @@
+{
+  "files": {
+    "main.css": "/static/css/main.2cb82835.css",
+    "main.js": "/static/js/main.975ba7d7.js",
+    "static/js/787.8c9eab3f.chunk.js": "/static/js/787.8c9eab3f.chunk.js",
+    "static/media/offer22.PNG": "/static/media/offer22.bcd956d5049b7b754d5a.PNG",
+    "static/media/Offer33.png": "/static/media/Offer33.555495e5a828aa72c98f.png",
+    "static/media/3.png": "/static/media/3.36419988152a0bf4d31f.png",
+    "static/media/process.jpg": "/static/media/process.447cc2d5792d51fb654e.jpg",
+    "static/media/t4.JPG": "/static/media/t4.1335621472046d52a645.JPG",
+    "static/media/t3.JPG": "/static/media/t3.b40b5bf183c3f27da93a.JPG",
+    "static/media/t2.JPG": "/static/media/t2.9c01c469b717c5614e40.JPG",
+    "static/media/t5.JPG": "/static/media/t5.130bc9a06f8698f991cd.JPG",
+    "static/media/t1.JPG": "/static/media/t1.78f09118e420cb87d93a.JPG",
+    "static/media/Delivery Steps.jpg": "/static/media/Delivery Steps.6d71c14aad09302718c2.jpg",
+    "static/media/FDS.JPG": "/static/media/FDS.4d4ceebbc0c3ed37b57d.JPG",
+    "static/media/Offer3.png": "/static/media/Offer3.028a8c45df825c9f39c0.png",
+    "static/media/1.png": "/static/media/1.754e606299f3ebf2e748.png",
+    "static/media/FDS Train Logo.jpg": "/static/media/FDS Train Logo.1ce393f0ef0373acc352.jpg",
+    "static/media/Offer1.png": "/static/media/Offer1.a2fc34482792ee1f7ae3.png",
+    "static/media/Offer5.png": "/static/media/Offer5.a2fc34482792ee1f7ae3.png",
+    "static/media/2.png": "/static/media/2.825017e92eb45733b2e9.png",
+    "static/media/click here.JPG": "/static/media/click here.bd39611ce0452e4fc84f.JPG",
+    "static/media/social media.JPG": "/static/media/social media.86f8c276117a49b8028a.JPG",
+    "index.html": "/index.html",
+    "main.2cb82835.css.map": "/static/css/main.2cb82835.css.map",
+    "main.975ba7d7.js.map": "/static/js/main.975ba7d7.js.map",
+    "787.8c9eab3f.chunk.js.map": "/static/js/787.8c9eab3f.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2cb82835.css",
+    "static/js/main.975ba7d7.js"
+  ]
+}
