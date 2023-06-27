@@ -6,7 +6,7 @@ import './Footer.css';
 
 function Footer(){
     return (
-        <div className  ="footer-container">
+        <div data-testid='footer-1' className  ="footer-container">
 			<div className="footer-3-cols">
 				<div id="FTR-L" className="footer column1"><img id="social-media-handles" src = {ImgSocialMedia} alt="Social media"/></div>
 				<div id="FTR-M" className="footer column2">Frequently asked questions <Link to = "/faq" > <img src = {ImgClickHere} alt="Click here"/> </Link></div>
