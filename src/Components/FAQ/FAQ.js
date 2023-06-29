@@ -12,7 +12,7 @@ export default function FAQ() {
   return (
     <>
       <Alert />
-      <div className="faq-container">
+      <div data-testid='faq-container-1' className="faq-container">
         <h1 className="faq-title">FAQs </h1>
         <ul className="faq-list">
           {questions.map((item, index) => (
