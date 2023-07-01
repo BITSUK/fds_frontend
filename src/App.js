@@ -3,6 +3,7 @@ import Header from './Components/Header/Header.js';
 import SideMenu from './Components/SideMenu/SideMenu.js';
 import RightPane from './Components/RightPane/RightPane.js';
 import Footer from './Components/Footer/Footer.js';
+import Test from './Components/Test.js'
 import NoPage from './Components/NoPage/NoPage.js';
 import UnderConstruction from './Components/NoPage/UnderConstruction.js';
 import Login from './Components/Login/Login.js';
@@ -48,7 +49,7 @@ export default function App() {
     <CartContext.Provider value={[cart, setCart]}> 
     <OrderContext.Provider value={[order, setOrder]}> 
       <Router>
-          <div className="container"> 
+          <div data-testid='app-1' className="container"> 
             <div className="row">
               <Header />
             </div>
@@ -64,7 +65,7 @@ export default function App() {
 					
 					          <Route exact path="/dashboard" element={<Dashboard />}/>
 					
-                    <Route exact path="/login" element={<Login/>}/>
+                    <Route exact path="/login" element={<Login data-testid='login-test-id'/>}/>
                     <Route exact path="/register" element={<Registration />}/>
                     <Route exact path="/forgot-password" element={<ResetPassword />}/>
 					
@@ -128,6 +129,9 @@ export default function App() {
             
             <div className="row">
               <Footer />
+            </div> 
+            <div className="row">
+              <Test />
             </div> 
 
           </div>
