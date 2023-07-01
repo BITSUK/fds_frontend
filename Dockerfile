@@ -13,5 +13,8 @@ EXPOSE 3000
 CMD ["npm" , "start"]
 
 
+#docker build command
+#docker build -t fdsfrontend .
+
 #docker run command
 #docker run -p 3000:3000 -it fdsfrontend
