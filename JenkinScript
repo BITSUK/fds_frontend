@@ -1,0 +1,70 @@
+pipeline{
+    agent any
+    stages{
+    stage('Initialize'){
+        steps{
+        git credentialsId: 'f52dea76-323e-44d7-be66-20715b4ed3e1', url: 'https://github.com/BITSUK/fds_frontend'
+    
+        }
+    }
+    
+    stage('Run'){
+        steps{
+            nodejs(nodeJSInstallationName: 'nodejs'){
+                bat 'npm run build'
+            }
+        }
+    } 
+    stage('Sonar analysis'){
+        steps{
+            nodejs(nodeJSInstallationName: 'nodejs')
+            {
+                bat 'npm install -g sonarqube-scanner'
+            }
+        }
+    } 
+    stage('create artifact '){
+        steps{
+                nodejs(nodeJSInstallationName: 'nodejs'){
+                    bat 'npm fund'}
+            }
+    }
+    stage('push artifact'){
+        steps{
+                nodejs(nodeJSInstallationName: 'nodejs'){
+                    bat 'tar czf fds.tar.gz node_modules src package.json'}
+            }
+    }
+    stage('create docker image'){
+        steps{
+            script{
+                bat 'docker login -u pallavink -p 24P@!!@vink'
+                bat 'docker build -t pallavink/fds_web_app_image:0.0.1.RELEASE .'
+            }
+        }
+    }
+    stage('push image to docker hub'){
+        steps{
+        withCredentials([string(credentialsId: 'dockerhubjenkin', variable: 'dockerHubjenkin')]) {
+        bat 'docker login -u pallavink -p 24P@!!@vink'
+        bat 'docker push pallavink/fds_web_app_image:0.0.1.RELEASE' 
+        }
+    }
+    }
+    stage('run docker image'){
+        steps{
+            bat 'docker login -u pallavink -p 24P@!!@vink'
+            bat 'docker run -p8005:8078 pallavink/fds_web_app_image:0.0.1.RELEASE'
+        }
+    }
+    stage('run selenium'){
+        steps{
+            bat 'python fds-selenium-test.py'
+        }
+    }
+    
+    
+    
+}
+     
+}
