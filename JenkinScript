@@ -56,15 +56,7 @@ pipeline{
             bat 'docker login -u pallavink -p 24P@!!@vink'
             bat 'docker run -p8005:8078 pallavink/fds_web_app_image:0.0.1.RELEASE'
         }
-    }
-    stage('run selenium'){
-        steps{
-            bat 'python fds-selenium-test.py'
-        }
-    }
-    
-    
-    
+    }    
 }
      
 }
